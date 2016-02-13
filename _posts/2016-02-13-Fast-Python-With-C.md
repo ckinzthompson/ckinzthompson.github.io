@@ -42,6 +42,7 @@ void cprod(int npoints, double *input_vector, double *output_vector){
 ```
 
 Then this file, cprod.c, could be compiled using GCC in a terminal with
+
 ```bash
 gcc -shared -o cprod.so -fPIC -O3 cprod.c
 ```
