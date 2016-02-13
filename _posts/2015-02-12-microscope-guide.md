@@ -4,11 +4,10 @@ title: Microscope Guide
 date: 2016-02-12 
 ---
 
+---
 Make sure you've been trained on microscope use, and how to disconnect the camera.
 
----
-
-# Setup
+### Setup
 
 1. Plug in power bricks for:
 	1. EMCCD
