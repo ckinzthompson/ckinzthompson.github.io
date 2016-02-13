@@ -10,7 +10,7 @@ You can do this by writing a wrapper for the C program in Python using Ctypes. T
 
 Here I'll show you how to do this with a silly for loop based calculation. Let's say that you wanted the cumulative product of a vector, x. Numpy already has a cumulative sum function, and you could use that to perform a fast vectorized calculation all in Python instead of a slow for-loop based calculation
 
-{% highlight python %}
+<!--{% highlight python %}-->
 ```python
 import numpy as np
 
@@ -25,12 +25,12 @@ def cprod_fast(x):
 	y = np.cumsum(np.log(x))
 	return np.exp(y)
 ```
-{% endhighlight %}
+<!--{% endhighlight %}-->
 
 But what if your particular calculation didn't vectorize easily? How could we take our vector x in Python and use for-loops for a fast calculation? Well in .C we could have pointers to an input and output vector, and do
 
 {% highlight C %}
-```C
+<!--```C-->
 // Function prototype
 void cprod(int npoints, double *input_vector, double *output_vector);
 
@@ -42,7 +42,7 @@ void cprod(int npoints, double *input_vector, double *output_vector){
 		output_vector[i+1] = output_vector[i]*input_vector[i+1];
 	}
 }
-```
+<!--```-->
 {% endhighlight %}
 
 Then this file, cprod.c, could be compiled using GCC in a terminal with
