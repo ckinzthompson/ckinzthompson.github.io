@@ -3,16 +3,4 @@ layout: default
 title: About Me
 ---
 
-<script>
-function toggle(){
-  if (this.src === './CKT_2015_small.jpg') {
-    this.src = './CKT_2015_large.jpg';
-  }
-  else if (this.src === './CKT_2015_large.jpg') {
-    this.src = './CKT_2015_small.jpg';
-  }
-}
-</script>
-
-<img src = './CKT_2015_small.jpg' onclick="toggle()">
-<img src="skins/sunlift/styleImages/navbar_pic/aboutus_n.jpg" onclick="this.src='skins/sunlift/styleImages/navbar_pic/aboutus_h.jpg'; return false;">
+<a href='./CKT_2015_large.jpg'><img src = './CKT_2015_small.jpg' onclick="toggle()"></a>
