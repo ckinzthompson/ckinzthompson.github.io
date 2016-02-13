@@ -1,3 +1,4 @@
 name: Colin Kinz-Thompson
-markdown: kramdown
+# markdown: kramdown
+markdown: redcarpet
 permalink: /blog/:year/:month/:day/:title
