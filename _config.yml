@@ -1,5 +1,5 @@
 name: Colin Kinz-Thompson
-# markdown: kramdown
-markdown: redcarpet
+markdown: kramdown
+# markdown: redcarpet
 highlighter: pygments
 permalink: /blog/:year/:month/:day/:title
