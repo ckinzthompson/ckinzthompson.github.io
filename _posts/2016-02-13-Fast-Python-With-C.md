@@ -10,6 +10,7 @@ You can do this by writing a wrapper for the C program in Python using Ctypes. T
 
 Here I'll show you how to do this with a silly for loop based calculation. Let's say that you wanted the cumulative product of a vector, x. Numpy already has a cumulative sum function, and you could use that to perform a fast vectorized calculation all in Python instead of a slow for-loop based calculation
 
+{% highlight python %}
 ```python
 import numpy as np
 
@@ -24,9 +25,11 @@ def cprod_fast(x):
 	y = np.cumsum(np.log(x))
 	return np.exp(y)
 ```
+{% endhighlight %}
 
 But what if your particular calculation didn't vectorize easily? How could we take our vector x in Python and use for-loops for a fast calculation? Well in .C we could have pointers to an input and output vector, and do
 
+{% highlight C %}
 ```C
 // Function prototype
 void cprod(int npoints, double *input_vector, double *output_vector);
@@ -40,15 +43,19 @@ void cprod(int npoints, double *input_vector, double *output_vector){
 	}
 }
 ```
+{% endhighlight %}
 
 Then this file, cprod.c, could be compiled using GCC in a terminal with
 
+{% highlight bash %}
 ```bash
 gcc -shared -o cprod.so -fPIC -O3 cprod.c
 ```
+{% endhighlight %}
 
 to create a library called cprod.so. Python's C-Types can be used to load this library and call it from inside a Python program. Here's an example of how to create a wrapper function to do that for either a Mac or Linux computer
 
+{% highlight python %}
 ```python
 import numpy as np
 from os import path as _path
@@ -101,6 +108,6 @@ except:
 	print "Couldn't find the compiled library"
 	print "Using cprod written in Python \n    This will be much slower!"
 ```
-
+{% endhighlight %}
 
 Now you can call cprod(x) in Python, and if it was able to find the compiled .C library, cprod should be much faster even with the for-loops.
