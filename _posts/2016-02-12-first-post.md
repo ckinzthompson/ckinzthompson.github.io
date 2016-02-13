@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title: I've Launched My Website
 date: 2016-02-12
 ---
