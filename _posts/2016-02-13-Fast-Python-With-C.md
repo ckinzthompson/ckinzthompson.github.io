@@ -1,7 +1,7 @@
 ---
 layout: posts
 title: Speed Up Python Code Using .C
-date: 2016-02-14
+date: 2016-02-13
 ---
 
 Vectorized Python code using Numpy can be very fast, however it is not always possible to avoid using slow for-loops in your program. However, if you can write a few lines in .C, there is an easy way to integrate perform the for-loops using C code, and still use Python for the rest of your program. 
