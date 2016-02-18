@@ -26,10 +26,10 @@ Additionally, you can use Extensions->Visualization->Clipping Plane Tool on each
 
 Finally, in order to render nice looking pictures, you'll need to do some ray tracing. Before doing that, you should setup Shadows and Ambient Occlusion through Display->Display Settings. Set:
 
-1.  Shadows: On
-2.  Amb Occl: On
-3.  AO Ambient: 0.8
-4.  AO Direct: 0.3
+*  Shadows: On
+*  Amb Occl: On
+*  AO Ambient: 0.8
+*  AO Direct: 0.3
 
 In order to do the ray tracing, go to File->Render. Here, switch to 'Tacyhon', and pick a new filename for the file (it usually comes out as a TARGA .tga file). Then, in the Render Command before the '-o %s.tga' option, add '-max_surfaces 1 -res 4000 3000'. This will render a very large picture, and most likely it'll take a very long time... but it'll look really nice.
 
