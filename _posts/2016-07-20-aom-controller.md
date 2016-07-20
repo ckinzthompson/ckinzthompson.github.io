@@ -9,7 +9,7 @@ I built a Controller unit to control ISOMET digital-input controlled Acousto-Opt
 
 To control the unit, you must interface with the following plug — schematic:
 ![Plug Schematic](/images/aom/plugschematic.png)
-
+----
 The built-in RF driver requires a 12 V source to generate the acoustic waves in the crystal. This needs to be relatively stable to avoid fluctuations. Also, a digital (3-5 V on) signal must be applied to the MOD pin in order to trigger the acoustic wave, and create the modulation. The idea behind this controller unit is to regulate a voltage source higher than 12 V down to 12V, and then to apply the modulation signal using an Arduino digital out pin. 
 
 This controller is built to control up to four AOM units, with the last two having the same modulation signal (for simultaneous triggering). In total, that means there are three digital out pins used.
@@ -69,14 +69,14 @@ void loop(){
 ## Build the Electronics
 Schematic Drawing:
 ![Schematic](/images/aom/schematic.png)
-
+----
 Outside View:
 ![Outside](/images/aom/outside.png)
-
+----
 Inside View:
 ![Inside](/images/aom/inside.png)
-
-Notes: 
+----
+##Notes: 
 * The DC jack/wall-wart adapter I bought aren’t compatible for some reason… therefore, I chopped the DC plug off, and soldered it straight to the leads of the jack (threaded through a hole in the jack).
 * The 12 V regulator runs pretty hot, therefore the fan should probably be positioned over this.
 * The AOMs run very hot — make sure not to keep them on for too long.
