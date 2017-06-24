@@ -76,7 +76,7 @@ where the second argument is the variance parameter ($$\sigma^2$$). Note that th
 ## Precision of the Autocorrelation function
 We can calculate the autocorrelation function as shown above, but this does not give any notion of the precision of the autocorrelation function (particularly at large $$\tau$$). Instead, we will use Bayesian inference to infer the posterior probability distribution describing the autocorrelation function at every delay. This will provide us with the mean value, and a credible interval - the latter of which provides an idea of the precision with with the autocorrelation function is defined at any given $$\tau$$. As seen below, the credible interval (95%) blows up at large $$\tau$$ (*i.e.*, n), showing us to be wary about using the mean value. Note, that the autocorrelation function plotted here is normalized to the first datapoint, $$\tau=0$$.
 
-![ACF with precision](/images/acf_precision/bayesian_autocorr.png = 480x)
+![ACF with precision](/images/acf_precision/bayesian_autocorr.png =480x)
 
 ### Code
 To generate the figure above
