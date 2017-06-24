@@ -7,7 +7,7 @@ date: 2017-06-23
 ## The Autocorrelation Function
 
 ### Definition
-Following Berne and Pecora's *Dynamic Light Scattering with Applications to Chemistry, Biology, and Physics*, the autocorrelation function of a time-dependent signal, $A(t)$, is defined by
+Following Berne and Pecora's *Dynamic Light Scattering with Applications to Chemistry, Biology, and Physics*, the autocorrelation function of a time-dependent signal, $$A(t)$$, is defined by
 
 $$\begin{aligned}
 \langle A(0)A(\tau) \rangle &= \lim_{T \to \infty} \frac{1}{T} \int_0^T dt\, A(t)A(t+\tau) \\
@@ -77,9 +77,7 @@ We can calculate the autocorrelation function as shown above, but this does not 
 
 <img src="/images/acf_precision/bayesian_autocorr.png" alt="ACF with precision" width="800" height="600">
 
-
-
-
+//
 
 ### Code
 To generate the figure above
