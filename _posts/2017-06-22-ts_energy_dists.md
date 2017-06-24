@@ -3,7 +3,7 @@ layout: posts
 title: Distributions of Transition State Energies
 date: 2017-06-22
 ---
-# Distributions of Transition State Energies
+
 ## Gamma
 Let's say that you're analyzing the survival probability (*i.e.*, $$1-CDF$$) of the lifetime, $$t$$, of a molecule in a particular state with rate constant, $$k$$. If the system is Markovian, then this probability is
 
