@@ -14,8 +14,8 @@ $$\begin{aligned}
 \langle A(0)A(\tau) \rangle &= \lim_{T \to \infty} \frac{1}{T} \int_0^T dt\, A(t)A(t+\tau) \\
 &\cong \lim_{N \to \infty} \frac{1}{N} \sum_{j=1}^N A_j A_{j+n},
 \end{aligned}$$
-where the bottom line is for a signal sampled at discrete intervals $\Delta t$ such that $t = j\Delta t$, and $\tau = N\Delta t$.
 
+where the bottom line is for a signal sampled at discrete intervals $$\Delta t$$ such that $$t = j\Delta t$$, and $$\tau = N\Delta t$$.
 
 ### Code
 
