@@ -74,11 +74,11 @@ $$ p(\mu \vert \mu_n, \kappa_n, \alpha_n, \beta_n, \{A(t_i)A(t_i+\tau)\}) = T_{2
 where the second argument is the variance parameter ($$\sigma^2$$). Note that the cumulative distribution function (CDF) of the Student's T distribution can be used to calculate the credible intervals on $$\mu$$ given this marginalized posterior probability distribution.
 
 ## Precision of the Autocorrelation function
-We can calculate the autocorrelation function as shown above, but this does not give any notion of the precision of the autocorrelation function (particularly at large $$\tau$$). Instead, we will use Bayesian inference to infer the posterior probability distribution describing the autocorrelation function at every delay. This will provide us with the mean value, and a credible interval - the latter of which provides an idea of the precision with with the autocorrelation function is defined at any given $$\tau$$. As seen below, the credible interval (95%) blows up at large $$\tau$$ (*i.e.*, n), showing us to be wary about using the mean value. Note, that the autocorrelation function plotted here is normalized to the first datapoint, $$\tau=0$$.
+We can calculate the autocorrelation function as shown above, but this does not give any notion of the precision of the autocorrelation function (particularly at large $$\tau$$). Instead, we will use Bayesian inference to infer the posterior probability distribution describing the autocorrelation function at every delay. This will provide us with the mean value, and a credible interval - the latter of which provides an idea of the precision with with the autocorrelation function is defined at any given $$\tau$$. As seen below, the credible interval (95%) blows up at large $$\tau$$ (*i.e.*, n), showing us to be wary about using the mean value. 
 
 <img src="/images/acf_precision/bayesian_autocorr.png" alt="ACF with precision" width="800" height="600">
 
-
+Note, that the autocorrelation function plotted here is normalized to the first datapoint, $$\tau=0$$.
 
 ### Code
 To generate the figure above
