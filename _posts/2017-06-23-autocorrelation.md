@@ -77,7 +77,6 @@ We can calculate the autocorrelation function as shown above, but this does not 
 
 <img src="/images/acf_precision/bayesian_autocorr.png" alt="ACF with precision" width="800" height="600">
 
-\\
 
 ### Code
 To generate the figure above
