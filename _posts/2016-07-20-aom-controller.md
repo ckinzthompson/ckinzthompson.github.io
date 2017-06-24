@@ -69,14 +69,14 @@ void loop(){
 ## Build the Electronics
 Schematic Drawing:
 ![Schematic](/images/aom/schematic.png)
-----
+---
 Outside View:
 ![Outside](/images/aom/outside.png)
-----
+---
 Inside View:
 ![Inside](/images/aom/inside.png)
-----
-##Notes: 
+---
+## Notes: 
 * The DC jack/wall-wart adapter I bought aren’t compatible for some reason… therefore, I chopped the DC plug off, and soldered it straight to the leads of the jack (threaded through a hole in the jack).
 * The 12 V regulator runs pretty hot, therefore the fan should probably be positioned over this.
 * The AOMs run very hot — make sure not to keep them on for too long.
