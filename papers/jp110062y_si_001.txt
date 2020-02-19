@@ -1,0 +1,342 @@
+&FORCE_EVAL
+
+	METHOD QMMM
+#--------------------------------------------------
+#--------------------------------------------------
+#--------------------------------------------------
+
+	&DFT
+		ROKS
+		&SIC
+			SIC_METHOD MAURI_SPZ
+			SIC_SCALING_A 0.8
+			SIC_SCALING_B 0.5
+		&END SIC
+
+		BASIS_SET_FILE_NAME ./GTH_BASIS_SETS
+		POTENTIAL_FILE_NAME ./POTENTIAL
+		RESTART_FILE_NAME ./DESCRIPTIVE_NAME.WFN
+
+		&MGRID
+			COMMENSURATE
+			CUTOFF 280
+			NGRIDS 3
+
+			&INTERPOLATOR
+				KIND SPLINE3
+			&END INTERPOLATOR
+
+		&END MGRID
+
+		&QS
+			METHOD GPW
+			EPS_DEFAULT 1.0E-13
+		&END QS
+
+		&SCF
+			EPS_SCF 1.0e-5
+			MAX_SCF 250
+			SCF_GUESS RESTART
+ 
+			&OT ON
+				PRECOND_SOLVER INVERSE_CHOLESKY
+				PRECONDITIONER FULL_KINETIC
+				MINIMIZER CG
+				ROTATION .TRUE.
+			&END OT
+
+		&END SCF
+
+		&XC
+			&XC_FUNCTIONAL BLYP
+			&END XC_FUNCTIONAL
+
+			&XC_GRID
+				XC_DERIV SPLINE2_smooth
+				XC_SMOOTH_RHO NN10
+			&END XC_GRID
+
+		&END XC
+
+		&PRINT
+			&E_DENSITY_CUBE
+			&END
+		&END
+
+	&END DFT
+
+#--------------------------------------------------#--------------------------------------------------
+#--------------------------------------------------
+
+	&MM
+		&FORCEFIELD
+			parm_file_name ./DESCRIPTIVE_NAME.pot
+			parmtype CHM
+
+			&SPLINE
+				rcut_nb 7.0
+			&END SPLINE
+
+		&END FORCEFIELD
+
+		&POISSON
+			&EWALD
+				EWALD_TYPE spme
+				ALPHA .5
+				GMAX 37
+				O_SPLINE 6
+			&END EWALD
+		&END POISSON
+
+	&END MM
+
+#------------------------------------------------
+#------------------------------------------------
+#------------------------------------------------
+
+	&QMMM
+		&CELL
+			ABC [angstrom] 30 30 30
+			PERIODIC XYZ
+		&END
+
+		&PERIODIC
+			GMAX 1
+
+			&MULTIPOLE
+				EWALD_PRECISION 0.000001 #1E-6 Hartree
+				RCUT 30.0
+				ANALYTICAL_GTERM
+			&END MULTIPOLE
+
+		&END PERIODIC
+
+		ECOUPL GAUSS
+		USE_GEEP_LIB 5
+
+		&INTERPOLATOR
+			EPS_R 1.0e-14
+			EPS_X 1.0e-14
+			MAXITER 150
+		&END INTERPOLATOR
+
+#------------------------------------------------
+
+		&MM_KIND HO1
+			RADIUS 0.35
+		&END MM_KIND
+		&MM_KIND H11
+			RADIUS 0.35
+		&END MM_KIND
+		&MM_KIND H12
+			RADIUS 0.35
+		&END MM_KIND
+		&MM_KIND H21
+			RADIUS 0.35
+		&END MM_KIND
+		&MM_KIND H51
+			RADIUS 0.35
+		&END MM_KIND
+		&MM_KIND H1
+			RADIUS 0.35
+		&END MM_KIND
+		&MM_KIND H52
+			RADIUS 0.35
+		&END MM_KIND
+		&MM_KIND H13
+			RADIUS 0.35
+		&END MM_KIND
+		&MM_KIND HC1
+			RADIUS 0.35
+		&END MM_KIND
+		&MM_KIND HO2
+			RADIUS 0.35
+		&END MM_KIND
+		&MM_KIND H22
+			RADIUS 0.35
+		&END MM_KIND
+		&MM_KIND H4
+			RADIUS 0.35
+		&END MM_KIND
+		&MM_KIND HC2
+			RADIUS 0.35
+		&END MM_KIND
+		&MM_KIND H2
+			RADIUS 0.35
+		&END MM_KIND
+		&MM_KIND P
+			RADIUS 1.10
+		&END MM_KIND
+		&MM_KIND IP
+			RADIUS 1.20
+		&END MM_KIND
+		&MM_KIND HW
+			RADIUS 0.35
+		&END MM_KIND
+
+#----------------------------------------------------
+
+		&QM_KIND C
+			mm_index  99 102 105 108 111 112 117 120 121 123
+			mm_index 131 134 137 140 143 144 149 152 153 155
+			mm_index 163 166 169 172 175 176 181 184 185 187
+			mm_index 195 198 201 204 207 208 213 216 217 219
+			mm_index 227 230 233 236 239 240 245 248 249 251
+			mm_index 386 389 392 395 397 398 402 406 408 410
+			mm_index 418 421 424 427 429 430 434 438 440 442
+			mm_index 450 453 456 459 461 462 466 470 472 474
+			mm_index 482 485 488 491 493 494 498 502 504 506
+			mm_index 514 517 520 523 525 526 530 534 536 538
+		&END QM_KIND
+
+		&QM_KIND H
+			mm_index 100 101 103 106 109 114 115 118 122 124
+			mm_index 125 132 133 135 138 141 146 147 150 154
+			mm_index 156 157 164 165 167 170 173 178 179 182
+			mm_index 186 188 189 196 197 199 202 205 210 211
+			mm_index 214 218 220 221 228 229 231 234 237 242
+			mm_index 243 246 250 252 253 387 388 390 393 396
+			mm_index 399 400 401 405 409 411 412 419 420 422
+			mm_index 425 428 431 432 433 437 441 443 444 451
+			mm_index 452 454 457 460 463 464 465 469 473 475
+			mm_index 476 483 484 486 489 492 495 496 497 501
+			mm_index 505 507 508 515 516 518 521 524 527 528
+			mm_index 529 533 537 539 540
+		&END QM_KIND
+
+		&QM_KIND N
+			mm_index 107 110 113 116 119 139 142 145 148 151
+			mm_index 171 174 177 180 183 203 206 209 212 215
+			mm_index 235 238 241 244 247 394 404 426 436 458
+			mm_index 468 490 500 522 532
+		&END QM_KIND
+
+		&QM_KIND O
+			mm_index  96  97  98 104 126 128 129 130 136 158
+			mm_index 160 161 162 168 190 192 193 194 200 222
+			mm_index 224 225 226 232 254 383 384 385 391 403
+			mm_index 407 413 415 416 417 423 435 439 445 447
+			mm_index 448 449 455 467 471 477 479 480 481 487
+			mm_index 499 503 509 511 512 513 519 531 535 541
+		&END QM_KIND
+
+		&QM_KIND P
+			mm_index  95 127 159 191 223 382 414 446 478 510
+		&END QM_KIND
+
+#----------------------------------------------------
+
+		&LINK
+			ALPHA 1.50
+			LINK_TYPE IMOMM
+			QM_INDEX 95
+			MM_INDEX 94
+			RADIUS 1.20
+		&END LINK
+
+		&LINK
+			ALPHA 1.50
+			LINK_TYPE IMOMM
+			QM_INDEX 254
+			MM_INDEX 255
+			RADIUS 1.20
+		&END LINK
+
+		&LINK
+			ALPHA 1.50
+			LINK_TYPE IMOMM
+			QM_INDEX 382
+			MM_INDEX 381
+			RADIUS 1.20
+		&END LINK
+
+		&LINK
+			ALPHA 1.50
+			LINK_TYPE IMOMM
+			QM_INDEX 541
+			MM_INDEX 542
+			RADIUS 1.20
+		&END LINK
+
+	&END QMMM
+
+#------------------------------------------------------
+#------------------------------------------------------
+#------------------------------------------------------
+
+	&SUBSYS
+		&CELL
+			ABC [angstrom] 57 66 67 
+			PERIODIC XYZ
+		&END CELL
+
+		&KIND C
+			BASIS_SET DZVP-GTH
+			POTENTIAL GTH-BLYP-q4
+		&END KIND
+
+		&KIND H
+			BASIS_SET DZVP-GTH
+			POTENTIAL GTH-BLYP-q1
+		&END KIND
+
+		&KIND N
+			BASIS_SET DZVP-GTH
+			POTENTIAL GTH-BLYP-q5
+		&END KIND
+
+		&KIND O
+			BASIS_SET DZVP-GTH
+			POTENTIAL GTH-BLYP-q6
+		&END KIND
+
+		&KIND P
+			BASIS_SET DZVP-GTH
+			POTENTIAL GTH-BLYP-q5
+		&END KIND
+
+		&TOPOLOGY
+			CONN_FILE ./DESCRIPTIVE_NAME.psf
+			CONNECTIVITY PSF
+			COORD_FILE ./DESCRIPTIVE_NAME.pdb
+			COORDINATE PDB
+		&END TOPOLOGY
+
+	&END SUBSYS
+
+&END FORCE_EVAL
+
+#------------------------------------------------------
+#------------------------------------------------------
+#------------------------------------------------------
+#------------------------------------------------------
+#------------------------------------------------------
+
+&GLOBAL
+
+	PROJECT DESCRIPTIVE_NAME
+	RUN_TYPE MD
+	PRINT_LEVEL MEDIUM
+
+&END GLOBAL
+
+#------------------------------------------------------
+#------------------------------------------------------
+#------------------------------------------------------
+#------------------------------------------------------
+#------------------------------------------------------
+
+&MOTION
+	&MD
+		ENSEMBLE NVE 
+		STEPS 800
+		TIMESTEP 0.5 #fs
+		TEMPERATURE 300.0000000 
+	&END MD
+	
+	&PRINT
+		&RESTART_HISTORY
+		&END RESTART_HISTORY
+	&END PRINT
+
+&END MOTION
