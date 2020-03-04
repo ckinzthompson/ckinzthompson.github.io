@@ -19,5 +19,5 @@ $(document).ready(function (){
 			$('.navbar-collapse').collapse('hide');
 	});
 
-	$('.collapse').collapse()
+	// $('.collapse').collapse()
 });
