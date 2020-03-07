@@ -1,10 +1,11 @@
 ---
-layout: posts
+layout: post
+author: Colin Kinz-Thompson
 title: Speed Up Python Code Using .C
 date: 2016-02-13
 ---
 
-Vectorized Python code using Numpy can be very fast, however it is not always possible to avoid using slow for-loops in your program. However, if you can write a few lines in .C, there is an easy way to integrate perform the for-loops using C code, and still use Python for the rest of your program. 
+Vectorized Python code using Numpy can be very fast, however it is not always possible to avoid using slow for-loops in your program. However, if you can write a few lines in .C, there is an easy way to integrate perform the for-loops using C code, and still use Python for the rest of your program.
 
 You can do this by writing a wrapper for the C program in Python using Ctypes. The C program can then be called directly from your Python program.
 
@@ -34,7 +35,7 @@ void cprod(int npoints, double *input_vector, double *output_vector);
 // Actual function
 void cprod(int npoints, double *input_vector, double *output_vector){
 	output_vector[0] = input_vector[0];
-	
+
 	for (int i=0; i < npoints - 1; i++){
 		output_vector[i+1] = output_vector[i]*input_vector[i+1];
 	}

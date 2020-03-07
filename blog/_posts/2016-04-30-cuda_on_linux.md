@@ -1,5 +1,6 @@
 ---
-layout: posts
+layout: post
+author: Colin Kinz-Thompson
 title: Getting CUDA set up on Linux
 date: 2016-04-30
 ---
@@ -12,26 +13,26 @@ For instance, I'm using a Geforce GTX 750 Ti, and that needed the 361 version of
 
 {% highlight console %}
 sudo apt-get install nvidia-361
-{% endhighlight %} 
+{% endhighlight %}
 
-You'll also probably want to restart your computer at this point. If something goes wrong, you'll want to google how to switch back from NVIDIA drivers to the original, generic, linux drivers called 'Nouveau'. Okay, now you'll have to start to install the CUDA toolkit -- there are a couple of different version (current is 7.5 or 8?), but you need to use the one that works for your driver version. Some googling, and you should find that. I used version 7.5 of the toolkit. Anyway... time to install! Go to the [CUDA toolkit downloads site](https://developer.nvidia.com/cuda-downloads), and select Linux, x86\_64, Ubuntu, 15.04, and runfile (local) -- this will download a ~1 gb file for the installer. 
+You'll also probably want to restart your computer at this point. If something goes wrong, you'll want to google how to switch back from NVIDIA drivers to the original, generic, linux drivers called 'Nouveau'. Okay, now you'll have to start to install the CUDA toolkit -- there are a couple of different version (current is 7.5 or 8?), but you need to use the one that works for your driver version. Some googling, and you should find that. I used version 7.5 of the toolkit. Anyway... time to install! Go to the [CUDA toolkit downloads site](https://developer.nvidia.com/cuda-downloads), and select Linux, x86\_64, Ubuntu, 15.04, and runfile (local) -- this will download a ~1 gb file for the installer.
 
 Okay before installing, there's some funny business. You'll need to kill your Xserver for the install, and then bring it back after. X is what provides the graphics on your machine... so this means no GUI for anything. It's helpful to have a second computer around in case anything goes wrong and you need to google answers from stackoverflow.
 
-OKAY - You'll need to need to enter a TTY session (control+alt+f1) and do everything from here. To go back to the GUI, you can press (control+alt+f7). Login to the TTY session, then, to stop the Xserver, issue the command 
+OKAY - You'll need to need to enter a TTY session (control+alt+f1) and do everything from here. To go back to the GUI, you can press (control+alt+f7). Login to the TTY session, then, to stop the Xserver, issue the command
 
 {% highlight console %}
 sudo service lightdm stop
 {% endhighlight %}
 
-(you shouldn't see anything if you press (control+alt+f7)... make sure to go back to the TTY session if you do this (control+alt+f1)). Navigate to your Downloads folder, and run installer. You might want to change the permissions first with 
+(you shouldn't see anything if you press (control+alt+f7)... make sure to go back to the TTY session if you do this (control+alt+f1)). Navigate to your Downloads folder, and run installer. You might want to change the permissions first with
 
 {% highlight console %}
 chmod 755 installer_filename.run
 ./installer_filename.run
 {% endhighlight %}
 
-This will prompt you for various install options. SKIP THE DRIVER INSTALLATION. Install the toolkit as root, and also the samples. Once this is done, you'll want to boot the X server back up using 
+This will prompt you for various install options. SKIP THE DRIVER INSTALLATION. Install the toolkit as root, and also the samples. Once this is done, you'll want to boot the X server back up using
 
 {% highlight console %}
 sudo service lightdm start
@@ -53,7 +54,7 @@ export PATH="${CUDA_HOME}/bin:$PATH"
 export LD_LIBRARY_PATH="${CUDA_HOME}/lib64:$LD_LIBRARY_PATH"
 {% endhighlight %}
 
-And then save that, and source it with 
+And then save that, and source it with
 {% highlight console %}
 source ~/.zshrc
 {% endhighlight %}

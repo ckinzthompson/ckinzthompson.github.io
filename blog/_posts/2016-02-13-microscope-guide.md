@@ -1,7 +1,8 @@
 ---
-layout: posts
+layout: post
+author: Colin Kinz-Thompson
 title: Microscope Guide
-date: 2016-02-13 
+date: 2016-02-13
 ---
 
 ---
@@ -23,7 +24,7 @@ Make sure you've been trained on microscope use, and how to disconnect the camer
 	5. Shutter controller
 
 
-3. Turn on the Green Laser: 
+3. Turn on the Green Laser:
 	1. Open the PuTTYtel program
 	2. Connect to the LASER preset option
 	3. Type "on" (don't type the quotes), and hit enter
@@ -36,14 +37,14 @@ Make sure you've been trained on microscope use, and how to disconnect the camer
 	2. Load preset hardware configuration ("Default\_Camera\_Setting")
 	3. Initialize Camera preset to "Regular"
 	4. Pick Shutter preset (e.g., "Green") for your desired illumination
-	
+
 5. Setup Microscope
 	1. Clean both sides of slide with acetone
 	2. Clean prism with acetone
 	3. Place water on objective
 	4. Lower objective, and put slide on microscope stage
 	5. Place thin layer of oil on prism, and secure prism to post.
-	
+
 6. Image
 	1. Find TIRF through eyepiece
 	2. Switch to camera, and focus with "Live" mode in Micro-Manager
@@ -65,6 +66,6 @@ Make sure you've been trained on microscope use, and how to disconnect the camer
 	3. Remove slide and clean with acetone
 	4. Close Micro-Manager
 	5. Shutdown green laser by typing "off" in PuTTYtel, and hit enter
-	6. Turn off EMCCD (toggle button), water circulator (switch), Red and Blue lasers (key and switch), and 
+	6. Turn off EMCCD (toggle button), water circulator (switch), Red and Blue lasers (key and switch), and
 	7. Unplug power blocks for EMCCD, green laser power supply, and water circulator
 	8. Fill out log book with name, hours, power settings, and status

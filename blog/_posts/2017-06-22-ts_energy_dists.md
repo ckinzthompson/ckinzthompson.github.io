@@ -1,5 +1,6 @@
 ---
-layout: posts
+layout: post
+author: Colin Kinz-Thompson
 title: Distributions of Transition State Energies
 date: 2017-06-22
 ---
