@@ -12,5 +12,5 @@ theme: jekyll-theme-primer
 source              : ./blog
 destination         : ./blog/_site
 layouts_dir         : ./blog/_layouts
-# data_dir            : ./blog/_data
-# includes_dir        : ./blog/_includes
+data_dir            : ./blog/_data
+includes_dir        : ./blog/_includes
