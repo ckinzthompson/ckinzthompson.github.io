@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 author: Colin Kinz-Thompson
 title: Autocorrelation Function Precision
 date: 2017-06-23

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 author: Colin Kinz-Thompson
 title: Getting CUDA set up on Linux
 date: 2016-04-30
