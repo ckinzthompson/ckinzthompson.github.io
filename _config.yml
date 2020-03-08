@@ -28,3 +28,4 @@ theme: minima
 
 source: ./blog
 destination: ./blog/_site
+layout_dir: ./blog/_layouts
