@@ -22,6 +22,10 @@ url: "http://ckinzthompson.github.io/blog" # the base hostname & protocol for yo
 twitter_username: ckinzthompson
 github_username:  ckinzthompson
 
+permalink: pretty
+plugins:
+  - jekyll-paginate
+
 # Build settings
 markdown: kramdown
 theme: minima
