@@ -36,7 +36,7 @@ plugins:
   - jekyll-feed
 
 
-source              : .
+source              : ./blog
 destination         : ./_site
 # layouts_dir         : _layouts
 # data_dir            : _data
