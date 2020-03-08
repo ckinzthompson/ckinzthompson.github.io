@@ -27,6 +27,7 @@ plugins:
   - jekyll-feed
 
 
+paginate: true
 
 # Build settings
 markdown: kramdown
