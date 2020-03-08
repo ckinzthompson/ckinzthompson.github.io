@@ -29,13 +29,14 @@ kramdown:
   hard_wrap: True
 # markdown: redcarpet
 highlighter: rouge
-permalink: /blog/:year/:month/:day/:title
+# permalink: /blog/:year/:month/:day/:title
 # plugins:
 #   - jekyll-feed
 # theme: minima
 
-
+#
+theme: "minima"
 source              : ./blog
-destination         : ./blog/_site
-layouts_dir : ./blog/_layouts
-include_dir : ./blog/_includes
+# destination         : ./blog/_site
+# layouts_dir : ./blog/_layouts
+# includes_dir : ./blog/_includes
