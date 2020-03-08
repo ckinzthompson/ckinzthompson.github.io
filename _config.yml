@@ -38,4 +38,4 @@ permalink: /blog/:year/:month/:day/:title
 source              : ./blog
 destination         : ./blog/_site
 layouts_dir : ./blog/_layouts
-includes_dir : ./blog/_includes
+include_dir : ./blog/_includes
