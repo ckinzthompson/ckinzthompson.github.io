@@ -36,3 +36,4 @@ theme: minima
 source: ./blog
 destination: ./blog/_site
 layouts_dir: ./blog/_layouts
+sass_dir: ./blog/_sass
