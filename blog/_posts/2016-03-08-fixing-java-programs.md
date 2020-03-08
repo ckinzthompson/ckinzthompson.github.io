@@ -1,5 +1,5 @@
 ---
-layout: posts
+layout: post
 author: Colin Kinz-Thompson
 title: Fixing Java Programs Your Lab-Mate Wrote Ages Ago
 date: 2016-03-08

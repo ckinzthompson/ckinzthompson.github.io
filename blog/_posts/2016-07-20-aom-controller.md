@@ -1,5 +1,5 @@
 ---
-layout: posts
+layout: post
 author: Colin Kinz-Thompson
 title: AOM Controller Project
 date: 2016-07-20

@@ -1,5 +1,5 @@
 ---
-layout: posts
+layout: post
 author: Colin Kinz-Thompson
 title: Microscope Guide
 date: 2016-02-13
