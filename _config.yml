@@ -17,12 +17,10 @@ title: CKT Blog
 email: cdk2119@columbia.edu
 description: >- # this means to ignore newlines until "baseurl:"
   My thoughts on chemistry, biophysics, making, programming, math, other things.
-baseurl: "blog" # the subpath of your site, e.g. /blog
+baseurl: "/blog" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: ckinzthompson
 github_username:  ckinzthompson
-
-theme: minima
 
 # Build settings
 markdown: kramdown
@@ -31,13 +29,13 @@ kramdown:
   hard_wrap: True
 # markdown: redcarpet
 highlighter: rouge
-permalink: /:year/:month/:day/:title
+permalink: /blog/:year/:month/:day/:title
 # plugins:
 #   - jekyll-feed
 
 
 source              : ./blog
 destination         : ./blog/_site
-layouts_dir         : ./blog/_layouts
+# layouts_dir         : _layouts
 # data_dir            : _data
 # includes_dir        : _includes
