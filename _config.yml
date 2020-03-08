@@ -28,6 +28,10 @@ plugins:
 paginate: 10
 paginate_path: "/blog/page:num/"
 
+header_pages:
+  - about.md
+  - index.md
+
 # Build settings
 markdown: kramdown
 theme: minima
