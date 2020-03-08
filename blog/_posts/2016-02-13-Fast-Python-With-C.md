@@ -1,7 +1,7 @@
 ---
 layout: posts
 author: Colin Kinz-Thompson
-title: Speed Up Python Code Using .C
+title: Use C code in Python
 date: 2016-02-13
 ---
 

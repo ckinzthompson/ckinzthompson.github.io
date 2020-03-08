@@ -1,7 +1,7 @@
 ---
 layout: posts
 author: Colin Kinz-Thompson
-title: Encoding Movies for Mac with FFMPEG
+title: Encoding Movies with FFMPEG (Mac)
 date: 2016-02-18
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: posts
 author: Colin Kinz-Thompson
-title: VMD Rendering
+title: Publication Quality Pictures in VMD
 date: 2016-02-18
 ---
 
