@@ -26,8 +26,7 @@ permalink: pretty
 plugins:
   - jekyll-feed
 
-header_pages:
-  - blog/about.md
+
 
 # Build settings
 markdown: kramdown
