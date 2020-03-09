@@ -15,4 +15,4 @@ nohup python -u processing_code.py &
 
 The logging/multiprocessing approach in the GIST below will log out the relevant information into a text file called 'log.log'.
 
-<script src="https://gist.github.com/ckinzthompson/df4c3313c488f08d881d3aa188d963b8.js"></script>
+{% gist df4c3313c488f08d881d3aa188d963b %}

@@ -26,6 +26,7 @@ permalink: pretty
 plugins:
   - jekyll-feed
   - jekyll-paginate
+  - jekyll-gist
 
 paginate: 5
 
