@@ -15,4 +15,58 @@ nohup python -u processing_code.py &
 
 The logging/multiprocessing approach in the GIST below will log out the relevant information into a text file called 'log.log'.
 
-{% gist df4c3313c488f08d881d3aa188d963b %}
+``` python
+import multiprocessing
+import logging
+import numpy as np
+
+logging.basicConfig(
+	level=logging.DEBUG,
+	format='%(asctime)s %(process)s %(levelname)s %(message)s',
+	filename='log.log',
+	filemode='w'
+)
+import logging.config
+logging.config.dictConfig({
+	'version': 1,
+	'disable_existing_loggers': True,
+})
+
+#################
+
+def process_data(theta):
+	job_name, job_ind, job_total, otherparameters = theta
+
+	## Start Logging
+	with multiprocessing.Lock():
+		logging.debug("Started  %s.  %2.1f%%"%(pdb_id,100*float(job_ind+1)/float(job_total)))
+	t0 = time.time()
+
+	## Main processing
+	try:
+		for i in range(100000):
+			a = i + 1
+	except: ## catch an error
+		with multiprocessing.Lock():
+			logging.debug('ERROR: issue with %s'%(job_name))
+		return None
+
+	## Stop Logging
+	t1 = time.time()
+	with multiprocessing.Lock():
+		logging.debug("Finished %s.  %.6f sec"%(job_id,t1-t0))
+
+	return None
+
+if __name__ == '__main__':
+	logging.debug("Processing Started")
+
+	## input parameters - job name, job index, total number of jobs, other paramters
+	total = 100
+	input_list = [[str(np.random.rand()), i, total, np.random.rand()] for i in range(total)]
+
+	with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as pool:
+		pool.map(process_data, input_list)
+
+	logging.debug("Processing completed")
+```
