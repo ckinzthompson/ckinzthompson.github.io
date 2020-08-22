@@ -1,0 +1,129 @@
+<html>
+	<head>
+		<title>Software - Kinz-Thompson Lab</title>
+		<meta charset="UTF-8"/>
+
+		<!-- bootswatch version - Lux stylesheet -->
+		<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/lux/bootstrap.min.css" rel="stylesheet" integrity="sha384-oOs/gFavzADqv3i5nCM+9CzXe3e5vXLXZ5LZ7PplpsWpTCufB7kqkTlC9FtZ5nJo" crossorigin="anonymous">
+
+		<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+
+	<body>
+		<main class="main">
+			<!-- header -->
+			<script src="js/header.js"></script>
+			
+<!-- Software ---------------------------------------     -->
+			<section class="jumbotron text-center" id="Software">
+				<div class="container">
+					<h1>Software, and Hardware</h1>
+					<p class="lead text-muted">
+						We're committed to open source software, and hardware. Primarily a Python, arduino, and C/CUDA lab. Got expertise? Interested in collaborating? Please, get in touch!
+					</p>
+				</div>
+			</section>
+
+			<div class="container-sm my-5 py-5">
+				<div class="accordion" id="softaccordion">
+
+				  <div class="card">
+				    <div class="card-header" id="soft1">
+				      <h2 class="mb-0">
+				        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#softcollapse1" aria-expanded="false" aria-controls="soft1">
+				          Bayesian Inference for the Analysis of Sub-temporal-resolution Data (BIASD)
+				        </button>
+				      </h2>
+				    </div>
+
+				    <div id="softcollapse1" class="collapse show" aria-labelledby="soft1" data-parent="#softaccordion">
+				      <div class="card-body">
+				        <p>BIASD is a method to temporal resolve kinetics any single-molecule time series, even if those kintics are orders of magnitude faster than the time resolution of the technique. Written in python, C, and CUDA</p>
+								<p><i class="fa fa-git-square"></i><a href="https://github.com/ckinzthompson/biasd"> Link </a></p>
+				      </div>
+				    </div>
+				  </div>
+
+					<div class="card">
+						<div class="card-header" id="soft6">
+							<h2 class="mb-0">
+								<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#softcollapse6" aria-expanded="false" aria-controls="softcollapse6">
+									Single-molecule Stochastic Simulation Algorithm (SSA)
+								</button>
+							</h2>
+						</div>
+						<div id="softcollapse6" class="collapse" aria-labelledby="soft6" data-parent="#softaccordion">
+							<div class="card-body">
+								<p>SSA (c.f., D. Gillespie) is an algorithm for simulating stochastic jump processes such as single-molecule time series. We have created a Python/C library for fast SSA-based simulations of single-molecule time series. Note: we have a separate, updated JITed version in pure Python - contact for more info.</p>
+								<p><i class="fa fa-git-square"></i><a href="https://github.com/ckinzthompson/biasd/tree/master/example_data/simulate_trajectories"> Link </a> </p>
+							</div>
+						</div>
+					</div>
+
+				  <div class="card">
+				    <div class="card-header" id="soft2">
+				      <h2 class="mb-0">
+				        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#softcollapse2" aria-expanded="false" aria-controls="softcollapse2">
+				          vbscope
+				        </button>
+				      </h2>
+				    </div>
+				    <div id="softcollapse2" class="collapse" aria-labelledby="soft2" data-parent="#softaccordion">
+				      <div class="card-body">
+								<p>vbscope is software to actively learn what "spots" look like for single-molecule localization microscopy. It is currently unreleased.</p>
+								<p><i class="fa fa-exclamation-triangle"></i>Contact us.</p>
+				      </div>
+				    </div>
+				  </div>
+
+				  <div class="card">
+				    <div class="card-header" id="soft3">
+				      <h2 class="mb-0">
+				        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#softcollapse3" aria-expanded="false" aria-controls="softcollapse3">
+				          fret_plot
+				        </button>
+				      </h2>
+				    </div>
+				    <div id="softcollapse3" class="collapse" aria-labelledby="soft3" data-parent="#softaccordion">
+				      <div class="card-body">
+								<p>fret_plot is software for post-processing, modeling data, and generating publication quality figures for smFRET data. It is currently unreleased.</p>
+								<p><i class="fa fa-exclamation-triangle"></i>Contact us.</p>
+				      </div>
+				    </div>
+				  </div>
+
+					<div class="card">
+				    <div class="card-header" id="soft4">
+				      <h2 class="mb-0">
+				        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#softcollapse4" aria-expanded="false" aria-controls="softcollapse4">
+				          Fast Arduino-based AOM controller box
+				        </button>
+				      </h2>
+				    </div>
+				    <div id="softcollapse4" class="collapse" aria-labelledby="soft4" data-parent="#softaccordion">
+				      <div class="card-body">
+								<p>Details on how to get sub-microsecond digital switching using an arduino in order to control an AOM.</p>
+								<p><i class="fa fa-exclamation-triangle"></i>Contact us.</p>
+				      </div>
+				    </div>
+				  </div>
+
+				<!-- -->
+				</div>
+			</div>
+
+
+		</main>
+	<script src="js/footer.js"></script>
+	</body>
+
+	<!-- make sure jquery comes before bootstrap js... -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
+
+
+</html>
