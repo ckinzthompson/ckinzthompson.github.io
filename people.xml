@@ -1,0 +1,32 @@
+<labmembers>
+	<person>
+		<name>Colin Kinz-Thompson</name>
+		<role>Assistant Professor</role>
+		<imgsrc>img/ppl/colin.jpg</imgsrc>
+		<items>
+			<item fa="fa-envelope-o">colin.kinzthompson@rutgers.edu</item>
+			<item fa="fa-phone">(973) 353-0671</item>
+			<item fa="fa-twitter"> &gt;a href=&quot;https://twitter.com/ckinzthompson&quot;&lt;@ckinzthompson&gt;/a&lt; </item>
+			<item fa="fa-book">&gt;a href=&quot;papers/CV_CKT.pdf&quot;&lt;</item>
+		</items>
+	</person>
+
+	<person>
+		<name>Onyx</name>
+		<role>Lab(rador) Dog</role>
+		<imgsrc>img/ppl/onyx.jpg</imgsrc>
+		<items>
+			<item fa="fa-envelope-o">onyx@onyx.dog</item>
+			<item fa="fa-phone">(paw) paw-woof</item>
+		</items>
+	</person>
+
+	<person>
+		<name>You!?</name>
+		<role>Undergrad? Grad Student? Postdoc?</role>
+		<imgsrc>img/ppl/blank1.jpg</imgsrc>
+		<items>
+			<item fa="fa-envelope-o">Send us an email!</item>
+		</items>
+	</person>
+</labmembers>
