@@ -8,13 +8,38 @@ date: 2020-09-27
 # Idea
 Use machine learning to turn Cryo EM images in negative stain TEM images, and back and forth.
 
-### Methods
+## Methods
 Use a machine learning approach called contrastive unpaired translation [link here](https://github.com/taesungp/contrastive-unpaired-translation). This allows you to do single image to single image translation! Very cool! Here's the paper on [arXiv](https://arxiv.org/pdf/2007.15651.pdf).
 
 I used the GPUs on to run this [Google Collab](https://colab.research.google.com/)
 
 Make sure you have the gpu on in the notebook.
 (Edit >> notebook settings)
+
+
+## Results
+I think it's pretty obvious that I needed to train more (stopped after first of 16 epochs (~50 mins)). This doesn't quite look like a negative stain image it's clearly going in the right direction! More training data (instead of a random image I pulled from the internet), and more training epochs should help!
+
+![png](https://ckinzthompson.github.io/img/em/CUT_cryoem_12_0.png)
+
+
+## Conclusions
+This is an insane idea without any scientific merit. To put it into perspective, imagine turning a single-molecule fluorescence image into a cryo-EM image...
+It's cool though!
+
+
+## Appendix
+
+Just for fun, let's try to turn an EM image into a David Goodsell style image.
+
+Use this [cell section](https://cdn.thinglink.me/api/image/698929919408734209/1240/10/scaletowidth)
+
+pull targets (1024x1024) from this image:
+[Goodsell target](https://cdn.rcsb.org/pdb101/motm/tiff/247-Myelinassociated_Glycoprotein-Myelin.tif)
+
+![png](https://ckinzthompson.github.io/img/em/CUT_goodsell.png)
+It's starting to work. I'm not totally sure why it's all blue, but more training might help. Finally, more images in the training will probably help the style transfer.
+
 
 ## The Jupyter Notebook
 
@@ -347,27 +372,3 @@ ax[2].imshow(img3)
 plt.savefig('cryoem_test_img.png')
 
 ```
-
-## Results
-I think it's pretty obvious that I needed to train more (stopped after first of 16 epochs (~50 mins)). This doesn't quite look like a negative stain image it's clearly going in the right direction! More training data (instead of a random image I pulled from the internet), and more training epochs should help!
-
-![png](https://ckinzthompson.github.io/img/em/CUT_cryoem_12_0.png)
-
-
-## Conclusions
-This is an insane idea without any scientific merit. To put it into perspective, imagine turning a single-molecule fluorescence image into a cryo-EM image...
-It's cool though!
-
-
-## Appendix
-
-Just for fun, let's try to turn an EM image into a David Goodsell style image.
-
-Use this [cell section](https://cdn.thinglink.me/api/image/698929919408734209/1240/10/scaletowidth)
-
-pull targets (1024x1024) from this image:
-[Goodsell target](https://cdn.rcsb.org/pdb101/motm/tiff/247-Myelinassociated_Glycoprotein-Myelin.tif)
-
-### Results
-![png](https://ckinzthompson.github.io/img/em/CUT_goodsell.png)
-It's starting to work. I'm not totally sure why it's all blue, but more training might help. Finally, more images in the training will probably help the style transfer.
