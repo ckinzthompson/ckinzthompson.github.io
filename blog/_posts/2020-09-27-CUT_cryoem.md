@@ -11,10 +11,10 @@ Use machine learning to turn Cryo EM images in negative stain TEM images, and ba
 ## Methods
 Use a machine learning approach called contrastive unpaired translation [link here](https://github.com/taesungp/contrastive-unpaired-translation). This allows you to do single image to single image translation! Very cool! Here's the paper on [arXiv](https://arxiv.org/pdf/2007.15651.pdf).
 
-I used the GPUs on to run this [Google Collab](https://colab.research.google.com/)
+I used Google GPUs to run this [Google Collab](https://colab.research.google.com/)
 
-Make sure you have the gpu on in the notebook.
-(Edit >> notebook settings)
+Make sure you have the GPU turned on in the notebook.
+(Edit >> Notebook Settings)
 
 
 ## Results
@@ -41,7 +41,7 @@ pull targets (1024x1024) from this image:
 It's starting to work. I'm not totally sure why it's all blue, but more training might help. Finally, more images in the training will probably help the style transfer.
 
 
-## The Jupyter Notebook
+## Code
 
 Check to make sure you have GPU access
 ```python
