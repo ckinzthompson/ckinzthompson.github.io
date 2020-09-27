@@ -357,3 +357,17 @@ I think it's pretty obvious that I needed to train more (stopped after first of 
 ## Conclusions
 This is an insane idea without any scientific merit. To put it into perspective, imagine turning a single-molecule fluorescence image into a cryo-EM image...
 It's cool though!
+
+
+## Appendix
+
+Just for fun, let's try to turn an EM image into a David Goodsell style image.
+
+Use this [cell section](https://cdn.thinglink.me/api/image/698929919408734209/1240/10/scaletowidth)
+
+pull targets (1024x1024) from this image:
+[Goodsell target](https://cdn.rcsb.org/pdb101/motm/tiff/247-Myelinassociated_Glycoprotein-Myelin.tif)
+
+### Results
+![png](https://ckinzthompson.github.io/img/em/CUT_goodsell.png)
+It's starting to work. I'm not totally sure why it's all blue, but more training might help. Finally, more images in the training will probably help the style transfer.
