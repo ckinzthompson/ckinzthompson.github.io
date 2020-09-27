@@ -9,7 +9,7 @@ date: 2020-09-27
 Use machine learning to turn Cryo EM images in negative stain TEM images, and back and forth.
 
 ### Methods
-Use a machine learning approach called contrastive unpaired translation [link here](https://github.com/taesungp/contrastive-unpaired-translation). This allows you to do single image to single image translation! Very cool!
+Use a machine learning approach called contrastive unpaired translation [link here](https://github.com/taesungp/contrastive-unpaired-translation). This allows you to do single image to single image translation! Very cool! Here's the paper on [arXiv](https://arxiv.org/pdf/2007.15651.pdf).
 
 I used the GPUs on to run this [Google Collab](https://colab.research.google.com/)
 
