@@ -18,7 +18,7 @@ Make sure you have the gpu on in the notebook.
 
 
 ## Results
-I think it's pretty obvious that I needed to train more (stopped after first of 16 epochs (~50 mins)). This doesn't quite look like a negative stain image it's clearly going in the right direction! More training data (instead of a random image I pulled from the internet), and more training epochs should help!
+I think it's pretty obvious that I needed to train more (stopped after first of 16 epochs (~50 mins)). This doesn't quite look like a negative stain image it's clearly going in the right direction! More training data (instead of a random image I pulled from the internet), and more training epochs should help! Comparing the dark spots (molecules) in cryo vs light spots (molecules) in stain suggests maybe inverting one of the images will help the translation.
 
 ![png](https://ckinzthompson.github.io/img/em/CUT_cryoem_12_0.png)
 
