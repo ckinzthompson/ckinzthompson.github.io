@@ -1,4 +1,4 @@
-
+top = r'''
 <html>
 	<head>
 		<title>People - Kinz-Thompson Lab</title>
@@ -29,50 +29,43 @@
 			<div class="album py-5 bg-light">
 				<div class="container">
 					<div class="row">
+'''
 
+
+def render_person(p):
+	x = p.findall('name')
+	name = x[0].text if len(x) > 0 else ''
+	x = p.findall('role')
+	role = x[0].text if len(x) > 0 else ''
+	x = p.findall('imgsrc')
+	imgsrc = x[0].text if len(x) > 0 else ''
+	items = p.findall('items')
+	istr = ''
+	if len(items) > 0:
+		items = items[0]
+		for item in items:
+			if 'fa' in item.attrib:
+				istr += '\t\t\t\t\t\t\t\t\t<i class=\"fa %s\">%s </i><br>\n'%(item.attrib['fa'],item.text)
+		istr=istr[:-5]
+
+	s = r'''
 						<div class="col-md-4">
 							<div class="card mb-4 shadow-sm peoplecard">
 								<div class="peoplecard-img d-flex">
-									<img class="bd-placeholder-img headshot" src="img/ppl/colin.jpg"></img>
+									<img class="bd-placeholder-img headshot" src="%s"></img>
 								</div>
 								<div class="peoplecard-body card-text">
-									<h5 style="text-align: center;">Colin Kinz-Thompson</h5>
-									<p style="text-align: center; ">Assistant Professor</p>
-									<i class="fa fa-envelope-o">colin.kinzthompson@rutgers.edu </i><br>
-									<i class="fa fa-phone">(973) 353-0671 </i><br>
-									<i class="fa fa-twitter"> <a href="https://twitter.com/ckinzthompson"<@ckinzthompson> @ckinzthompson </a>  </i><br>
-									<i class="fa fa-book"><a href="papers/CV_CKT.pdf">CV</a> </i>
+									<h5 style="text-align: center;">%s</h5>
+									<p style="text-align: center; ">%s</p>
+%s
 								</div>
 							</div>
 						</div>
+'''%(imgsrc,name,role,istr)
 
-						<div class="col-md-4">
-							<div class="card mb-4 shadow-sm peoplecard">
-								<div class="peoplecard-img d-flex">
-									<img class="bd-placeholder-img headshot" src="img/ppl/onyx.jpg"></img>
-								</div>
-								<div class="peoplecard-body card-text">
-									<h5 style="text-align: center;">Onyx</h5>
-									<p style="text-align: center; ">Lab(rador) Dog</p>
-									<i class="fa fa-envelope-o">onyx@onyx.dog </i><br>
-									<i class="fa fa-phone">(paw) paw-woof </i>
-								</div>
-							</div>
-						</div>
+	return s
 
-						<div class="col-md-4">
-							<div class="card mb-4 shadow-sm peoplecard">
-								<div class="peoplecard-img d-flex">
-									<img class="bd-placeholder-img headshot" src="img/ppl/blank1.jpg"></img>
-								</div>
-								<div class="peoplecard-body card-text">
-									<h5 style="text-align: center;">You!?</h5>
-									<p style="text-align: center; ">Undergrad? Grad Student? Postdoc?</p>
-									<i class="fa fa-envelope-o">Send us an email! </i>
-								</div>
-							</div>
-						</div>
-
+mid = r'''
 					</div>
 				</div>
 			</div>
@@ -84,20 +77,9 @@
 			<div class="album py-5 bg-light">
 				<div class="container">
 					<div class="row">
+'''
 
-						<div class="col-md-4">
-							<div class="card mb-4 shadow-sm peoplecard">
-								<div class="peoplecard-img d-flex">
-									<img class="bd-placeholder-img headshot" src=""></img>
-								</div>
-								<div class="peoplecard-body card-text">
-									<h5 style="text-align: center;">No one yet</h5>
-									<p style="text-align: center; "></p>
-
-								</div>
-							</div>
-						</div>
-
+bottom = r'''
 					</div>
 				</div>
 			</div>
@@ -112,3 +94,19 @@
 
 
 </html>
+'''
+
+
+
+if __name__ == '__main__':
+	import xml.etree.ElementTree as et
+	root = et.parse('people.xml').getroot()
+
+	with open('./people.html','w') as f:
+		f.write(top)
+		for cp in root.findall('current_person'):
+			f.write(render_person(cp))
+		f.write(mid)
+		for cp in root.findall('past_person'):
+			f.write(render_person(cp))
+		f.write(bottom)
