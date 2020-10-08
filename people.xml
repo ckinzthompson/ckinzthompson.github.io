@@ -12,6 +12,16 @@
 	</current_person>
 
 	<current_person>
+		<name>Katherine Leon Hernandez</name>
+		<role>Graduate Student</role>
+		<start>Fall 2020</start>
+		<imgsrc>img/ppl/blank1.jpg</imgsrc>
+		<items>
+			<item fa="fa-envelope-o">kathy.leon@rutgers.edu</item>
+		</items>
+	</current_person>
+
+	<current_person>
 		<name>Onyx</name>
 		<role>Lab(rador) Dog</role>
 		<imgsrc>img/ppl/onyx.jpg</imgsrc>
