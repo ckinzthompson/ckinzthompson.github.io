@@ -31,14 +31,14 @@
 		</items>
 	</current_person>
 
-	<current_person>
+	<!-- <current_person>
 		<name>You!?</name>
 		<role>Undergrad? Grad Student? Postdoc?</role>
 		<imgsrc>img/ppl/blank1.jpg</imgsrc>
 		<items>
 			<item fa="fa-envelope-o">Send us an email!</item>
 		</items>
-	</current_person>
+	</current_person> -->
 
 	<past_person>
 		<name>No one yet</name>

@@ -22,8 +22,15 @@ top = r'''
 			<section class="jumbotron text-center" id="people">
 				<div class="container">
 					<h1>People</h1>
-					<p class="lead text-muted">Our lab is in the <a href="https://sasn.rutgers.edu/academics-admissions/academic-departments/chemistry" class="text-muted">Department of Chemistry at Rutgers University-Newark</a>.</p>
-					<p> If you're interested in doing cutting-edge, exceptionally interdisciplinary science, then consider joining our team. Send your CV, and an explanation of why you're interested to Colin. Undergraduate students at other institutions can learn more about the <a href="https://sasn.rutgers.edu/academics-admissions/academic-departments/chemistry/ms-phd-chemistry">Ph.D. program in chemistry here</a>.</p>
+					<!--<p class="lead text-muted">Our lab is </p>-->
+					<p class="lead text-muted"> Are you interested in doing cutting-edge, interdisciplinary science? </p><br>
+					<p class="lead text-muted"> We're looking for undergraduate students, graduate students, and post-docs to join the team! If you are in chemistry, biology, physics, computer science, engineering or other areas -- we've got a place for you! Send your C.V. and an explanation of your interests to Colin.</p><br>
+					<p class="lead text-muted"> Join us in the <a href="https://sasn.rutgers.edu/academics-admissions/academic-departments/chemistry" class="text-muted">Department of Chemistry at Rutgers University-Newark</a>. Learn more about the <a href="https://sasn.rutgers.edu/academics-admissions/academic-departments/chemistry/ms-phd-chemistry" class="text-muted">our Ph.D. program in chemistry here</a>.</p>
+				</div>
+			</section>
+			<section class="jumbotron text-center" id="past">
+				<div class='container'>
+					<h1>Current Members</h1>
 				</div>
 			</section>
 			<div class="album py-5 bg-light">
@@ -45,7 +52,7 @@ def render_person(p):
 		items = items[0]
 		for item in items:
 			if 'fa' in item.attrib:
-				istr += '\t\t\t\t\t\t\t\t\t<i class=\"fa %s\">%s </i><br>\n'%(item.attrib['fa'],item.text)
+				istr += '\t\t\t\t\t\t\t\t\t<i class=\"fa %s\"></i>%s <br>\n'%(item.attrib['fa'],item.text)
 		istr=istr[:-5]
 
 	s = r'''
