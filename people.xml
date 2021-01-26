@@ -22,6 +22,16 @@
 	</current_person>
 
 	<current_person>
+		<name>Yuntao Qiu</name>
+		<role>Graduate Student</role>
+		<start>Spring 2021</start>
+		<imgsrc>img/ppl/blank1.jpg</imgsrc>
+		<items>
+			<item fa="fa-envelope-o">yq123@scarletmail.rutgers.edu</item>
+		</items>
+	</current_person>
+
+	<current_person>
 		<name>Onyx</name>
 		<role>Lab(rador) Dog</role>
 		<imgsrc>img/ppl/onyx.jpg</imgsrc>
