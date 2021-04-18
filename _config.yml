@@ -38,5 +38,3 @@ source: ./blog
 destination: ./blog/_site
 layouts_dir: ./blog/_layouts
 includes_dir: ./blog/_include
-
-google_analytics: G-6DXRRLW54Y
