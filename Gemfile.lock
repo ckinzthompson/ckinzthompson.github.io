@@ -14,8 +14,6 @@ GEM
       execjs
     coffee-script-source (1.11.1)
     colorator (1.1.0)
-    commonmarker (0.17.13)
-      ruby-enum (~> 0.5)
     concurrent-ruby (1.1.6)
     dnsruby (1.61.3)
       addressable (>= 2.8.0)
