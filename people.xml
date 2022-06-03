@@ -25,11 +25,22 @@
 		<name>Yuntao Qiu</name>
 		<role>Graduate Student</role>
 		<start>Spring 2021</start>
-		<imgsrc>img/ppl/yuntao.png</imgsrc>
+		<imgsrc>img/ppl/blank1.png</imgsrc>
 		<items>
 			<item fa="fa-envelope-o">yq123@scarletmail.rutgers.edu</item>
 		</items>
 	</current_person>
+
+	<current_person>
+		<name>Wesley Chan</name>
+		<role>Undergraduate Student</role>
+		<start>Spring 2022</start>
+		<imgsrc>img/ppl/blank1.png</imgsrc>
+		<items>
+			<item fa="fa-envelope-o">wc518@scarletmail.rutgers.edu</item>
+		</items>
+	</current_person>
+
 
 	<current_person>
 		<name>Onyx</name>
