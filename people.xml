@@ -41,6 +41,16 @@
 		</items>
 	</current_person>
 
+	<current_person>
+		<name>Natalia Nemeria</name>
+		<role>Research Associate</role>
+		<start>Summer 2022</start>
+		<imgsrc>img/ppl/blank1.jpg</imgsrc>
+		<items>
+			<item fa="fa-envelope-o">nemeria@newark.rutgers.edu</item>
+		</items>
+	</current_person>
+
 
 	<current_person>
 		<name>Onyx</name>
