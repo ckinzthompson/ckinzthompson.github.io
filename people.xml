@@ -5,9 +5,19 @@
 		<imgsrc>img/ppl/colin.jpg</imgsrc>
 		<items>
 			<item fa="fa-envelope-o">colin.kinzthompson@rutgers.edu</item>
-			<item fa="fa-phone">(973) 353-0671</item>
+			<!-- <item fa="fa-phone">(973) 353-0671</item> -->
 			<item fa="fa-twitter"> &lt;a href=&quot;https://twitter.com/ckinzthompson&quot;&lt;@ckinzthompson&gt; @ckinzthompson &lt;/a&gt; </item>
 			<item fa="fa-book">&lt;a href=&quot;papers/CV_CKT.pdf&quot;&gt;CV&lt;/a&gt;</item>
+		</items>
+	</current_person>
+
+	<current_person>
+		<name>Natalia Nemeria</name>
+		<role>Research Associate</role>
+		<start>Summer 2022</start>
+		<imgsrc>img/ppl/blank1.jpg</imgsrc>
+		<items>
+			<item fa="fa-envelope-o">nemeria@newark.rutgers.edu</item>
 		</items>
 	</current_person>
 
@@ -22,35 +32,14 @@
 	</current_person>
 
 	<current_person>
-		<name>Yuntao Qiu</name>
+		<name>Tianyue Dai</name>
 		<role>Graduate Student</role>
-		<start>Spring 2021</start>
+		<start>Fall 2022</start>
 		<imgsrc>img/ppl/blank1.jpg</imgsrc>
 		<items>
-			<item fa="fa-envelope-o">yq123@scarletmail.rutgers.edu</item>
+			<item fa="fa-envelope-o">td460@newark.rutgers.edu</item>
 		</items>
 	</current_person>
-
-	<current_person>
-		<name>Wesley Chan</name>
-		<role>Undergraduate Student</role>
-		<start>Spring 2022</start>
-		<imgsrc>img/ppl/blank1.jpg</imgsrc>
-		<items>
-			<item fa="fa-envelope-o">wc518@scarletmail.rutgers.edu</item>
-		</items>
-	</current_person>
-
-	<current_person>
-		<name>Natalia Nemeria</name>
-		<role>Research Associate</role>
-		<start>Summer 2022</start>
-		<imgsrc>img/ppl/blank1.jpg</imgsrc>
-		<items>
-			<item fa="fa-envelope-o">nemeria@newark.rutgers.edu</item>
-		</items>
-	</current_person>
-
 
 	<current_person>
 		<name>Onyx</name>
@@ -71,15 +60,41 @@
 		</items>
 	</current_person> -->
 
-	<past_person>
-		<name>No one yet</name>
+	<!-- <past_person> -->
+		<!-- <name>No one yet</name> -->
 		<!-- <role>Lab(rador) Dog</role> -->
 		<!-- <imgsrc>img/ppl/onyx.jpg</imgsrc> -->
 		<!-- <items> -->
 			<!-- <item fa="fa-envelope-o">onyx@onyx.dog</item> -->
 			<!-- <item fa="fa-phone">(paw) paw-woof</item> -->
 		<!-- </items> -->
+	<!-- </past_person> -->
+
+	<past_person>
+		<name>Yuntao Qiu</name>
+		<role>Graduate Student</role>
+		<start>Spring 2021-Summer 2022</start>
+		<!-- <imgsrc>img/ppl/blank1.jpg</imgsrc> -->
+		<items>
+			<item fa="fa-envelope-o">yq123@scarletmail.rutgers.edu</item>
+		</items>
 	</past_person>
 
+	<past_person>
+		<name>Wesley Chan</name>
+		<role>Undergraduate Student</role>
+		<start>Spring 2022-Summer 2022</start>
+		<!-- <imgsrc>img/ppl/blank1.jpg</imgsrc> -->
+		<items>
+			<item fa="fa-envelope-o">wc518@scarletmail.rutgers.edu</item>
+		</items>
+	</past_person>
+
+	<past_person>
+		<name>Sasche Joseph</name>
+		<role>ACS Project SEED Student</role>
+		<start>Summer 2022</start>
+		<!-- <imgsrc>img/ppl/blank1.jpg</imgsrc> -->
+	</past_person>
 
 </labmembers>
