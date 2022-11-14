@@ -2,7 +2,7 @@
 	<current_person>
 		<name>Colin Kinz-Thompson</name>
 		<role>Assistant Professor</role>
-		<imgsrc>img/ppl/colin.jpg</imgsrc>
+		<imgsrc>img/ppl/colin_microscope.jpg</imgsrc>
 		<items>
 			<item fa="fa-envelope-o">colin.kinzthompson@rutgers.edu</item>
 			<!-- <item fa="fa-phone">(973) 353-0671</item> -->
@@ -15,7 +15,7 @@
 		<name>Natalia Nemeria</name>
 		<role>Research Associate</role>
 		<start>Summer 2022</start>
-		<imgsrc>img/ppl/blank1.jpg</imgsrc>
+		<imgsrc>img/ppl/natasha_microscope.jpg</imgsrc>
 		<items>
 			<item fa="fa-envelope-o">nemeria@newark.rutgers.edu</item>
 		</items>
@@ -25,7 +25,7 @@
 		<name>Katherine Leon Hernandez</name>
 		<role>Graduate Student</role>
 		<start>Fall 2020</start>
-		<imgsrc>img/ppl/kathy_leon.jpg</imgsrc>
+		<imgsrc>img/ppl/kathy_microscope.jpg</imgsrc>
 		<items>
 			<item fa="fa-envelope-o">kathy.leon@rutgers.edu</item>
 		</items>
@@ -35,7 +35,7 @@
 		<name>Tianyue Dai</name>
 		<role>Graduate Student</role>
 		<start>Fall 2022</start>
-		<imgsrc>img/ppl/blank1.jpg</imgsrc>
+		<imgsrc>img/ppl/tianyue_microscope.jpg</imgsrc>
 		<items>
 			<item fa="fa-envelope-o">td460@newark.rutgers.edu</item>
 		</items>
@@ -45,9 +45,19 @@
 		<name>Zhutao Sheng</name>
 		<role>Graduate Student</role>
 		<start>Fall 2022</start>
-		<imgsrc>img/ppl/zs_profile-photo.png</imgsrc>
+		<imgsrc>img/ppl/zhutao_microscope.jpg</imgsrc>
 		<items>
 			<item fa="fa-envelope-o">zhutao.sheng@rutgers.edu</item>
+		</items>
+	</current_person>
+
+	<current_person>
+		<name>Vaishnavi Shesham</name>
+		<role>Graduate Student</role>
+		<start>Fall 2022</start>
+		<imgsrc>img/ppl/vaishnavi_microscope.jpg</imgsrc>
+		<items>
+			<item fa="fa-envelope-o">vs803@scarletmail.rutgers.edu</item>
 		</items>
 	</current_person>
 
