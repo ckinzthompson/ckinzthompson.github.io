@@ -25,7 +25,7 @@ top = r'''
 				</div>
 			</section>
 			<div class="container marketing">
-				<div class="featurette mx-1 px-1">
+				<div class="row featurette mx-1 px-1">
 					<div class="col-md-5 order-md-1">
 						<img class="featurette-image img-fluid mx-auto" src="img/ppl/ktgroup_nov2022.jpg">
 					</div>
