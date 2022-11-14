@@ -22,7 +22,9 @@ top = r'''
 			<section class="jumbotron text-center" id="people">
 				<div class="container">
 					<h1>People</h1>
-					<!--<p class="lead text-muted">Our lab is </p>-->
+					<div class='container'>
+						<imgclass="bd-placeholder-img" src="img/ppl/ktgroup_nov2022.jpg"></img>
+					</div>
 					<p class="lead text-muted"> Are you interested in doing cutting-edge, interdisciplinary science? </p><br>
 					<p class="lead text-muted"> We're looking for undergraduate students, graduate students, and post-docs to join the team! If you are in chemistry, biology, physics, computer science, engineering or other areas -- we've got a place for you! Send your C.V. and an explanation of your interests to Colin.</p><br>
 					<p class="lead text-muted"> Join us in the <a href="https://sasn.rutgers.edu/academics-admissions/academic-departments/chemistry" class="text-muted">Department of Chemistry at Rutgers University-Newark</a>. Learn more about the <a href="https://sasn.rutgers.edu/academics-admissions/academic-departments/chemistry/ms-phd-chemistry" class="text-muted">our Ph.D. program in chemistry here</a>.</p>
