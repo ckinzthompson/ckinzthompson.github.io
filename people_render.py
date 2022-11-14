@@ -33,8 +33,8 @@ top = r'''
 						<h2 class="featurette-heading"> Our group </h2>
 						<p class="lead">Are you interested in doing cutting-edge, interdisciplinary science? We're looking for undergraduate students, graduate students, and post-docs to join the team! If you are in chemistry, biology, physics, computer science, engineering or other areas -- we've got a place for you! Send your C.V. and an explanation of your interest in biophysics to Colin. Join us in the <a href="https://sasn.rutgers.edu/academics-admissions/academic-departments/chemistry" color="blue"> Department of Chemistry at Rutgers University-Newark</a>. Learn more about the <a href="https://sasn.rutgers.edu/academics-admissions/academic-departments/chemistry/ms-phd-chemistry" color="blue">our Ph.D. program in chemistry here</a>.</p>
 					</div>
-
 				</div>
+				<hr class="featurette-divider">
 			</div>
 
 			<section class="jumbotron text-center" id="past">
