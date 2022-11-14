@@ -62,7 +62,7 @@
 	</current_person>
 
 
-	<current_person>
+	<!-- <current_person>
 		<name>Onyx</name>
 		<role>Lab(rador) Dog</role>
 		<imgsrc>img/ppl/onyx.jpg</imgsrc>
@@ -70,7 +70,7 @@
 			<item fa="fa-envelope-o">onyx@onyx.dog</item>
 			<item fa="fa-phone">(paw) paw-woof</item>
 		</items>
-	</current_person>
+	</current_person> -->
 
 	<!-- <current_person>
 		<name>You!?</name>
