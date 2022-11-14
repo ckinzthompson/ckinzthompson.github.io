@@ -22,6 +22,7 @@ top = r'''
 			<section class="jumbotron text-center" id="people">
 				<div class="container">
 					<h1>People</h1>
+					<p class="lead text-muted">Who we are</p>
 				</div>
 			</section>
 			<div class="container marketing">
