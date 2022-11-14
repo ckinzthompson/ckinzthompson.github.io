@@ -22,14 +22,24 @@ top = r'''
 			<section class="jumbotron text-center" id="people">
 				<div class="container">
 					<h1>People</h1>
-					<div class='container'>
-						<imgclass="bd-placeholder-img" src="img/ppl/ktgroup_nov2022.jpg"></img>
-					</div>
 					<p class="lead text-muted"> Are you interested in doing cutting-edge, interdisciplinary science? </p><br>
 					<p class="lead text-muted"> We're looking for undergraduate students, graduate students, and post-docs to join the team! If you are in chemistry, biology, physics, computer science, engineering or other areas -- we've got a place for you! Send your C.V. and an explanation of your interests to Colin.</p><br>
 					<p class="lead text-muted"> Join us in the <a href="https://sasn.rutgers.edu/academics-admissions/academic-departments/chemistry" class="text-muted">Department of Chemistry at Rutgers University-Newark</a>. Learn more about the <a href="https://sasn.rutgers.edu/academics-admissions/academic-departments/chemistry/ms-phd-chemistry" class="text-muted">our Ph.D. program in chemistry here</a>.</p>
 				</div>
 			</section>
+
+			<div class="row featurette mx-1 px-1">
+				<div class="col-md-7 order-md-2">
+					<h2 class="featurette-heading"> Our group </h2>
+					<p>Are you interested in doing cutting-edge, interdisciplinary science? </p><br>
+					<p>We're looking for undergraduate students, graduate students, and post-docs to join the team! If you are in chemistry, biology, physics, computer science, engineering or other areas -- we've got a place for you! Send your C.V. and an explanation of your interests to Colin.</p><br>
+					<p> Join us in the <a href="https://sasn.rutgers.edu/academics-admissions/academic-departments/chemistry">Department of Chemistry at Rutgers University-Newark</a>. Learn more about the <a href="https://sasn.rutgers.edu/academics-admissions/academic-departments/chemistry/ms-phd-chemistry">our Ph.D. program in chemistry here</a>.</p>
+				</div>
+				<div class="col-md-5 order-md-1">
+					<img src="img/ppl/ktgroup_nov2022.jpg" class="img-fluid mx-auto featurette-image">
+				</div>
+			</div>
+
 			<section class="jumbotron text-center" id="past">
 				<div class='container'>
 					<h1>Current Members</h1>
