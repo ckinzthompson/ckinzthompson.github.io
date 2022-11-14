@@ -40,11 +40,14 @@ top = r'''
 
 				<div class="row featurette mx-1 px-1">
 					<h1>Current Members</h1>
-
-					<div class="album py-5 bg-light">
-						<div class="container">
-							<div class="row">
+					<div class="container">
+						<div class="row">
 '''
+					# <div class="album py-5 bg-light">
+
+						# <div class="container">
+							# <div class="row">
+
 
 
 def render_person(p):
@@ -80,17 +83,21 @@ def render_person(p):
 
 	return s
 
-mid = r'''
+mid = r'''				</div>
 					</div>
 				</div>
 				<div class="row featurette mx-1 px-1">
 					<h1>Previous Members</h1>
-					<div class="album py-5 bg-light">
-						<div class="container">
-							<div class="row">
+					<div class="container">
+						<div class="row">
 '''
+					# <div class="album py-5 bg-light">
+						# <div class="container">
+							# <div class="row">
+
 
 bottom = r'''
+						</div>
 					</div>
 				</div>
 			</div>
