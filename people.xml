@@ -71,6 +71,16 @@
 			<item fa="fa-envelope-o">vs803@scarletmail.rutgers.edu</item>
 		</items>
 	</current_person>
+	
+	<current_person>
+		<name>Karl Gaiser</name>
+		<role>Undergraduate Student</role>
+		<start>Spring 2023</start>
+		<imgsrc>img/ppl/blank1.jpg</imgsrc>
+		<items>
+			<item fa="fa-envelope-o">kcg5@njit.edu</item>
+		</items>
+	</current_person>
 
 
 	<!-- <current_person>
