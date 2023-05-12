@@ -83,6 +83,19 @@
 	</current_person>
 
 
+	<current_person>
+		<name>Kaiyang Zhu</name>
+		<role>Undergraduate Student</role>
+		<start>Summer 2023</start>
+		<imgsrc>img/ppl/blank1.jpg</imgsrc>
+		<items>
+			<item fa="fa-envelope-o">kaiyang.zhu@emory.edu</item>
+		</items>
+	</current_person>
+
+
+
+
 	<!-- <current_person>
 		<name>Onyx</name>
 		<role>Lab(rador) Dog</role>
