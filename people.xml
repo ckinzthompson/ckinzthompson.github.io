@@ -129,7 +129,7 @@
 		<name>Yuntao Qiu</name>
 		<role>Graduate Student</role>
 		<start>Spring 2021-Summer 2022</start>
-		<!-- <imgsrc>img/ppl/blank1.jpg</imgsrc> -->
+    <imgsrc>img/ppl/blank1.jpg</imgsrc>
 		<items>
 			<item fa="fa-envelope-o">yq123@scarletmail.rutgers.edu</item>
 		</items>
@@ -139,7 +139,7 @@
 		<name>Wesley Chan</name>
 		<role>Undergraduate Student</role>
 		<start>Spring 2022-Summer 2022</start>
-		<!-- <imgsrc>img/ppl/blank1.jpg</imgsrc> -->
+    <imgsrc>img/ppl/blank1.jpg</imgsrc>
 		<items>
 			<item fa="fa-envelope-o">wc518@scarletmail.rutgers.edu</item>
 		</items>
@@ -149,7 +149,24 @@
 		<name>Sasche Joseph</name>
 		<role>ACS Project SEED Student</role>
 		<start>Summer 2022</start>
-		<!-- <imgsrc>img/ppl/blank1.jpg</imgsrc> -->
+    <imgsrc>img/ppl/blank1.jpg</imgsrc>
 	</past_person>
+
+
+
+	<pets>
+		<name>Onyx</name>
+		<role>Lab(rador retriever)</role>
+    <!-- <start>Summer 2022</start> -->
+    <imgsrc>img/ppl/pets/onyx.jpg</imgsrc>
+	</pets>
+	<pets>
+		<name>Cilantra</name>
+		<role>Cat(ion exchange chromatography resin)</role>
+    <!-- <start>Summer 2022</start> -->
+    <imgsrc>img/ppl/pets/cilantra.jpg</imgsrc>
+	</pets>
+
+
 
 </labmembers>

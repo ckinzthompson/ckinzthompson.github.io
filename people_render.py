@@ -94,6 +94,18 @@ mid = r'''				</div>
 					# <div class="album py-5 bg-light">
 						# <div class="container">
 							# <div class="row">
+							
+mid2 = r'''				</div>
+					</div>
+				</div>
+				<div class="row featurette mx-1 px-1">
+					<h1>Most Important Members</h1>
+					<div class="container">
+						<div class="row">
+'''
+					# <div class="album py-5 bg-light">
+						# <div class="container">
+							# <div class="row">
 
 
 bottom = r'''
@@ -126,5 +138,8 @@ if __name__ == '__main__':
 			f.write(render_person(cp))
 		f.write(mid)
 		for cp in root.findall('past_person'):
+			f.write(render_person(cp))
+		f.write(mid2)
+		for cp in root.findall('pets'):
 			f.write(render_person(cp))
 		f.write(bottom)
