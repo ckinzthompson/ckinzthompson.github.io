@@ -1,0 +1,163 @@
+---
+title: "People"
+toc: true
+---
+
+Meet the Labbies and Crabbies
+
+
+### Principal Investigator
+:::: {layout="[ 35, 65 ]"}
+![](./images/ppl/colin_microscope.jpg)
+
+::: {center}
+Prof. Colin Kinz-Thompson
+
+[![](./images/envelope-regular.svg){width=0.25in}](mailto:colin.kinzthompson@rutgers.edu)
+[![](./images/rectangle-list-regular.svg){width=0.25in}]("./papers/CV_CKT.pdf")
+:::
+::::
+
+
+
+
+### Research Scientists
+:::: {layout="[ 35, 65 ]"}
+![](./images/ppl/natasha_microscope.jpg)
+
+::: {center}
+Dr. Natalia Nemeria
+
+Research Associate
+
+[![](./images/envelope-regular.svg){width=0.25in}](mailto:nemeria@newark.rutgers.edu)
+<!-- Start: Summer 2022  -->
+<!-- End: Current -->
+:::
+::::
+
+### Graduate Students
+
+:::: {layout="[ 35, 65 ]"}
+![](./images/ppl/kathy_microscope.jpg)
+
+::: {center}
+Katherine Leon Hernandez
+
+SREB Doctoral Scholar, NIH MBRS Scholar, NSF LSAMP Scholar
+
+[![](./images/envelope-regular.svg){width=0.25in}](mailto:kathy.leon@rutgers.edu)
+<!-- Start: Fall 2020  -->
+<!-- End: Current -->
+:::
+::::
+
+
+
+:::: {layout="[ 35, 65 ]"}
+![](./images/ppl/andres_microscope.jpg)
+
+::: {center}
+Andres Cifuentes
+
+[![](./images/envelope-regular.svg){width=0.25in}](mailto:acc256@scarletmail.rutgers.edu)
+<!-- Start: Spring 2023  -->
+<!-- End: Current -->
+:::
+::::
+
+
+
+:::: {layout="[ 35, 65 ]"}
+![](./images/ppl/tianyue_microscope.jpg)
+
+::: {center}
+Tianyue Dai
+
+[![](./images/envelope-regular.svg){width=0.25in}](mailto:td460@newark.rutgers.edu)
+<!-- Start: Fall 2022  -->
+<!-- End: Current -->
+:::
+::::
+
+
+
+:::: {layout="[ 35, 65 ]"}
+![](./images/ppl/zhutao_microscope.jpg)
+
+::: {center}
+Zhutao Sheng
+
+[![](./images/envelope-regular.svg){width=0.25in}](mailto:zhutao.sheng@rutgers.edu)
+<!-- Start: Fall 2022  -->
+<!-- End: Current -->
+:::
+::::
+
+
+
+:::: {layout="[ 35, 65 ]"}
+![](./images/ppl/vaishnavi_microscope.jpg)
+
+::: {center}
+Vaishnavi Shesham
+
+[![](./images/envelope-regular.svg){width=0.25in}](mailto:vs803@scarletmail.rutgers.edu)
+<!-- Start: Fall 2022  -->
+<!-- End: Current -->
+:::
+::::
+
+
+
+### Undergraduate Research Assistants
+
+:::: {layout="[ 35, 65 ]"}
+![](./images/ppl/blank1.jpg)
+
+::: {center}
+Karl Gaiser
+
+[![](./images/envelope-regular.svg){width=0.25in}](mailto:kcg5@njit.edu)
+<!-- Start: Spring 2023  -->
+<!-- End: Current -->
+:::
+::::
+	
+
+
+### Past Members
+
+| Position | Name | Dates | Contact Info |
+|----------|------|-------|--------------|
+| Graduate Students| Yuntao Qiu | Spring 2021 - Summer 2022 | yq123@scarletmail.rutgers.edu |
+| Undergraduate Students | Kaiyang Zhu | Summer 2023 | kaiyang.zhu@emory.edu |
+|          | Wesley Chan | Spring 2022 - Summer 2022 | wc518@scarletmail.rutgers.edu |
+| High School Students | Sasche Joseph | Summer 2022 | ACS Project SEED Student |
+
+
+
+### Pets
+
+:::: {layout="[ 35, 65 ]"}
+![](./images/ppl/pets/onyx.jpg)
+
+::: {}
+Onyx
+
+Lab(rador retriever)
+
+:::
+::::
+
+
+:::: {layout="[ 35, 65 ]"}
+![](./images/ppl/pets/cilantra.jpg)
+
+::: {}
+Cilantra
+
+Cat(ion exchange chromatography resin)
+
+:::
+::::

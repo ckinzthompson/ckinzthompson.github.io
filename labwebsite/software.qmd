@@ -1,0 +1,76 @@
+---
+title: "Software"
+toc: true
+---
+
+We're committed to free and open source software. Primarily, we use Python/Arduino/C to develop solutions to our experimental and analysis problems. Interested in collaborating? Please, get in touch!
+
+# HARP
+:::: {}
+
+
+::: {layout="[ 66,33 ]"}
+![](./images/harp.png)
+
+Hierarchical Atomic Resolution Perception (HARP) is software for assessing cryoEM model quality.
+
+:::
+
+* Read the preprint: [Scale-dependent hierarchical resolution: applications to atomic resolution and model validation in cryoEM](https://www.biorxiv.org/content/10.1101/2023.10.17.562748v1)
+* Visit the [HARP website](https://bayes-shape-calc.github.io/HARP/)
+* See the code on [GitHub](https://github.com/bayes-shape-calc/HARP)
+
+
+::::
+
+
+
+
+# tMAVEN
+:::: {}
+::: {layout="[ 50,50 ]"}
+![](./images/tmaven_screenshot.png)
+
+time-series Modeling, Analysis, and Visualization ENvironment (tMAVEN) is software for post-processing, modeling, and generating publication quality figures for smFRET data. It was made in collaboration with the [Gonzalez lab](http://www.columbia.edu/cu/chemistry/groups/gonzalez/index.html).
+:::
+
+* Read the preprint: [Increasing the accuracy of single-molecule data analysis using tMAVEN](https://www.biorxiv.org/content/10.1101/2023.08.15.553409v1)
+* Visit the [tMAVEN website](https://gonzalezbiophysicslab.github.io/tmaven/)
+* See the code on [GitHub](https://github.com/GonzalezBiophysicsLab/tmaven)
+::::
+
+
+
+
+# BIASD
+
+:::: {}
+::: {layout="[50,100]"}
+![](./images/biasd.jpg)
+
+Bayesian Inference for the Analysis of Sub-temporal-resolution Data (BIASD) is a method to temporal resolve kinetics any single-molecule time series, even if those kintics are orders of magnitude faster than the time resolution of the technique.
+:::
+
+* Read the first paper: [Increasing the Time Resolution of Single-Molecule Experiments with Bayesian Inference](https://doi.org/10.1016/j.bpj.2017.11.3741)
+* Read the next paper: [Entropic control of the free-energy landscape of an archetypal biomolecular machine](10.1073/pnas.2220591120)
+* See the code on [GitHub](https://github.com/ckinzthompson/biasd)
+
+::::
+
+
+# vbscope
+:::: {}
+
+
+::: {layout="[ 50,100 ]"}
+![](./images/michael-dziedzic-0XkLAIrknco-unsplash.jpg)
+
+vbscope is archived software from the [Gonzalez lab](http://www.columbia.edu/cu/chemistry/groups/gonzalez/index.html). for analyzing single-molecule localization microscopy data.
+
+:::
+
+* See the code on [GitHub](https://github.com/GonzalezBiophysicsLab/vbscope-paper)
+
+
+::::
+
