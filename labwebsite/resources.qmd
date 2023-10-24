@@ -1,0 +1,40 @@
+---
+title: "Resources"
+toc: true
+---
+
+### Spectroscopy
+- [Spectra Viewer](https://www.fpbase.org/spectra/)
+- [R0 Calculator](https://www.fpbase.org/fret/)
+- [Ray Optics Simulation](https://phydemo.app/ray-optics/simulator/)
+
+
+### Molecular Biology
+- [Barrick Lab Protocols](https://barricklab.org/twiki/bin/view/Lab/ProtocolList)
+- [Addgene: Intro to Lab Bench](https://www.addgene.org/intro-lab-bench/)
+
+
+### Biomolecular Structure
+- [RCSB Protein Data Bank](https://www.rcsb.org)
+- [PDBx-mmCIF Syntax](https://mmcif.wwpdb.org/docs/tutorials/mechanics/pdbx-mmcif-syntax.html)
+
+
+### Math
+- [Conjugate Priors - Table](https://en.wikipedia.org/wiki/Conjugate_prior#Table_of_conjugate_distributions)
+- [Laplace Transform - Properties](https://en.wikipedia.org/wiki/Laplace_transform#Properties_and_theorems)
+- [Laplace Transform - Table](https://en.wikipedia.org/wiki/Laplace_transform#Table_of_selected_Laplace_transforms)
+- [Fourier Transform - Table](https://en.wikipedia.org/wiki/Fourier_transform#Tables_of_important_Fourier_transforms)
+- [Gamma Function](https://en.wikipedia.org/wiki/Gamma_function)
+- [Integrals of exponential functions](https://en.wikipedia.org/wiki/List_of_integrals_of_exponential_functions)
+
+
+### Chemistry
+- [Not Voodoo - Demystifies Synthetic Organic Chemistry](http://www.chem.rochester.edu/notvoodoo/)
+- [Sigma - Reagent Grade Table](https://www.sigmaaldrich.com/technical-service-home/product-portfolio.html)
+
+
+### Professional
+- [SciENcv - NIH/NSF biosketches](https://www.ncbi.nlm.nih.gov/sciencv/)
+- [DMPTool - Build your data management plan](https://dmptool.org)
+
+
