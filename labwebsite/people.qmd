@@ -14,7 +14,7 @@ Meet the Labbies and Crabbies
 Prof. Colin Kinz-Thompson
 
 [![](./images/envelope-regular.svg){width=0.25in}](mailto:colin.kinzthompson@rutgers.edu)
-[![](./images/rectangle-list-regular.svg){width=0.25in}]("./papers/CV_CKT.pdf")
+[![](./images/rectangle-list-regular.svg){width=0.25in}]("./labwebsite/papers/CV_CKT.pdf")
 :::
 ::::
 
@@ -110,7 +110,7 @@ Vaishnavi Shesham
 
 
 
-### Undergraduate Research Assistants
+### Undergraduate Researchers
 
 :::: {layout="[ 35, 65 ]"}
 ![](./images/ppl/blank1.jpg)
@@ -128,12 +128,17 @@ Karl Gaiser
 
 ### Past Members
 
-| Position | Name | Dates | Contact Info |
-|----------|------|-------|--------------|
-| Graduate Students| Yuntao Qiu | Spring 2021 - Summer 2022 | yq123@scarletmail.rutgers.edu |
-| Undergraduate Students | Kaiyang Zhu | Summer 2023 | kaiyang.zhu@emory.edu |
-|          | Wesley Chan | Spring 2022 - Summer 2022 | wc518@scarletmail.rutgers.edu |
-| High School Students | Sasche Joseph | Summer 2022 | ACS Project SEED Student |
+
+###### Graduate Students
+* Yuntao Qiu, Spring 2021 - Summer 2022, yq123@scarletmail.rutgers.edu
+
+###### Undergraduate Students
+* Kaiyang Zhu, Summer 2023, kaiyang.zhu@emory.edu
+
+* Wesley Chan, Spring 2022 - Summer 2022, wc518@scarletmail.rutgers.edu
+
+###### High School Students
+* Sasche Joseph, Summer 2022, ACS Project SEED Student
 
 
 

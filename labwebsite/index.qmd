@@ -2,8 +2,7 @@
 title: "Single Molecule Biophysics"
 toc: false
 ---
-
-in the Chemistry Department at Rutgers Newark
+The Kinz-Thompson lab is in the Chemistry Department at Rutgers Newark
 
 ::: {.column-page}
 ![](./images/downscaled_pawel-czerwi.jpg)

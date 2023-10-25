@@ -2,14 +2,12 @@
 title: "Research"
 ---
 
-Research interests
 We study the motions of complex molecules, how they are organized, and how they enable chemistry.
 
 # Membrane-bound Proteins
 Life must perform the most general of chemistries in order to control the flow of molecules into and out of cells, and to send and receive information out into the environment. Somehow membrane-bound proteins have evolved to peform that chemistry, and to do it without making mistakes. How do these nanoscopic "machines" perform their tasks in the face of a tremendous amount of interference from their environment? We study the intrinsic fluctuations of membrane-bound proteins and other molecules in order to understand how they function, and how they are regulated in response to the selective pressure of survival. 
 
 ![Nanoscopic control of chemicals and information.](./images/membraneproteins.jpg)
-
 
 # Single-Molecule Techniques
 Traditionally, chemists analyze collections of so many molecules at once that they can only observe the average behavior. Imagine going to an art gallery to enjoy all of the paintings, only to instead see one mixture of all of the paintings together. Using single-molecule techniques, such as fluorescence resonance energy transfer (FRET) microscopy, we can routinely observe individual molecules as they work. These powerful approaches are technically demanding, and difficult to analyze, but provide unparalled resolution into the molecular processes and mechanisms behind life. 
@@ -20,3 +18,7 @@ Traditionally, chemists analyze collections of so many molecules at once that th
 The data collected from individual molecules is noisy, and is only a low-dimensional representation of the entire molecule. Despite these shortcomings, in single-molecule experiments, we must infer the underlying molecular details from this data, and use them to understand the overall energy landscape of the molecule. We are experts at developing and using Bayesian inference and machine learning algorithms to perform those analyses, and in a way that enables previously impossible experiments.
 
 ![Computational insight into the molecular scale](./images/biml.jpg)
+
+
+<!-- # Lots of other things!
+Surface chemistry, biomolecular condensates, cryoEM, molecular dynamics, and allostery -->

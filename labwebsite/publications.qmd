@@ -6,38 +6,51 @@ toc: true
 
 # 2020 - Current
 
-* Ray, K. K. & Kinz-Thompson, C. D. (2023) Scale-dependent hierarchical resolution: applications to atomic resolution and model validation in cryoEM. bioRxiv, DOI:10.1101/2023.10.17.562748.
 
-* Verma, A. R., Ray, K. K., Bodick, M., Kinz-Thompson, C. D. & Gonzalez, Jr., R. L. (2023) Increasing the accuracy of single-molecule data analysis using tMAVEN. bioRxiv. DOI:10.1101/2023.08.15.553409.
+* Ray, K. K. & Kinz-Thompson, C. D. (2023) *Scale-dependent hierarchical resolution: applications to atomic resolution and model validation in cryoEM*. bioRxiv, DOI:10.1101/2023.10.17.562748.
+\[[Preprint](https://www.biorxiv.org/content/10.1101/2023.10.17.562748v1)\]
 
-* Ray, K.K., Kinz-Thompson, C.D., Fei, J., Wang, B., Lin, Q., Gonzalez, Jr., R.L. (2023) Entropic control of the free energy landscape of an archetypal biomolecular machine. Proceedings of the National Academy of Sciences 120, e2220591120.
+* Verma, A. R., Ray, K. K., Bodick, M., Kinz-Thompson, C. D. & Gonzalez, Jr., R. L. (2023) *Increasing the accuracy of single-molecule data analysis using tMAVEN*. bioRxiv. DOI:10.1101/2023.08.15.553409.
+\[[Preprint](https://www.biorxiv.org/content/10.1101/2023.08.15.553409v1)\]
 
-* Zhu, L., Kim, J., Leng, K., Ramos, J.E., Kinz-Thompson, C.D., Karpowich, N.K., Gonzalez Jr., R.L., Hunt, J.F. (2022) Realtime observation of ATP-driven single B12 molecule translocation through BtuCD-F. bioRxiv. DOI:10.1101/2022.12.02.518935.
+* Ray, K.K., Kinz-Thompson, C.D., Fei, J., Wang, B., Lin, Q., Gonzalez, Jr., R.L. (2023) *Entropic control of the free energy landscape of an archetypal biomolecular machine*. Proceedings of the National Academy of Sciences 120, e2220591120. 
+\[[Link](https://www.pnas.org/doi/10.1073/pnas.2220591120)\]
+\[[Preprint](https://www.biorxiv.org/content/10.1101/2022.10.03.510626v2)\]
 
-* Zhu, L., Kim, J., Leng, K., Ramos, J.E., Kinz-Thompson, C.D., Karpowich, N.K., Gonzalez Jr., R.L., Hunt, J.F. (2022) Mechanistic implications of the interaction of the soluble substrate-binding protein with a type II ABC importer, bioRxiv. DOI:10.1101/2022.12.02.518933.
+* Zhu, L., Kim, J., Leng, K., Ramos, J.E., Kinz-Thompson, C.D., Karpowich, N.K., Gonzalez Jr., R.L., Hunt, J.F. (2022) *Realtime observation of ATP-driven single B12 molecule translocation through BtuCD-F*. bioRxiv. DOI:10.1101/2022.12.02.518935. 
+\[[Preprint](https://www.biorxiv.org/content/10.1101/2022.12.02.518935v1)\]
 
-* Kinz-Thompson, C.D., Lopez Redondo, M., Mulligan C., Sauer, D.B., Marden, J.J., Song, J. Tajkhorshid, E., Hunt, J.F., Stokes, D.L., Mindell, J.A., Wang, D.N, Gonzalez, Jr., R.L. (2022) Elevator mechanism dynamics in a sodium-coupled dicarboxylate transporter, bioRxiv. DOI:10.1101/2022.05.01.490196.
+* Zhu, L., Kim, J., Leng, K., Ramos, J.E., Kinz-Thompson, C.D., Karpowich, N.K., Gonzalez Jr., R.L., Hunt, J.F. (2022) *Mechanistic implications of the interaction of the soluble substrate-binding protein with a type II ABC importer*, bioRxiv. DOI:10.1101/2022.12.02.518933.
+\[[Preprint](https://www.biorxiv.org/content/10.1101/2022.12.02.518933v1)\]
 
-* Ray, K.K., Verma, A.R., Gonzalez, Jr., R.L., Kinz-Thompson, C.D. (2022) Inferring the shape of data: a probabilistic framework for analysing experiments in the natural sciences. Proceedings of the Royal Society A, 478, 20220177. DOI:10.1098/rspa.2022.0177.
+* Kinz-Thompson, C.D., Lopez Redondo, M., Mulligan C., Sauer, D.B., Marden, J.J., Song, J. Tajkhorshid, E., Hunt, J.F., Stokes, D.L., Mindell, J.A., Wang, D.N, Gonzalez, Jr., R.L. (2022) *Elevator mechanism dynamics in a sodium-coupled dicarboxylate transporter*, bioRxiv. DOI:10.1101/2022.05.01.490196.
+\[[Preprint](https://www.biorxiv.org/content/10.1101/2022.05.01.490196v2)\]
 
-* Kinz-Thompson, C.D., Ray, K.K., Gonzalez, Jr., R.L. (2021) Bayesian inference: the comprehensive approach to analyzing single-molecule experiments. Annual Review of Biophysics, 50, 191-208. DOI:10.1146/annurev-biophys-082120-103921.
+* Ray, K.K., Verma, A.R., Gonzalez, Jr., R.L., Kinz-Thompson, C.D. (2022) *Inferring the shape of data: a probabilistic framework for analysing experiments in the natural sciences*. Proceedings of the Royal Society A, 478, 20220177. DOI:10.1098/rspa.2022.0177. 
+\[[Link](https://royalsocietypublishing.org/doi/full/10.1098/rspa.2022.0177)\]
+\[[Preprint](https://arxiv.org/abs/2109.12462)\]
+
+* Kinz-Thompson, C.D., Ray, K.K., Gonzalez, Jr., R.L. (2021) *Bayesian inference: the comprehensive approach to analyzing single-molecule experiments*. Annual Review of Biophysics, 50, 191-208. DOI:10.1146/annurev-biophys-082120-103921.
+\[[Link](https://www.annualreviews.org/doi/abs/10.1146/annurev-biophys-082120-103921)\]
+\[[PMC](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8238404/)\]
+\[[Preprint](https://www.biorxiv.org/content/10.1101/2020.10.23.353110v1)\]
 
 # Prior to 2020
 
-* Subramanyam, S., Kinz-Thompson, C.D., Gonzalez, R.L., Jr., Spies, M. (2018) Observation and Anal- ysis of RAD51 Nucleation Dynamics at Single-monomer Resolution. Methods in Enzymology, 600, 201-232.
+* Subramanyam, S., Kinz-Thompson, C.D., Gonzalez, R.L., Jr., Spies, M. (2018) *Observation and Analysis of RAD51 Nucleation Dynamics at Single-monomer Resolution*. Methods in Enzymology, 600, 201-232. \[[Link](https://www.sciencedirect.com/science/article/pii/S007668791730383X)\] \[[PMC](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6033278/)\]
 
-* Kinz-Thompson, C.D.,† Gonzalez, R.L., Jr. (2018) Increasing the Time Resolution of Single-molecule Experiments with Bayesian Inference. Biophysical Journal, 114, 289-300.
+* Kinz-Thompson, C.D.,† Gonzalez, R.L., Jr. (2018) *Increasing the Time Resolution of Single-molecule Experiments with Bayesian Inference.* Biophysical Journal, 114, 289-300. \[[Link](https://www.sciencedirect.com/science/article/pii/S0006349517349731)\] \[[PMC](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5984981/)\] \[[Preprint](https://www.biorxiv.org/content/10.1101/099648v3)\]
 
-* Kinz-Thompson, C.D., Bailey, N.A., Gonzalez, R.L., Jr. (2016) Precisely and Accurately Inferring Single-molecule Rate Constants. Methods in Enzymology, 581, 187-225.
+* Kinz-Thompson, C.D., Bailey, N.A., Gonzalez, R.L., Jr. (2016) *Precisely and Accurately Inferring Single-molecule Rate Constants*. Methods in Enzymology, 581, 187-225. \[[Link](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5746875/)\] \[[PMC](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5746875/)\]
 
-* Kinz-Thompson, C.D., Sharma, A.K., Frank, J., Gonzalez, R.L., Jr. Chowdhury, D. (2015) Quantita- tive Connection between Ensemble Thermodynamics and Single-Molecule Kinetics: A Case Study Using Cryogenic Electron Microscopy and Single-Molecule Fluorescence Resonance Energy Transfer Investigations of the Ribosome. Journal of Physical Chemistry B, 119(34), 10888-10901.
+* Kinz-Thompson, C.D., Sharma, A.K., Frank, J., Gonzalez, R.L., Jr. Chowdhury, D. (2015) *Quantitative Connection between Ensemble Thermodynamics and Single-Molecule Kinetics: A Case Study Using Cryogenic Electron Microscopy and Single-Molecule Fluorescence Resonance Energy Transfer Investigations of the Ribosome.* Journal of Physical Chemistry B, 119(34), 10888-10901. \[[Link](https://pubs.acs.org/doi/10.1021/jp5128805)\] \[[PMC](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4552622/)\]
 
-* Kinz-Thompson, C.D., Gonzalez, R.L., Jr. (2014) smFRET Studies of the “Encounter” Complexes and Subsequent Intermediate States that Regulate the Selectivity of Ligand Binding. FEBS Letters, 588(19), 3526-3538.
+* Kinz-Thompson, C.D., Gonzalez, R.L., Jr. (2014) *smFRET Studies of the “Encounter” Complexes and Subsequent Intermediate States that Regulate the Selectivity of Ligand Binding*. FEBS Letters, 588(19), 3526-3538. \[[Link](https://febs.onlinelibrary.wiley.com/doi/10.1016/j.febslet.2014.07.013)\] \[[PMC](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4779314/)\]
 
-* Kinz-Thompson, C.D., Palma, M., Pulukkunat, D.K., Chenet, D., Hone, J., Wind, S.J., Gonzalez, R.L., Jr. (2013) Robustly Passivated, Gold Nanoaperture Arrays for Single-Molecule Fluorescence Microscopy. ACS Nano, 7(9), 8159-8166.
+* Kinz-Thompson, C.D., Palma, M., Pulukkunat, D.K., Chenet, D., Hone, J., Wind, S.J., Gonzalez, R.L., Jr. (2013) *Robustly Passivated, Gold Nanoaperture Arrays for Single-Molecule Fluorescence Microscopy.* ACS Nano, 7(9), 8159-8166. \[[Link](https://pubs.acs.org/doi/10.1021/nn403447s)\] \[[PMC](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4748375/)\]
 
-* Kravec, S.M., Kinz-Thompson, C.D., Conwell, E.M. (2011) Localization of a Hole on an Adenine- Thymine Radical Cation Embedded in B-Form DNA in Water. Journal of Physical Chemistry B, 115(19), 6166-6171.
+* Kravec, S.M., Kinz-Thompson, C.D., Conwell, E.M. (2011) *Localization of a Hole on an Adenine-Thymine Radical Cation Embedded in B-Form DNA in Water.* Journal of Physical Chemistry B, 115(19), 6166-6171. \[[Link](https://pubs.acs.org/doi/10.1021/jp110062y)\]
 
-* Kinz-Thompson, C., Conwell, E. (2010) Proton Transfer in Adenine-Thymine Radical Cation Embed- ded in B-Form DNA. Journal of Physical Chemistry Letters, 1(9), 1403-1407.
+* Kinz-Thompson, C., Conwell, E. (2010) *Proton Transfer in Adenine-Thymine Radical Cation Embedded in B-Form DNA. *Journal of Physical Chemistry Letters, 1(9), 1403-1407. \[[Link](https://pubs.acs.org/doi/10.1021/jz100214h)\]
 
-* Kucherov, V.M., Kinz-Thompson, C.D., Conwell, E.M. (2010) Polarons in DNA Oligomers. Journal of Physical Chemistry C, 114(3), 1663-1666.
+* Kucherov, V.M., Kinz-Thompson, C.D., Conwell, E.M. (2010) *Polarons in DNA Oligomers.* Journal of Physical Chemistry C, 114(3), 1663-1666. \[[Link](https://pubs.acs.org/doi/10.1021/jp908809t)\]

@@ -48,7 +48,7 @@ time-series Modeling, Analysis, and Visualization ENvironment (tMAVEN) is softwa
 ::: {layout="[50,100]"}
 ![](./images/biasd.jpg)
 
-Bayesian Inference for the Analysis of Sub-temporal-resolution Data (BIASD) is a method to temporal resolve kinetics any single-molecule time series, even if those kintics are orders of magnitude faster than the time resolution of the technique.
+Bayesian Inference for the Analysis of Sub-temporal-resolution Data (BIASD) is a method to temporally resolve the kinetics a single-molecule time series, even if those kintics are orders of magnitude faster than the time resolution of the technique.
 :::
 
 * Read the first paper: [Increasing the Time Resolution of Single-Molecule Experiments with Bayesian Inference](https://doi.org/10.1016/j.bpj.2017.11.3741)
