@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>The Kinz-Thompson Lab - Publications</title>
+<title>The Kinz-Thompson Lab - Posts</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,6 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -58,7 +60,37 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-description"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -91,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./publications.html" aria-current="page">
+    <a class="nav-link" href="./publications.html">
  <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -124,25 +156,16 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#current" id="toc-current" class="nav-link active" data-scroll-target="#current">2020 - Current</a></li>
-  <li><a href="#prior-to-2020" id="toc-prior-to-2020" class="nav-link" data-scroll-target="#prior-to-2020">Prior to 2020</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-page" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Publications</h1>
+<h1 class="title">Posts</h1>
 </div>
 
 
@@ -157,37 +180,118 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="current" class="level1">
-<h1>2020 - Current</h1>
-<ul>
-<li><p>Ray, K. K. &amp; Kinz-Thompson, C. D. (2023) <em>Scale-dependent hierarchical resolution: applications to atomic resolution and model validation in cryoEM</em>. bioRxiv, DOI:10.1101/2023.10.17.562748. [<a href="https://www.biorxiv.org/content/10.1101/2023.10.17.562748v1">Preprint</a>]</p></li>
-<li><p>Verma, A. R., Ray, K. K., Bodick, M., Kinz-Thompson, C. D. &amp; Gonzalez, Jr., R. L. (2023) <em>Increasing the accuracy of single-molecule data analysis using tMAVEN</em>. bioRxiv. DOI:10.1101/2023.08.15.553409. [<a href="https://www.biorxiv.org/content/10.1101/2023.08.15.553409v1">Preprint</a>]</p></li>
-<li><p>Ray, K.K., Kinz-Thompson, C.D., Fei, J., Wang, B., Lin, Q., Gonzalez, Jr., R.L. (2023) <em>Entropic control of the free energy landscape of an archetypal biomolecular machine</em>. Proceedings of the National Academy of Sciences 120, e2220591120. [<a href="https://www.pnas.org/doi/10.1073/pnas.2220591120">Link</a>] [<a href="https://www.biorxiv.org/content/10.1101/2022.10.03.510626v2">Preprint</a>]</p></li>
-<li><p>Zhu, L., Kim, J., Leng, K., Ramos, J.E., Kinz-Thompson, C.D., Karpowich, N.K., Gonzalez Jr., R.L., Hunt, J.F. (2022) <em>Realtime observation of ATP-driven single B12 molecule translocation through BtuCD-F</em>. bioRxiv. DOI:10.1101/2022.12.02.518935. [<a href="https://www.biorxiv.org/content/10.1101/2022.12.02.518935v1">Preprint</a>]</p></li>
-<li><p>Zhu, L., Kim, J., Leng, K., Ramos, J.E., Kinz-Thompson, C.D., Karpowich, N.K., Gonzalez Jr., R.L., Hunt, J.F. (2022) <em>Mechanistic implications of the interaction of the soluble substrate-binding protein with a type II ABC importer</em>, bioRxiv. DOI:10.1101/2022.12.02.518933. [<a href="https://www.biorxiv.org/content/10.1101/2022.12.02.518933v1">Preprint</a>]</p></li>
-<li><p>Kinz-Thompson, C.D., Lopez Redondo, M., Mulligan C., Sauer, D.B., Marden, J.J., Song, J. Tajkhorshid, E., Hunt, J.F., Stokes, D.L., Mindell, J.A., Wang, D.N, Gonzalez, Jr., R.L. (2022) <em>Elevator mechanism dynamics in a sodium-coupled dicarboxylate transporter</em>, bioRxiv. DOI:10.1101/2022.05.01.490196. [<a href="https://www.biorxiv.org/content/10.1101/2022.05.01.490196v2">Preprint</a>]</p></li>
-<li><p>Ray, K.K., Verma, A.R., Gonzalez, Jr., R.L., Kinz-Thompson, C.D. (2022) <em>Inferring the shape of data: a probabilistic framework for analysing experiments in the natural sciences</em>. Proceedings of the Royal Society A, 478, 20220177. DOI:10.1098/rspa.2022.0177. [<a href="https://royalsocietypublishing.org/doi/full/10.1098/rspa.2022.0177">Link</a>] [<a href="https://arxiv.org/abs/2109.12462">Preprint</a>]</p></li>
-<li><p>Kinz-Thompson, C.D., Ray, K.K., Gonzalez, Jr., R.L. (2021) <em>Bayesian inference: the comprehensive approach to analyzing single-molecule experiments</em>. Annual Review of Biophysics, 50, 191-208. DOI:10.1146/annurev-biophys-082120-103921. [<a href="https://www.annualreviews.org/doi/abs/10.1146/annurev-biophys-082120-103921">Link</a>] [<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8238404/">PMC</a>] [<a href="https://www.biorxiv.org/content/10.1101/2020.10.23.353110v1">Preprint</a>]</p></li>
-</ul>
-</section>
-<section id="prior-to-2020" class="level1">
-<h1>Prior to 2020</h1>
-<ul>
-<li><p>Subramanyam, S., Kinz-Thompson, C.D., Gonzalez, R.L., Jr., Spies, M. (2018) <em>Observation and Analysis of RAD51 Nucleation Dynamics at Single-monomer Resolution</em>. Methods in Enzymology, 600, 201-232. [<a href="https://www.sciencedirect.com/science/article/pii/S007668791730383X">Link</a>] [<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6033278/">PMC</a>]</p></li>
-<li><p>Kinz-Thompson, C.D.,† Gonzalez, R.L., Jr.&nbsp;(2018) <em>Increasing the Time Resolution of Single-molecule Experiments with Bayesian Inference.</em> Biophysical Journal, 114, 289-300. [<a href="https://www.sciencedirect.com/science/article/pii/S0006349517349731">Link</a>] [<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5984981/">PMC</a>] [<a href="https://www.biorxiv.org/content/10.1101/099648v3">Preprint</a>]</p></li>
-<li><p>Kinz-Thompson, C.D., Bailey, N.A., Gonzalez, R.L., Jr.&nbsp;(2016) <em>Precisely and Accurately Inferring Single-molecule Rate Constants</em>. Methods in Enzymology, 581, 187-225. [<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5746875/">Link</a>] [<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5746875/">PMC</a>]</p></li>
-<li><p>Kinz-Thompson, C.D., Sharma, A.K., Frank, J., Gonzalez, R.L., Jr.&nbsp;Chowdhury, D. (2015) <em>Quantitative Connection between Ensemble Thermodynamics and Single-Molecule Kinetics: A Case Study Using Cryogenic Electron Microscopy and Single-Molecule Fluorescence Resonance Energy Transfer Investigations of the Ribosome.</em> Journal of Physical Chemistry B, 119(34), 10888-10901. [<a href="https://pubs.acs.org/doi/10.1021/jp5128805">Link</a>] [<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4552622/">PMC</a>]</p></li>
-<li><p>Kinz-Thompson, C.D., Gonzalez, R.L., Jr.&nbsp;(2014) <em>smFRET Studies of the “Encounter” Complexes and Subsequent Intermediate States that Regulate the Selectivity of Ligand Binding</em>. FEBS Letters, 588(19), 3526-3538. [<a href="https://febs.onlinelibrary.wiley.com/doi/10.1016/j.febslet.2014.07.013">Link</a>] [<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4779314/">PMC</a>]</p></li>
-<li><p>Kinz-Thompson, C.D., Palma, M., Pulukkunat, D.K., Chenet, D., Hone, J., Wind, S.J., Gonzalez, R.L., Jr.&nbsp;(2013) <em>Robustly Passivated, Gold Nanoaperture Arrays for Single-Molecule Fluorescence Microscopy.</em> ACS Nano, 7(9), 8159-8166. [<a href="https://pubs.acs.org/doi/10.1021/nn403447s">Link</a>] [<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4748375/">PMC</a>]</p></li>
-<li><p>Kravec, S.M., Kinz-Thompson, C.D., Conwell, E.M. (2011) <em>Localization of a Hole on an Adenine-Thymine Radical Cation Embedded in B-Form DNA in Water.</em> Journal of Physical Chemistry B, 115(19), 6166-6171. [<a href="https://pubs.acs.org/doi/10.1021/jp110062y">Link</a>]</p></li>
-<li><p>Kinz-Thompson, C., Conwell, E. (2010) <em>Proton Transfer in Adenine-Thymine Radical Cation Embedded in B-Form DNA. </em>Journal of Physical Chemistry Letters, 1(9), 1403-1407. [<a href="https://pubs.acs.org/doi/10.1021/jz100214h">Link</a>]</p></li>
-<li><p>Kucherov, V.M., Kinz-Thompson, C.D., Conwell, E.M. (2010) <em>Polarons in DNA Oligomers.</em> Journal of Physical Chemistry C, 114(3), 1663-1666. [<a href="https://pubs.acs.org/doi/10.1021/jp908809t">Link</a>]</p></li>
-</ul>
+<p>Here are some interesting posts about molecules, math, programming, etc.</p>
 
 
-</section>
 
-</main> <!-- /main -->
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1698552000000" data-listing-file-modified-sort="1698621014956" data-listing-reading-time-sort="2.24">
+<div class="body">
+<a href="./posts/2023-10-29-median.html">
+<h3 class="no-anchor listing-title">
+Fast Median Filters
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>A quick investigation of how to speed up median filtering of 2D images</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2023-10-29-median.html">
+<div class="listing-date">
+Oct 29, 2023
+</div>
+<div class="listing-author">
+Colin Kinz-Thompson
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1498190400000" data-listing-file-modified-sort="1698625279166" data-listing-reading-time-sort="3.02">
+<div class="body">
+<a href="./posts/2017-06-23-autocorrelation.html">
+<h3 class="no-anchor listing-title">
+Autocorrelation Function Precision
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>A Bayesian take on estimating ACFs</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2017-06-23-autocorrelation.html">
+<div class="listing-date">
+Jun 23, 2017
+</div>
+<div class="listing-author">
+Colin Kinz-Thompson
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1498104000000" data-listing-file-modified-sort="1698625430151" data-listing-reading-time-sort="3.53">
+<div class="body">
+<a href="./posts/2017-06-22-ts_energy_dists.html">
+<h3 class="no-anchor listing-title">
+Distributions of Transition State Energies
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>Frauenfelder-inspired distributions</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2017-06-22-ts_energy_dists.html">
+<div class="listing-date">
+Jun 22, 2017
+</div>
+<div class="listing-author">
+Colin Kinz-Thompson
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1498017600000" data-listing-file-modified-sort="1698626335452" data-listing-reading-time-sort="2.13">
+<div class="body">
+<a href="./posts/2017-06-21-maxvalue.html">
+<h3 class="no-anchor listing-title">
+Estimating Max-value Distributions
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>A decent approximation for order statistics</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2017-06-21-maxvalue.html">
+<div class="listing-date">
+Jun 21, 2017
+</div>
+<div class="listing-author">
+Colin Kinz-Thompson
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

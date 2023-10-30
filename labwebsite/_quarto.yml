@@ -16,14 +16,22 @@ website:
       - people.qmd
       - research.qmd
       - publications.qmd
-      - software.qmd
 
-      # - section: "Posts"
-      #   contents:
-      #     - about.qmd
+      - text: Other
+        menu:
+          - software.qmd
+          - text: Posts
+            file: blog.qmd
+          - resources.qmd
+      
+      # - publications.qmd
+      # - software.qmd
+      # - text: Posts
+      #   file: blog.qmd
+      # - resources.qmd
 
-      - resources.qmd
       - contact.qmd
+
 
 format:
   html:

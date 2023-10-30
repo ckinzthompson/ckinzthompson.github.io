@@ -2,3 +2,4 @@
 _site
 .sass-cache
 .jekyll-metadata
+labwebsite/posts/.ipynb_checkpoints/*
