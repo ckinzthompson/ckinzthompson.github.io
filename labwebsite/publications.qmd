@@ -9,6 +9,7 @@ toc: true
 
 * Ray, K. K. & Kinz-Thompson, C. D. (2023) *Scale-dependent hierarchical resolution: applications to atomic resolution and model validation in cryoEM*. bioRxiv, DOI:10.1101/2023.10.17.562748.
 \[[Preprint](https://www.biorxiv.org/content/10.1101/2023.10.17.562748v1)\]
+\[[Zenodo Dataset](https://zenodo.org/records/10011336)\]
 
 * Verma, A. R., Ray, K. K., Bodick, M., Kinz-Thompson, C. D. & Gonzalez, Jr., R. L. (2023) *Increasing the accuracy of single-molecule data analysis using tMAVEN*. bioRxiv. DOI:10.1101/2023.08.15.553409.
 \[[Preprint](https://www.biorxiv.org/content/10.1101/2023.08.15.553409v1)\]
