@@ -6,6 +6,8 @@ toc: true
 
 # 2020 - Current
 
+* Gentry, R.C., Ide, N.A., Comunale, V.M., Hartwick, E.W., Kinz-Thompson, C.D., Gonzalez Jr., R.L. (2023) *The mechanism of mRNA activation*. bioRxiv, DOI:10.1101/2023.11.15.567265.
+\[[Preprint](https://www.biorxiv.org/content/10.1101/2023.11.15.567265v1)\]
 
 * Ray, K. K. & Kinz-Thompson, C. D. (2023) *Scale-dependent hierarchical resolution: applications to atomic resolution and model validation in cryoEM*. bioRxiv, DOI:10.1101/2023.10.17.562748.
 \[[Preprint](https://www.biorxiv.org/content/10.1101/2023.10.17.562748v1)\]
