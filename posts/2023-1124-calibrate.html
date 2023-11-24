@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Colin Kinz-Thompson">
+<meta name="dcterms.date" content="2023-11-24">
+<meta name="description" content="A working, python-based calibration protocol for sCMOS cameras">
+
+<title>The Kinz-Thompson Lab - Calibrating an sCMOS camera</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">The Kinz-Thompson Lab</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../people.html">
+ <span class="menu-text">People</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../research.html">
+ <span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../publications.html">
+ <span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-other" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Other</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-other">    
+        <li>
+    <a class="dropdown-item" href="../software.html">
+ <span class="dropdown-text">Software</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../blog.html">
+ <span class="dropdown-text">Posts</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../resources.html">
+ <span class="dropdown-text">Resources</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../contact.html">
+ <span class="menu-text">Contact</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Calibrating an sCMOS camera</h1>
+                  <div>
+        <div class="description">
+          A working, python-based calibration protocol for sCMOS cameras
+        </div>
+      </div>
+                </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Colin Kinz-Thompson </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 24, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#information" id="toc-information" class="nav-link active" data-scroll-target="#information">Information</a>
+  <ul class="collapse">
+  <li><a href="#cameras" id="toc-cameras" class="nav-link" data-scroll-target="#cameras">Cameras</a></li>
+  <li><a href="#min-value-statistics-to-infer-normal-distributions" id="toc-min-value-statistics-to-infer-normal-distributions" class="nav-link" data-scroll-target="#min-value-statistics-to-infer-normal-distributions">Min-value statistics to infer normal distributions</a></li>
+  </ul></li>
+  <li><a href="#collect-data" id="toc-collect-data" class="nav-link" data-scroll-target="#collect-data">Collect Data</a>
+  <ul class="collapse">
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a>
+  <ul class="collapse">
+  <li><a href="#microscope-code" id="toc-microscope-code" class="nav-link" data-scroll-target="#microscope-code">Microscope Code</a></li>
+  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software</a></li>
+  <li><a href="#approach" id="toc-approach" class="nav-link" data-scroll-target="#approach">Approach</a></li>
+  <li><a href="#timing" id="toc-timing" class="nav-link" data-scroll-target="#timing">Timing</a></li>
+  </ul></li>
+  <li><a href="#acquire-dark" id="toc-acquire-dark" class="nav-link" data-scroll-target="#acquire-dark">Acquire Dark</a></li>
+  <li><a href="#acquire-light" id="toc-acquire-light" class="nav-link" data-scroll-target="#acquire-light">Acquire Light</a></li>
+  </ul></li>
+  <li><a href="#analyze-data" id="toc-analyze-data" class="nav-link" data-scroll-target="#analyze-data">Analyze Data</a>
+  <ul class="collapse">
+  <li><a href="#load-the-data" id="toc-load-the-data" class="nav-link" data-scroll-target="#load-the-data">Load the Data</a></li>
+  <li><a href="#isolate-linear-response-region" id="toc-isolate-linear-response-region" class="nav-link" data-scroll-target="#isolate-linear-response-region">Isolate linear response region</a></li>
+  <li><a href="#calculate-the-calibrations" id="toc-calculate-the-calibrations" class="nav-link" data-scroll-target="#calculate-the-calibrations">Calculate the calibrations</a></li>
+  <li><a href="#analyze-the-calibrations" id="toc-analyze-the-calibrations" class="nav-link" data-scroll-target="#analyze-the-calibrations">Analyze the calibrations</a>
+  <ul class="collapse">
+  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="information" class="level1">
+<h1>Information</h1>
+<p>This post is a functional Jupyter notebook that enables the user to calibrate an sCMOS camera. It uses <a href="https://github.com/micro-manager/pycro-manager/">pycromanager</a> and <a href="https://micro-manager.org">micromanager</a> to collect calibration data, and then Python code to analyze that data and video the calibration parameters. In general, it is equivalent to the approach used by Huang et al.&nbsp;below. The cells are filled with data from a calibration of a Hamamatsu BT Fusion sCMOS camera in <code>fast</code> mode.</p>
+<p>Some useful reading:</p>
+<ul>
+<li>The SI of <a href="https://www.nature.com/articles/nmeth.2488">Huang et al.&nbsp;(2013) Nat. Methods, DOI:10.1038/nmeth.2488</a></li>
+<li>Janesick, J. R. Photon transfer: DN → <span class="math inline">\(\lambda\)</span>. (SPIE, 2007).</li>
+</ul>
+<section id="cameras" class="level2">
+<h2 class="anchored" data-anchor-id="cameras">Cameras</h2>
+<p>This section describes the math behind a camera in familar terms.</p>
+<p>Assume that are incoming photons impinging upon a single detector (i.e., on of the pixels of an sCMOS camera). The rate of those incident photons per measurement is</p>
+<p><span class="math display">\[ \lambda = \lambda^\prime + \lambda^{\prime\prime} t,\]</span> where we have denoted a time independent contribution with one prime and a time-dependent contribution with two primes.</p>
+<p>For any given time period, the probability distribution function (PDF) of the actual number of photons hitting the detector, <span class="math inline">\(N\)</span>, will be Poisson-distributed with rate <span class="math inline">\(\lambda\)</span> such that</p>
+<p><span class="math display">\[ p(N \mid \lambda) = \text{Poisson}(N\mid\lambda) = \frac{\lambda^N e^{-\lambda}}{N!}.\]</span></p>
+<p>without losing generality, we’ll switch to using electrons instead of photons. A good camera will have a high QE, so most of the incident photon will be converted into photoelectrons, however there are also electrons generated by the camera read process (read noise) and things like (time dependent) dark-currents. So, assuming that <span class="math inline">\(N\)</span> electrons are generated on the camera pixel in question (regardless of their origin…), a camera will return a number in digital units (DU) corresponding to the number of electrons that were detected. The output signal, <span class="math inline">\(y\)</span>, is generally offset from 0 by some fixed number <span class="math inline">\(y_0\)</span> to avoid ‘negative’ numbers in unsigned int output of the ADC. This offset addition is a deterministic process, so we can consider the camera to take a number of electrons <span class="math inline">\(N\)</span> and return a number <span class="math inline">\(y-y_0\)</span> in DU. That process is stochastic, and generally follows a normal distribution such that</p>
+<p><span class="math display">\[ p(y-y_0 \mid N, \theta) = \mathcal{N}(y-y_0 \mid gN, \sigma^2), \]</span></p>
+<p>where <span class="math inline">\(g\)</span> is the gain in <span class="math inline">\(DU/e^{-}\)</span>, <span class="math inline">\(\sigma^2\)</span> is the read noise, and <span class="math inline">\(\theta\)</span> is a shorthand for the set of model parameters included in the conditional dependency of a statement (e.g., <span class="math inline">\(g\)</span>, <span class="math inline">\(\sigma^2\)</span>, and <span class="math inline">\(y_0\)</span> here).</p>
+<p>What we’re actually interested in is the PDF of <span class="math inline">\(y\)</span> as a function of <span class="math inline">\(\lambda\)</span> regardless of the actual number of <span class="math inline">\(N\)</span>. To get this, we have to perform a marginalization</p>
+<p><span class="math display">\[ p(y-y_0 \mid \theta) = \sum_N p(y-y_0\mid N,\theta)\cdot p(N\mid\theta). \]</span></p>
+<p>This marginalization calcuation can be performed analytically in the case that <span class="math inline">\(N\)</span> is relatively large (ie, greater than ~1000). In that situation the Poisson distribution can be approximated as a normal distribution, such that</p>
+<p><span class="math display">\[ \text{Poisson}(N\mid\lambda) \approx \mathcal{N}(N\mid \lambda,\lambda), \]</span> i.e., where the mean and variance of the normal distribution is the rate of the Poisson distribution. This approximation is apparent by moment matching, and more rigorously achieved by comparing the moment generating functions of the Poisson and normal distributions.</p>
+<p>In that situation, after integrating over N and a lot of rearranging, we find that</p>
+<p><span class="math display">\[ p(y \mid \theta) = \mathcal{N}\left(y \mid g\lambda^{\prime\prime}t + (y_0 + g\lambda^\prime), g^2\lambda^{\prime\prime}t + (\sigma^2 +g^2\lambda^\prime)\right), \]</span></p>
+<p>which explicity notes the time dependence of these measurements. It’s important to note that while the mean scales as <span class="math inline">\(g\)</span> and the variance scales as <span class="math inline">\(g^2\)</span>, both linearly scale with <span class="math inline">\(\lambda^{\prime\prime}\)</span>. In short, both the mean and the variance of the output signal of a camera pixel (under relatively high electron counts) are linear in exposure time.</p>
+<p>When comparing to the work of Huang et al.&nbsp;in their SI sections one and two, we note that their sCMOS calibration protocol utilizes the same assumptions. Thus, we have the following equivalencies</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Huang et al</th>
+<th>This work</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(g_i\)</span></td>
+<td><span class="math inline">\(g\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(o_i\)</span></td>
+<td><span class="math inline">\((y_0 + g\lambda^\prime)\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(var_i\)</span></td>
+<td><span class="math inline">\((\sigma^2 +g^2\lambda^\prime)\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(v^k_i - var_i\)</span></td>
+<td><span class="math inline">\(g^2 \lambda^{\prime\prime}t\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\bar{D^k_i}-o_i\)</span></td>
+<td><span class="math inline">\(g\lambda^{\prime\prime}t\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Thus these calibrations are completely equivalent, although our parameterizations are little more transparent. However, instead of using their exact protocol, we provide a more convenient calculation to get <span class="math inline">\(g\)</span>. Note that if <span class="math inline">\(t = 0\)</span> and/or <span class="math inline">\(\lambda^{\prime\prime}=0\)</span> (i.e., a dark movie), then we expect</p>
+<p><span class="math display">\[ p(y_{i,\text{dark}} \mid \theta) = \mathcal{N}(y_{i,\text{dark}} \mid o_i, var_i), \]</span> so we can obtain measurements of <span class="math inline">\(y_{i,dark}\)</span> and use any common approach to get <span class="math inline">\(o_i\)</span> and <span class="math inline">\(var_i\)</span> for each pixel. As discussed below, we use an order-statistics approach to avoid any contamination from salt noise (e.g., cosmic rays hitting the pixels), but the most common would be to use the sample mean and variance to estimate the values of <span class="math inline">\(o_i\)</span> and <span class="math inline">\(var_i\)</span>.</p>
+<p>As Huang et al.&nbsp;note, the estimation for <span class="math inline">\(g\)</span> can be cast as a least-squares minimization problem if we know <span class="math inline">\(o_i\)</span>, <span class="math inline">\(var_i\)</span>, and have a series of <span class="math inline">\(y\)</span> obtained at several different exposure times and/or illumination intensities. However, their approach requires the use a pseudo-matrix inverse and is kind of annoying to program etc. Instead, here we show the equivalent maximum likelihood estimator of this problem, which is much easier to implement.</p>
+<p>Note that both approaches assume for each <span class="math inline">\(k^{th}\)</span> movie acquired, that</p>
+<p><span class="math display">\[ \mathcal{N}(v^k_i-var_i \mid g(\bar{D^k_i}-o_i), \sigma^2_{least squares} ), \]</span></p>
+<p>where the least squares variance is unimportant, but the same for each dataset. The MLE approach to this problem of estimating g is to take the derivative with respect to g of the log-likelihood (i.e., the product of these normal distributions), set that equal to zero, and solve for g. This gives</p>
+<p><span class="math display">\[ \frac{d}{d g_i} \ln\mathcal{L}  = 0 =  \sum_k \left((v_i^k-var_i) - g(\bar{D_i^k}-o_i)\right) \cdot \left( -(\bar{D_i^k}-o_i)\right) \]</span> <span class="math display">\[ \sum_k \left(v_i^k-var_i \right)\left( g(\bar{D_i^k}-o_i) \right) = g_i \sum_k \left( g(\bar{D_i^k}-o_i) \right)^2 \]</span></p>
+<p><span class="math display">\[ g_{i,MLE} = \frac{ \sum_k \left(v_i^k-var_i \right)\left( g(\bar{D_i^k}-o_i) \right)} { \sum_k \left( g(\bar{D_i^k}-o_i) \right)^2} \]</span></p>
+<p>Checking this with our variables, we see that <span class="math display">\[ g = \frac{\sum_k (g^2\lambda^{\prime\prime}t) (g\lambda^{\prime\prime}t)}{\sum_k (g\lambda^{\prime\prime}t)^2} \sim \frac{g^3}{g^2} \sim g^1.\]</span></p>
+</section>
+<section id="min-value-statistics-to-infer-normal-distributions" class="level2">
+<h2 class="anchored" data-anchor-id="min-value-statistics-to-infer-normal-distributions">Min-value statistics to infer normal distributions</h2>
+<p>This is a niche subject, but the idea is that if you only look at local extrema, then you can still predict the original distribution. A bit ago, I developed a pretty good approximation to the second-moment for normal distributed variables (<a href="http://ckinzthompson.github.io/posts/2017-06-21-maxvalue.html">read about it here</a>). There are already good approximations to the first-moment in the literature. Thus, the approach we take is to find the local minima (here, at the same pixel, in time), calculate the sample mean and sample variance of those local minima (note, this excludes any salt noise if the local regions are large enough and salt is slow), and then use moment matching to solve for the parameters of the original normal distribution. This works very well.</p>
+</section>
+</section>
+<section id="collect-data" class="level1">
+<h1>Collect Data</h1>
+<p>The rest of the notebook can be used to perform the sCMOS camera calibration using pycromanager/micromanager. Broadly:</p>
+<ol type="1">
+<li>Customize the variables in the setup section</li>
+<li>Cap the camera (use a very good cap!), and run the dark collection code.</li>
+<li>Uncap the camera, apply light to the sensor (using a diffuser; saturate the sensor at the highest exposure), run the light collection code</li>
+<li>Run the analysis code</li>
+</ol>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>Customize the variables below for your system</p>
+<div class="cell" data-tags="[]" data-execution_count="93">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">## This is a temporary file for each individual movie. Make sure the disk has enough space to hold one movie at a time.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">## It will automatically be deleted.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>fdir <span class="op">=</span> <span class="vs">r'C:\Users\ptirf\Desktop'</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>fname <span class="op">=</span> <span class="vs">r'temp'</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">## Number of frames to collect -- nb, you really want to have the dark movie dialed in, so use more datapoints there.</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>npoints_light <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>npoints_dark  <span class="op">=</span> <span class="dv">5000</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">## Automatically set these imaging parameters at the beginning of each acquisition</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>properties <span class="op">=</span> [</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'HamamatsuHam_DCAM'</span>,<span class="st">'ScanMode'</span>,<span class="dv">3</span>],</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'HamamatsuHam_DCAM'</span>,<span class="st">'Binning'</span>,<span class="st">'2x2'</span>],</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">## Define the exposures to use. nb, often must be given in msec not sec....</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>exposure_properties <span class="op">=</span> [<span class="st">'HamamatsuHam_DCAM'</span>,<span class="st">'Exposure'</span>]</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>exposures <span class="op">=</span> <span class="dv">10</span><span class="op">**</span>np.linspace(<span class="op">-</span><span class="dv">4</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">13</span>) <span class="op">*</span> <span class="dv">1000</span> <span class="co">## msec</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Light Exposures (msec):'</span>,exposures)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>dark_exposure <span class="op">=</span> <span class="fl">0.01</span> <span class="op">*</span> <span class="dv">1000</span> <span class="co">## msec</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Dark Exposure (msec):'</span>,dark_exposure)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">## This script uses min-value order statistics to avoid salt noise. </span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co">## `nskip` is how many frames to look across when finding each minima.</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>nskip <span class="op">=</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Light Exposures (msec): [  0.1          0.17782794   0.31622777   0.56234133   1.
+   1.77827941   3.16227766   5.62341325  10.          17.7827941
+  31.6227766   56.23413252 100.        ]
+Dark Exposure (msec): 10.0</code></pre>
+</div>
+</div>
+<section id="microscope-code" class="level3">
+<h3 class="anchored" data-anchor-id="microscope-code">Microscope Code</h3>
+</section>
+<section id="software" class="level3">
+<h3 class="anchored" data-anchor-id="software">Software</h3>
+<p>Note, getting pycromanager working required matching micro-manager and pycromanager version. The trick was to go to pypi (pycromanager is installed using pip), and find out the day when the latest release was released. Then go to the daily builds download of micro-manager and download the daily build from the closest/best matched day.</p>
+<p>For instance, in November 2023, the latest pycromanager release version was 0.29.9, which was put out on (September 29,2023)[https://pypi.org/project/pycromanager/#history]. The (latest nightly build)[https://download.micro-manager.org/nightly/2.0/Windows/] of micromanger failed, so going back to the 9/29/2023 release worked.</p>
+</section>
+<section id="approach" class="level3">
+<h3 class="anchored" data-anchor-id="approach">Approach</h3>
+<p>This approaches uses min-value order statistics to estimate the gaussian distribution of intensities for each pixel. This approach is to avoid salt noise. It uses (my own moment-matching approximation)[http://ckinzthompson.github.io/posts/2017-06-21-maxvalue.html].</p>
+<p>Also, it excludes the first frame of every <em>tif</em> file (i.e., if your movie is split across many files, several frames are skipped). This is because it was too much work to figure out which tif file is the actual first of such a series. In that first movie,the first frame seems to be overexposed on my camera and <em>must</em> be skipped. Skipping all the first frames is the quickest solution.</p>
+<p>Also, each movie is acquired, processed, and then deleted. Processing algorithms keep the movie data as <code>uint16</code> to save memory. The maximum memory use is when locating the local minima, a copy of <code>size/nskip</code> is made while the original data is around, so that should be 1.1x the file size if using <code>nskip=10</code>. Also note that all tif files contribute to the mean and var (the expectation values of <span class="math inline">\(E[x]\)</span> and <span class="math inline">\(E[x^2]\)</span> are acquired in an online approach, and the mean and var are calculated from them at the end).</p>
+</section>
+<section id="timing" class="level3">
+<h3 class="anchored" data-anchor-id="timing">Timing</h3>
+<p>The processing seems to be the rate-limiting step. Could probably speed up by running pixels in parallel (i.e.&nbsp;<code>nb.prange</code>).</p>
+<div class="cell" data-tags="[]" data-execution_count="61">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numba <span class="im">as</span> nb</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> ndtri</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">@nb.njit</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> collect_t_mins(d,l):</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> d.ndim <span class="op">==</span> <span class="dv">2</span>:</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">Exception</span>(<span class="st">'d should be 3d'</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    nt,nx,ny <span class="op">=</span> d.shape</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    mt <span class="op">=</span> nt<span class="op">//</span>l</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> np.zeros((mt,nx,ny),dtype<span class="op">=</span><span class="st">'uint16'</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(nx):</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(ny):</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(mt):</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>                out[k,i,j] <span class="op">=</span> np.<span class="bu">min</span>(d[k<span class="op">*</span>l:(k<span class="op">+</span><span class="dv">1</span>)<span class="op">*</span>l,i,j])</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> out</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="at">@nb.njit</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> online_expectations(d):</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">## the point is the d should stay a uint16 array for memory issues...</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    nt,nx,ny <span class="op">=</span> d.shape</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> np.zeros((<span class="dv">2</span>,nx,ny),dtype<span class="op">=</span><span class="st">'double'</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    dtij <span class="op">=</span> <span class="fl">0.</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(nt):</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(nx):</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(ny):</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>                dtij <span class="op">=</span> <span class="bu">float</span>(d[t,i,j])</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>                out[<span class="dv">0</span>,i,j] <span class="op">+=</span> dtij</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>                out[<span class="dv">1</span>,i,j] <span class="op">+=</span> dtij<span class="op">*</span>dtij</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> out</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> online_normal_stats(tifs,nskip):</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="co">    take a list of tif filenames and return the mean and var per pixel image of all together</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="co">    uses online approx, min-value statistics, and keeps everything uint16 for memory purposes</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="co">    '''</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">#### Calculate the mean and variance of each pixel, including ALL the tif file parts</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Note, there are some improvements to make:</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    <span class="co">## - the first frame from every file is skipped -- only need to skip it for first file to avoid weird artifacts</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    ntifs <span class="op">=</span> <span class="bu">len</span>(tifs)</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>    ns <span class="op">=</span> np.zeros((ntifs))</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(ntifs):</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>        <span class="co">## skip the first time point -- only for movie one but idk which that is now (note, not nec. the first filename in list)</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>        tif <span class="op">=</span> tifs[i]</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>        d <span class="op">=</span> tifffile.imread(tifs[i])[<span class="dv">1</span>:]</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>        d <span class="op">=</span> collect_t_mins(d,nskip)</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>        nt,nx,ny <span class="op">=</span> d.shape</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>            expectations <span class="op">=</span> np.zeros((ntifs,<span class="dv">2</span>,nx,ny))</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>        expectations[i] <span class="op">=</span> online_expectations(d)</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>        ns[i] <span class="op">=</span> nt</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>    expectations <span class="op">=</span> expectations.<span class="bu">sum</span>(<span class="dv">0</span>)</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>    ns <span class="op">=</span> np.<span class="bu">sum</span>(ns)</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>    mean <span class="op">=</span> expectations[<span class="dv">0</span>]<span class="op">/</span>ns</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>    var <span class="op">=</span> expectations[<span class="dv">1</span>]<span class="op">/</span>ns <span class="op">-</span> mean<span class="op">**</span><span class="fl">2.</span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>    <span class="co">## use min-value statistics to get actual distribution</span></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>    alpha <span class="op">=</span> <span class="fl">0.375</span></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>    factor_mean <span class="op">=</span> ndtri((nskip<span class="op">-</span>alpha)<span class="op">/</span>(nskip<span class="op">-</span><span class="fl">2.</span><span class="op">*</span>alpha<span class="op">+</span><span class="fl">1.</span>))</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> <span class="fl">.85317</span></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> <span class="op">-</span><span class="fl">.573889</span></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>    factor_var <span class="op">=</span> np.log(nskip)<span class="op">/</span>(a<span class="op">+</span>b<span class="op">/</span>nskip)</span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>    tv <span class="op">=</span> var <span class="op">*</span> factor_var</span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>    tm <span class="op">=</span> mean <span class="op">+</span> factor_mean<span class="op">*</span>np.sqrt(tv)</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> tm,tv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-tags="[]" data-execution_count="62">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pycromanager <span class="im">import</span> Acquisition, Core, multi_d_acquisition_events</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tifffile</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> shutil</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> microscope_expose(npoints,exposure,exposure_properties,properties,fdir,fname<span class="op">=</span><span class="st">'temp'</span>,nskip<span class="op">=</span><span class="dv">10</span>):</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Setup MMCore</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    core <span class="op">=</span> Core()</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Set camera properties</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> prop <span class="kw">in</span> properties:</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        core.set_property(prop[<span class="dv">0</span>],prop[<span class="dv">1</span>],prop[<span class="dv">2</span>])</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Set the exposure</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    core.set_property(exposure_properties[<span class="dv">0</span>],exposure_properties[<span class="dv">1</span>],exposure)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="fl">.5</span>) <span class="co">## Make sure it kicks in</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'Running'</span>, core.get_property(exposure_properties[<span class="dv">0</span>],exposure_properties[<span class="dv">1</span>]))</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Start the acquisition - store it in as .tif files that will be removed </span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Originally wanted to do this completely in memory.... bugs?</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> Acquisition(directory<span class="op">=</span>fdir,name<span class="op">=</span>fname,debug<span class="op">=</span><span class="va">False</span>,core_log_debug<span class="op">=</span><span class="va">False</span>,show_display<span class="op">=</span><span class="va">False</span>) <span class="im">as</span> acq:</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        events <span class="op">=</span> multi_d_acquisition_events(num_time_points<span class="op">=</span>npoints, time_interval_s<span class="op">=</span><span class="fl">0.</span>)</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        acq.acquire(events)</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Make sure we close the dataset? </span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    dataset <span class="op">=</span> acq.get_dataset()</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    path <span class="op">=</span> dataset.path</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    dataset.close()</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Get all the NDTiff files -- large files are split over several individual files</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    tifs <span class="op">=</span> [os.path.join(path, tif) <span class="cf">for</span> tif <span class="kw">in</span> os.listdir(path) <span class="cf">if</span> tif.endswith(<span class="st">".tif"</span>)]</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    <span class="co">## get statistics</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'Calculating'</span>,<span class="bu">len</span>(tifs),path)</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    mean,var <span class="op">=</span> online_normal_stats(tifs,nskip)</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Remove the tif data</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    shutil.rmtree(path)</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mean,var</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="acquire-dark" class="level2">
+<h2 class="anchored" data-anchor-id="acquire-dark">Acquire Dark</h2>
+<p>Turn the light off and make sure absolutely no light makes it to the detector. Probably you should just unhook the camera and put the cap on it… do it. don’t be lazy. Also, plastic caps seem to let light in?</p>
+<div class="cell" data-tags="[]" data-execution_count="63">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Collect data, calculate statistics, then remove data</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>mean,var <span class="op">=</span> microscope_expose(npoints_dark,dark_exposure,exposure_properties,properties,fdir,fname,nskip)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> np.array([[mean,var],])</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">## Save the real data</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> time.time()</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> np.array(out)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>np.save(os.path.join(fdir,<span class="st">'dark_data.npy'</span>),out)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Done </span><span class="sc">%.3f</span><span class="st"> sec'</span><span class="op">%</span>(t1<span class="op">-</span>t0))</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(out.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Running 10.0010
+Calculating 4 C:\Users\ptirf\Desktop\temp_1\
+Done 185.981 sec
+(1, 2, 1152, 1152)</code></pre>
+</div>
+</div>
+</section>
+<section id="acquire-light" class="level2">
+<h2 class="anchored" data-anchor-id="acquire-light">Acquire Light</h2>
+<p>Make sure to go to the top exposure time, and tune the light source to so that nearly all of the pixels are at the ADC maximum (i.e., <span class="math inline">\(2^{16}-1=65535\)</span>). Also, make sure to remove any image splitters to make sure all pixels are getting a comparable amount of light.</p>
+<p>My setup: 1. I took a piece of plastic (cut from a petri dish plate) 2. Scratched it up to be a diffuser added a piece of black masking tape b/c it was allowing too much light 3. Placed that over the camera opening 4. Placed kim-wipes on top of that to act as diffusers 5. Placed the mask tape roll on top of the kimwipes to keep them from blowing around 6. Positioned an LED point down onto the camera. 7. Tuned the light source to saturate the camera at the maximum exposure (0.1 sec here…) using the micromanager live preview histogram</p>
+<div class="cell" data-tags="[]" data-execution_count="64">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> []</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>time.sleep(<span class="dv">20</span>) <span class="co">## for you to get out of the room...</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> exposure <span class="kw">in</span> exposures:</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Collect data, calculate statistics, then remove data</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    mean,var <span class="op">=</span> microscope_expose(npoints_light,exposure,exposure_properties,properties,fdir,fname,nskip)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    out.append([mean,var])</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">## Save the real data</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> time.time()</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> np.array(out)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>np.save(os.path.join(fdir,<span class="st">'light_data.npy'</span>),out)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>np.save(os.path.join(fdir,<span class="st">'light_exposures.npy'</span>),exposures)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Done </span><span class="sc">%.3f</span><span class="st"> sec'</span><span class="op">%</span>(t1<span class="op">-</span>t0))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Running 0.1000
+Calculating 1 C:\Users\ptirf\Desktop\temp_1\
+Running 0.1780
+Calculating 1 C:\Users\ptirf\Desktop\temp_1\
+Running 0.3190
+Calculating 1 C:\Users\ptirf\Desktop\temp_1\
+Running 0.5620
+Calculating 1 C:\Users\ptirf\Desktop\temp_1\
+Running 1.0000
+Calculating 1 C:\Users\ptirf\Desktop\temp_1\
+Running 1.7790
+Calculating 1 C:\Users\ptirf\Desktop\temp_1\
+Running 3.1670
+Calculating 1 C:\Users\ptirf\Desktop\temp_1\
+Running 5.6250
+Calculating 1 C:\Users\ptirf\Desktop\temp_1\
+Running 10.0010
+Calculating 1 C:\Users\ptirf\Desktop\temp_1\
+Running 17.7840
+Calculating 1 C:\Users\ptirf\Desktop\temp_1\
+Running 31.6230
+Calculating 1 C:\Users\ptirf\Desktop\temp_1\
+Running 56.2380
+Calculating 1 C:\Users\ptirf\Desktop\temp_1\
+Running 100.0030
+Calculating 1 C:\Users\ptirf\Desktop\temp_1\
+Done 666.046 sec</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="analyze-data" class="level1">
+<h1>Analyze Data</h1>
+<section id="load-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="load-the-data">Load the Data</h2>
+<div class="cell" data-tags="[]" data-execution_count="144">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>fdir <span class="op">=</span> <span class="st">'./'</span> <span class="co">#fdir</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>fname_exposures <span class="op">=</span> os.path.join(fdir,<span class="st">'light_exposures.npy'</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>fname_light_data <span class="op">=</span> os.path.join(fdir,<span class="st">'light_data.npy'</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>fname_dark_data <span class="op">=</span> os.path.join(fdir,<span class="st">'dark_data.npy'</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">###</span><span class="co"> in case they're non-standard files...</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># fname_exposures  = 'light3_exposures.npy'</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># fname_light_data = 'light3_means_vars.npy'</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># fname_dark_data  = 'dark3_means_vars.npy'</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>exposures <span class="op">=</span> np.load(fname_exposures)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>light_data <span class="op">=</span> np.load(fname_light_data)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>dark_data <span class="op">=</span> np.load(fname_dark_data)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>exposures <span class="op">=</span> exposures<span class="op">/</span><span class="fl">1000.</span> <span class="co">## they are given in msec</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="isolate-linear-response-region" class="level2">
+<h2 class="anchored" data-anchor-id="isolate-linear-response-region">Isolate linear response region</h2>
+<p>Figure out which datapoints don’t look like the expected gaussians – only take the region where increasing exposure time produces a linear change (i.e., below around 1000 electrons you have poisson noise and the normal approximation is bad; above ~60k electrons and many of the pixel ADCs will saturate)</p>
+<div class="cell" data-execution_count="145">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#### These will be excluded</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>cut_lower <span class="op">=</span> <span class="dv">1400</span>   <span class="co">## the 2x2 binning offet is 400, so ...</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>cut_upper <span class="op">=</span> <span class="dv">55000</span>  <span class="co">## the camera has a 16-bit ADC .... so 65535 max</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-tags="[]" data-execution_count="146">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> light_data[:,<span class="dv">0</span>].mean((<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>last <span class="op">=</span> mu <span class="op">&gt;</span> cut_upper</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>keep <span class="op">=</span> np.bitwise_and(mu <span class="op">&gt;</span> cut_lower, mu <span class="op">&lt;</span> cut_upper)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> np.<span class="bu">sum</span>(last) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    keep[np.argmax(last):] <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>notkeep <span class="op">=</span> np.bitwise_not(keep)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> keep.<span class="bu">sum</span>() <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    plt.loglog(exposures[keep],mu[keep],<span class="st">'o'</span>,color<span class="op">=</span><span class="st">'tab:blue'</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> notkeep.<span class="bu">sum</span>() <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    plt.loglog(exposures[notkeep],mu[notkeep],<span class="st">'o'</span>,color<span class="op">=</span><span class="st">'tab:red'</span>)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>plt.axhline(y<span class="op">=</span><span class="dv">65535</span>,color<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>plt.axhspan(ymin <span class="op">=</span> <span class="dv">1</span>, ymax <span class="op">=</span> cut_lower,color<span class="op">=</span><span class="st">'tab:red'</span>,alpha<span class="op">=</span><span class="fl">.3</span>)</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>plt.axhline(y<span class="op">=</span>cut_lower,color<span class="op">=</span><span class="st">'tab:red'</span>)</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>plt.axhspan(ymin <span class="op">=</span> cut_upper, ymax <span class="op">=</span> <span class="dv">2</span><span class="op">**</span><span class="dv">16</span><span class="op">-</span><span class="dv">1</span>,color<span class="op">=</span><span class="st">'tab:red'</span>,alpha<span class="op">=</span><span class="fl">.3</span>)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>plt.axhline(y<span class="op">=</span>cut_upper,color<span class="op">=</span><span class="st">'tab:red'</span>)</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">10</span><span class="op">**</span><span class="dv">2</span>,<span class="dv">10</span><span class="op">**</span><span class="dv">5</span>)</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Avg. Camera (DU)'</span>)</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Exposure Time (s)'</span>)</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="2023-1124-calibrate_files/figure-html/cell-9-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="calculate-the-calibrations" class="level2">
+<h2 class="anchored" data-anchor-id="calculate-the-calibrations">Calculate the calibrations</h2>
+<p>Note, Huang et al use least squares and a matrix based solver that involves pseudo-inverses. To avoid all of that, you can just use the maximum-likelihood estimator (MLE) version of that calculation used here.</p>
+<p>Notes for this camera (Hamamatsu BT Fusion):</p>
+<ul>
+<li>It looks like I need to redo the illumination and/or dark image, because there are rings in the gain image</li>
+<li>There are weird pixels on this camera at the top (column-wise read out amplifiers?), and on one edge (idk). These can be excluded by slicing <code>[128:,:-128]</code> for the 2x2 binnned images here. Note this brings this camera down to a 1024x1024 or 2048x2048 image. Also, the manual says that running at such a size ROI gets a reasonable speed boost, so maybe I’ll do this is the future.</li>
+<li>This data is in imaging mode 3 (fast).</li>
+</ul>
+<div class="cell" data-tags="[]" data-execution_count="147">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">## These labels follow Huang et al.</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>o <span class="op">=</span> dark_data[<span class="dv">0</span>,<span class="dv">0</span>]</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>var <span class="op">=</span> dark_data[<span class="dv">0</span>,<span class="dv">1</span>]</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">## they use least squares, here is the MLE version </span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> np.<span class="bu">sum</span>((light_data[keep,<span class="dv">1</span>] <span class="op">-</span> var[<span class="va">None</span>,:,:])<span class="op">*</span>(light_data[keep,<span class="dv">0</span>] <span class="op">-</span> o[<span class="va">None</span>,:,:]),axis<span class="op">=</span><span class="dv">0</span>)<span class="op">/</span>np.<span class="bu">sum</span>((light_data[keep,<span class="dv">0</span>] <span class="op">-</span> o[<span class="va">None</span>,:,:])<span class="op">**</span><span class="fl">2.</span>,axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(o.shape,var.shape,g.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(1152, 1152) (1152, 1152) (1152, 1152)</code></pre>
+</div>
+</div>
+<div class="cell" data-tags="[]" data-execution_count="153">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">2</span>,figsize<span class="op">=</span>(<span class="dv">7</span>,<span class="dv">3</span>),dpi<span class="op">=</span><span class="dv">300</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>hy,hx <span class="op">=</span> ax[<span class="dv">0</span>].hist(g.flatten(),bins<span class="op">=</span><span class="dv">500</span>,log<span class="op">=</span><span class="va">True</span>,<span class="bu">range</span><span class="op">=</span>(<span class="dv">0</span>,<span class="dv">10</span>),color<span class="op">=</span><span class="st">'tab:blue'</span>)[:<span class="dv">2</span>]</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].hist(g[<span class="dv">128</span>:,:<span class="op">-</span><span class="dv">128</span>].flatten(),bins<span class="op">=</span><span class="dv">500</span>,log<span class="op">=</span><span class="va">True</span>,histtype<span class="op">=</span><span class="st">'step'</span>,color<span class="op">=</span><span class="st">'tab:orange'</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].imshow(g,vmin<span class="op">=</span><span class="dv">4</span>,vmax<span class="op">=</span><span class="dv">6</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">'g (DU/e-)'</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">'Pixels'</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].axis(<span class="st">'off'</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>peak_g <span class="op">=</span> hx[hy.argmax()]</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Maximum:'</span>,peak_g)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="2023-1124-calibrate_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Maximum: 4.46</code></pre>
+</div>
+</div>
+<div class="cell" data-tags="[]" data-execution_count="154">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">2</span>,figsize<span class="op">=</span>(<span class="dv">7</span>,<span class="dv">3</span>),dpi<span class="op">=</span><span class="dv">300</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>hy,hx <span class="op">=</span> ax[<span class="dv">0</span>].hist(o.flatten(),bins<span class="op">=</span><span class="dv">500</span>,log<span class="op">=</span><span class="va">True</span>,color<span class="op">=</span><span class="st">'tab:blue'</span>)[:<span class="dv">2</span>]</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].hist(o[<span class="dv">128</span>:,:<span class="op">-</span><span class="dv">128</span>].flatten(),bins<span class="op">=</span><span class="dv">500</span>,log<span class="op">=</span><span class="va">True</span>,histtype<span class="op">=</span><span class="st">'step'</span>,color<span class="op">=</span><span class="st">'tab:orange'</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].imshow(o,vmin<span class="op">=</span><span class="dv">380</span>,vmax<span class="op">=</span><span class="dv">420</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">'o (DU)'</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">'Pixels'</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].axis(<span class="st">'off'</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>peak_o <span class="op">=</span> hx[hy.argmax()]</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Maximum:'</span>,peak_o)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="2023-1124-calibrate_files/figure-html/cell-12-output-1.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Maximum: 401.9556435675076</code></pre>
+</div>
+</div>
+<div class="cell" data-tags="[]" data-execution_count="155">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">2</span>,figsize<span class="op">=</span>(<span class="dv">7</span>,<span class="dv">3</span>),dpi<span class="op">=</span><span class="dv">300</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>hy,hx <span class="op">=</span> ax[<span class="dv">0</span>].hist(var.flatten(),bins<span class="op">=</span><span class="dv">500</span>,log<span class="op">=</span><span class="va">True</span>,<span class="bu">range</span><span class="op">=</span>(<span class="dv">0</span>,<span class="dv">1000</span>),color<span class="op">=</span><span class="st">'tab:blue'</span>)[:<span class="dv">2</span>]</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].hist(var[<span class="dv">128</span>:,:<span class="op">-</span><span class="dv">128</span>].flatten(),bins<span class="op">=</span><span class="dv">500</span>,log<span class="op">=</span><span class="va">True</span>,histtype<span class="op">=</span><span class="st">'step'</span>,color<span class="op">=</span><span class="st">'tab:orange'</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].imshow(var,vmin<span class="op">=</span><span class="dv">50</span>,vmax<span class="op">=</span><span class="dv">400</span>,interpolation<span class="op">=</span><span class="st">'nearest'</span>)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="vs">r'var ($DU^2$)'</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">'Pixels'</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].axis(<span class="st">'off'</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>peak_var <span class="op">=</span> hx[hy.argmax()]</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Maximum:'</span>,peak_var)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Noisy electrons:'</span>,np.sqrt(peak_var)<span class="op">/</span>peak_g)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="2023-1124-calibrate_files/figure-html/cell-13-output-1.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Maximum: 132.0
+Noisy electrons: 2.5760370612278156</code></pre>
+</div>
+</div>
+<div class="cell" data-tags="[]" data-execution_count="156">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Save the calibration</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Saving calibrations (individual and global)'</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'g:   </span><span class="sc">%.3f</span><span class="st">'</span><span class="op">%</span>(peak_g))</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'o:   </span><span class="sc">%.3f</span><span class="st">'</span><span class="op">%</span>(peak_o))</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'var: </span><span class="sc">%.3f</span><span class="st">'</span><span class="op">%</span>(peak_var))</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> np.concatenate([g,o,var,],axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>np.save(<span class="st">'calibration_individual.npy'</span>,out)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> np.concatenate([g<span class="op">*</span><span class="fl">0.</span><span class="op">+</span>peak_g,o<span class="op">*</span><span class="fl">0.</span><span class="op">+</span>peak_o,var<span class="op">*</span><span class="dv">0</span><span class="op">+</span>peak_var],axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>np.save(<span class="st">'calibration_global.npy'</span>,out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Saving calibrations (individual and global)
+g:   4.460
+o:   401.956
+var: 132.000</code></pre>
+</div>
+</div>
+</section>
+<section id="analyze-the-calibrations" class="level2">
+<h2 class="anchored" data-anchor-id="analyze-the-calibrations">Analyze the calibrations</h2>
+<div class="cell" data-tags="[]" data-execution_count="159">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">2</span>,figsize<span class="op">=</span>(<span class="dv">7</span>,<span class="dv">3</span>))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>avgphotons <span class="op">=</span> (light_data[:,<span class="dv">0</span>]<span class="op">-</span>o)<span class="op">/</span>g</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> np.median((np.median(avgphotons,axis<span class="op">=</span>(<span class="dv">1</span>,<span class="dv">2</span>))<span class="op">/</span>exposures)[:<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].loglog(exposures[:<span class="op">-</span><span class="dv">1</span>],(np.mean(avgphotons,axis<span class="op">=</span>(<span class="dv">1</span>,<span class="dv">2</span>))<span class="op">/</span>exposures)[:<span class="op">-</span><span class="dv">1</span>],<span class="st">'o'</span>,color<span class="op">=</span><span class="st">'tab:blue'</span>,label<span class="op">=</span><span class="st">'Data'</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].axhline(y<span class="op">=</span>lam,color<span class="op">=</span><span class="st">'tab:orange'</span>,label<span class="op">=</span><span class="st">'Median'</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">'Exposure (s)'</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">'Avg. Photon rate (s^-1)'</span>)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].legend()</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="dv">10</span><span class="op">**</span>np.linspace(np.log10(exposures[<span class="dv">0</span>])<span class="op">//</span><span class="dv">1</span><span class="op">-</span><span class="dv">1</span>,np.log10(exposures[<span class="op">-</span><span class="dv">1</span>])<span class="op">//</span><span class="dv">1</span><span class="op">+</span><span class="dv">1</span>,<span class="dv">1000</span>)</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>yy <span class="op">=</span> g.mean()<span class="op">*</span>lam<span class="op">*</span>t<span class="op">+</span>o.mean()</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>yy[yy<span class="op">&gt;=</span><span class="dv">2</span><span class="op">**</span><span class="dv">16</span><span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> <span class="dv">2</span><span class="op">**</span><span class="dv">16</span><span class="op">-</span><span class="dv">1</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].loglog(t,yy,label<span class="op">=</span><span class="st">'Model'</span>,color<span class="op">=</span><span class="st">'tab:orange'</span>)</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].loglog(exposures,light_data[:,<span class="dv">0</span>].mean((<span class="dv">1</span>,<span class="dv">2</span>)),<span class="st">'o'</span>,label<span class="op">=</span><span class="st">'Data'</span>,color<span class="op">=</span><span class="st">'tab:blue'</span>)</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].legend()</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].axhline(y<span class="op">=</span>cut_lower,color<span class="op">=</span><span class="st">'tab:red'</span>)</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].axhline(y<span class="op">=</span>cut_upper,color<span class="op">=</span><span class="st">'tab:red'</span>)</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_ylabel(<span class="st">'Avg. Camera Counts (DU)'</span>)</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlabel(<span class="st">'Exposure (s)'</span>)</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="2023-1124-calibrate_files/figure-html/cell-15-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<section id="notes" class="level3">
+<h3 class="anchored" data-anchor-id="notes">Notes</h3>
+<p>The Hamamatsu BT Fusion documations quotes read noise levels as:</p>
+<ul>
+<li>mode 3 (fast): 1.6 RMS e-</li>
+<li>mode 2 (standard): 1.0 RMS e-</li>
+<li>mode 1 (ultra-quiet): 0.7 RMS e-</li>
+</ul>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
