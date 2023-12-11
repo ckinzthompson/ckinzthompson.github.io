@@ -105,6 +105,27 @@
     "text": "Analyze the calibrations\n\nfig,ax = plt.subplots(1,2,figsize=(7,3))\n\navgphotons = (light_data[:,0]-o)/g\nlam = np.median((np.median(avgphotons,axis=(1,2))/exposures)[:-1])\nax[0].loglog(exposures[:-1],(np.mean(avgphotons,axis=(1,2))/exposures)[:-1],'o',color='tab:blue',label='Data')\nax[0].axhline(y=lam,color='tab:orange',label='Median')\nax[0].set_xlabel('Exposure (s)')\nax[0].set_ylabel('Avg. Photon rate (s^-1)')\nax[0].legend()\n\nt = 10**np.linspace(np.log10(exposures[0])//1-1,np.log10(exposures[-1])//1+1,1000)\nyy = g.mean()*lam*t+o.mean()\nyy[yy>=2**16-1] = 2**16-1\nax[1].loglog(t,yy,label='Model',color='tab:orange')\nax[1].loglog(exposures,light_data[:,0].mean((1,2)),'o',label='Data',color='tab:blue')\nax[1].legend()\n\nax[1].axhline(y=cut_lower,color='tab:red')\nax[1].axhline(y=cut_upper,color='tab:red')\n\nax[1].set_ylabel('Avg. Camera Counts (DU)')\nax[1].set_xlabel('Exposure (s)')\nfig.tight_layout()\nplt.show()\n\n\n\n\n\nNotes\nThe Hamamatsu BT Fusion documations quotes read noise levels as:\n\nmode 3 (fast): 1.6 RMS e-\nmode 2 (standard): 1.0 RMS e-\nmode 1 (ultra-quiet): 0.7 RMS e-"
   },
   {
+    "objectID": "posts/2023-12-11-pretrained_models_huggingface.html",
+    "href": "posts/2023-12-11-pretrained_models_huggingface.html",
+    "title": "Running pretrained ML models on a Laptop",
+    "section": "",
+    "text": "Code\n#### If you don't already have the libraries that will be imported in this notebook, you can uncomment the line below to install them\n# %pip install torch numpy matplotlib transformers diffusers accelerate\n\n\n\n\nCode\n## A lot of models on hugging face are in PyTorch\nimport torch\n\n### This bit of code determines whether you have an NVIDIA gpu or you want to use the mac silicon GPU.\nif torch.cuda.is_available():\n    device = \"cuda:0\"\nelif torch.backends.mps.is_available():\n    device = torch.device(\"mps\")\nelse:\n    device = \"cpu\"\n\n## Other imports\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport warnings\nwarnings.filterwarnings('ignore')"
+  },
+  {
+    "objectID": "posts/2023-12-11-pretrained_models_huggingface.html#blenderbot-small",
+    "href": "posts/2023-12-11-pretrained_models_huggingface.html#blenderbot-small",
+    "title": "Running pretrained ML models on a Laptop",
+    "section": "Blenderbot (small)",
+    "text": "Blenderbot (small)\n\n\nCode\nfrom transformers import AutoTokenizer, BlenderbotSmallForConditionalGeneration\n\nmodelname = \"facebook/blenderbot_small-90M\"\ntokenizer = AutoTokenizer.from_pretrained(modelname)\nmodel = BlenderbotSmallForConditionalGeneration.from_pretrained(modelname).to(device)\n\n\n\n\nCode\nprompt = \"My dog is cute. Why don't you agree?\"\n\ninputs = tokenizer(prompt, return_tensors=\"pt\").to(device)\nreply_ids = model.generate(**inputs)\noutput = tokenizer.batch_decode(reply_ids, skip_special_tokens=True)[0]\n\nprint(prompt)\nprint(\"> \",output)\n\n\nMy dog is cute. Why don't you agree?\n>  i don't know, i guess it's just that i've never had a dog before."
+  },
+  {
+    "objectID": "posts/2023-12-11-pretrained_models_huggingface.html#blenderbot-regular",
+    "href": "posts/2023-12-11-pretrained_models_huggingface.html#blenderbot-regular",
+    "title": "Running pretrained ML models on a Laptop",
+    "section": "Blenderbot (regular)",
+    "text": "Blenderbot (regular)\n\n\nCode\nfrom transformers import BlenderbotTokenizer, BlenderbotForConditionalGeneration\n    \nmodelname = \"facebook/blenderbot-400M-distill\"\n# modelname = \"facebook/blenderbot-1B-distill\"\n# modelname = \"facebook/blenderbot-3B\" ## a little too large for my laptop\n\ntokenizer = BlenderbotTokenizer.from_pretrained(modelname)\nmodel = BlenderbotForConditionalGeneration.from_pretrained(modelname).to(device)\n\n\n\n\nCode\nprompt = \"My dog is cute. Why don't you agree?\"\n\ninputs = tokenizer([prompt], return_tensors=\"pt\").to(device)\nreply_ids = model.generate(**inputs)\noutput = tokenizer.batch_decode(reply_ids,skip_special_tokens=True)[0]\n\nprint(prompt)\nprint(\">\",output)\n\n\nMy dog is cute. Why don't you agree?\n>  I love dogs, but I'm allergic to them. What kind of dog do you have?"
+  },
+  {
     "objectID": "posts/2017-06-23-autocorrelation.html",
     "href": "posts/2017-06-23-autocorrelation.html",
     "title": "Autocorrelation Function Precision",
@@ -186,6 +207,6 @@
     "href": "blog.html",
     "title": "Posts",
     "section": "",
-    "text": "Here are some interesting posts about molecules, math, programming, etc.\n\n\n\n\n\n\n\n\n\n\nMLE Polynomial Filtering\n\n\n\n\n\nFlexible polynomial-based filtering useing MLE is just easy to program Savitzky-Golay\n\n\n\n\n\n\nDec 1, 2023\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\n\n\nCalibrating an sCMOS camera\n\n\n\n\n\nA working, python-based calibration protocol for sCMOS cameras\n\n\n\n\n\n\nNov 24, 2023\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\n\n\nFast Median Filters\n\n\n\n\n\nA quick investigation of how to speed up median filtering of 2D images\n\n\n\n\n\n\nOct 29, 2023\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\n\n\nAutocorrelation Function Precision\n\n\n\n\n\nA Bayesian take on estimating ACFs\n\n\n\n\n\n\nJun 23, 2017\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\n\n\nDistributions of Transition State Energies\n\n\n\n\n\nFrauenfelder-inspired distributions\n\n\n\n\n\n\nJun 22, 2017\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\n\n\nEstimating Max-value Distributions\n\n\n\n\n\nA decent approximation for order statistics\n\n\n\n\n\n\nJun 21, 2017\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\nNo matching items"
+    "text": "Here are some interesting posts about molecules, math, programming, etc.\n\n\n\n\n\n\n\n\n\n\nRunning pretrained ML models on a Laptop\n\n\n\n\n\nThis notebook demonstrates how to use the Python libraries called transformers and diffusers by HuggingFace on a Macbook using the onboard GPU.\n\n\n\n\n\n\nDec 11, 2023\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\n\n\nMLE Polynomial Filtering\n\n\n\n\n\nFlexible polynomial-based filtering useing MLE is just easy to program Savitzky-Golay\n\n\n\n\n\n\nDec 1, 2023\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\n\n\nCalibrating an sCMOS camera\n\n\n\n\n\nA working, python-based calibration protocol for sCMOS cameras\n\n\n\n\n\n\nNov 24, 2023\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\n\n\nFast Median Filters\n\n\n\n\n\nA quick investigation of how to speed up median filtering of 2D images\n\n\n\n\n\n\nOct 29, 2023\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\n\n\nAutocorrelation Function Precision\n\n\n\n\n\nA Bayesian take on estimating ACFs\n\n\n\n\n\n\nJun 23, 2017\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\n\n\nDistributions of Transition State Energies\n\n\n\n\n\nFrauenfelder-inspired distributions\n\n\n\n\n\n\nJun 22, 2017\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\n\n\nEstimating Max-value Distributions\n\n\n\n\n\nA decent approximation for order statistics\n\n\n\n\n\n\nJun 21, 2017\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\nNo matching items"
   }
 ]
