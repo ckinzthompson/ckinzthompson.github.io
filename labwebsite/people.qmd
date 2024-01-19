@@ -123,6 +123,21 @@ Karl Gaiser
 <!-- End: Current -->
 :::
 ::::
+
+
+:::: {layout="[ 35, 65 ]"}
+![](./images/ppl/jordi_microscope.jpg)
+
+::: {center}
+Jordania (Jordi) Urquizo
+
+[![](./images/linkedin.svg){width=0.25in}](https://www.linkedin.com/in/jordania-urquizo/)
+[![](./images/envelope-regular.svg){width=0.25in}](mailto:jju20@scarletmail.rutgers.edu)
+<!-- Start: Spring 2024  -->
+<!-- End: Current -->
+:::
+::::
+
 	
 
 
