@@ -81,6 +81,18 @@ Tianyue Dai
 ::::
 
 
+:::: {layout="[ 35, 65 ]"}
+![](./images/ppl/blank1.jpg)
+
+::: {center}
+Christa Murphy
+
+[![](./images/envelope-regular.svg){width=0.25in}](mailto:mailto:cm1669@scarletmail.rutgers.edu)
+<!-- Start: Spring 2024  -->
+<!-- End: Current -->
+:::
+::::
+
 
 :::: {layout="[ 35, 65 ]"}
 ![](./images/ppl/zhutao_microscope.jpg)
