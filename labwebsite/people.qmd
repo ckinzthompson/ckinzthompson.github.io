@@ -138,6 +138,20 @@ Karl Gaiser
 
 
 :::: {layout="[ 35, 65 ]"}
+![](./images/ppl/blank1.jpg)
+
+::: {center}
+Katrina Mejia
+
+GS-LSAMP Scholar
+
+[![](./images/envelope-regular.svg){width=0.25in}](mailto:kmm722@scarletmail.rutgers.edu)
+<!-- Start: Spring 2024  -->
+<!-- End: Current -->
+:::
+::::
+
+:::: {layout="[ 35, 65 ]"}
 ![](./images/ppl/jordi_microscope.jpg)
 
 ::: {center}
