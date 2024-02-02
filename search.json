@@ -161,6 +161,41 @@
     "text": "Normal\nA less exact case is if the rate constants are distributed according to a normal distribution, \\(\\mathcal{N}(k \\vert \\mu, \\sigma)\\). This is a bit of a stretch, because rate constants aren’t negative, but the support of the normal distribution is from \\(-\\infty\\) to \\(+\\infty\\). However, as long as the normal distribution is very small when \\(k < 0\\), then this is fairly reasonable. Here, we’ll ignore the bounds of the integral for that reason. An additional note is that the gamma distribution should begin to approximate the normal distribution when \\(\\alpha\\) becomes quite large. Anyway, if we marginalize out \\(k\\), as above, we find that\n\\[\\begin{aligned}\nS(k \\vert \\mu, \\sigma) &= \\int dk \\cdot \\mathcal{N} (k \\vert \\mu, \\sigma)\\cdot e^{-kt} \\\\\n&= \\frac{1}{\\sqrt{2 \\pi \\sigma^2}} \\int dk \\cdot e^{\\frac{-1}{2\\sigma^2} (k-\\mu)^2 - kt}\\\\\n&= \\frac{1}{\\sqrt{2 \\pi \\sigma^2}} \\int dk \\cdot e^{\\frac{-1}{2\\sigma^2} \\left(k^2 - 2\\mu k + \\mu^2 - 2\\sigma^2 kt \\right)}\\\\\n&= \\frac{1}{\\sqrt{2 \\pi \\sigma^2}} \\int dk \\cdot e^{\\frac{-1}{2\\sigma^2} \\left( (k-(\\mu-\\sigma^2t))^2 + 2\\mu \\sigma^2 t - \\sigma^4 t^2 \\right)}\\\\\n&= \\frac{1}{\\sqrt{2 \\pi \\sigma^2}} \\int dk \\cdot e^{\\frac{-1}{2\\sigma^2} \\cdot (k-(\\mu-\\sigma^2t))^2}e^{\\frac{-1}{2\\sigma^2} ( 2\\mu \\sigma^2 t - \\sigma^4 t^2 )}\\\\\n&= e^{\\frac{-1}{2\\sigma^2} ( 2\\mu \\sigma^2 t - \\sigma^4 t^2 )}\\cdot \\frac{1}{\\sqrt{2 \\pi \\sigma^2}} \\int dk \\cdot e^{\\frac{-1}{2\\sigma^2} \\cdot (k-(\\mu-\\sigma^2t))^2}\\\\\n&= e^{\\frac{-1}{2\\sigma^2} ( 2\\mu \\sigma^2 t - \\sigma^4 t^2 )}\\cdot \\int dk \\cdot \\mathcal{N} ( k\\vert \\mu-\\sigma^2 t, \\sigma^2 )\\\\\n&= e^{\\frac{-1}{2\\sigma^2} ( 2\\mu \\sigma^2 t - \\sigma^4 t^2 )} \\\\\n&= e^{-\\mu t + \\frac{1}{2} \\sigma^2 t^2}.\n\\end{aligned}\\]\nThis expression is exact if there is not a significant contribution from the \\(k < 0\\) region (i.e., very slow rates, where the decay times are very long). If there are those effects, you will find that at small \\(t\\), the form is exact, and then at long \\(t\\), you see a curved deviation away from the exact solution towards increasing survival probability. That’s obviously wrong, but it’s the effects of the \\(k < 0\\) region."
   },
   {
+    "objectID": "posts/2024-02-01-MS_MLE.html",
+    "href": "posts/2024-02-01-MS_MLE.html",
+    "title": "MLE Charge Determination in ESI Mass Spectrometry",
+    "section": "",
+    "text": "Often in an ESI-mass spectrum, you can see many peaks corresponding to different charge-states of the same molecule (i.e., with the same mass). Unfortunately, we only know the \\(m/z\\) value of these peaks, and do not know the charge corresponding to each peak. While neighboring peaks should have a \\(\\pm 1\\) relationship, we do not know if the first peak (i.e., highest \\(m/z\\) we can see) is the \\(z=+1\\) peak or some other charge. Charge determination must be performed in order to figure out the charge of each peak, and thus determine the mass of the molecule. Advanced deconvolution techinques exist for this purpose (including max-entropy based techniques), but here I’ll derive an accessible formula using maximum-likelihood estimation to calculate the charge and mass of the molecule simultaneously from several peak locations.\n\n\n\nA list of peaks \\(\\{x_i\\}\\). This is just several \\(m/z\\) values you have identified as belonging to the same series in a mass spectrum (i.e., via their common envelope).\nA reference index, \\(0\\). Pick one, it doesn’t matter which – it could be the largest, or the first.\nThe mass of the reference molecule, \\(m_0\\). Drop the \\(0\\) for ease of typing (\\(m\\)).\nThe charge of the reference molecule, \\(z_0\\). Drop the \\(0\\) for ease of typing (\\(z\\)).\n\\(n_i\\) is the index relative to the reference peak (i.e., \\(n_0=0\\), \\(n_1=1\\), \\(n_{-1}=-1, ...\\)).\n\\(\\langle X \\rangle \\equiv \\frac{1}{N} \\sum_{i=1}^{N} X_i\\)\n\n\n\n\nPeaks are located at: \\[x_i = \\frac{m_0+n_i}{z_0+n_i}\\]"
+  },
+  {
+    "objectID": "posts/2024-02-01-MS_MLE.html#estimate-m",
+    "href": "posts/2024-02-01-MS_MLE.html#estimate-m",
+    "title": "MLE Charge Determination in ESI Mass Spectrometry",
+    "section": "Estimate \\(m\\)",
+    "text": "Estimate \\(m\\)\n\\[0=\\frac{d \\ln \\mathcal{L}}{d m} \\] \\[0= \\sum_i 2(x_i z+n_i(x_i-1)-m)(-1)\\] \\[= \\sum_i (x_i z+n_i(x_i-1)-m)\\] \\[= \\langle xz \\rangle + \\langle n(x-1)\\rangle - m\\]\nand finally \\[\\implies m = z \\langle x\\rangle + \\langle n(x-1)\\rangle\\]"
+  },
+  {
+    "objectID": "posts/2024-02-01-MS_MLE.html#estimate-z",
+    "href": "posts/2024-02-01-MS_MLE.html#estimate-z",
+    "title": "MLE Charge Determination in ESI Mass Spectrometry",
+    "section": "Estimate \\(z\\)",
+    "text": "Estimate \\(z\\)\n\\[0=\\frac{d \\ln \\mathcal{L}}{d z} \\] \\[0= \\sum_i 2(x_i z+n_i(x_i-1)-m)(x_i)\\] \\[= z \\langle x^2\\rangle +\\langle  nx(x-1) \\rangle -m\\langle x\\rangle\\] \\[= z \\langle x^2\\rangle +\\langle  nx(x-1) \\rangle -z\\langle x\\rangle^2 - langle x\\rangle\\langle n(x-1)\\rangle\\] and finally \\[\\implies z = \\frac{\\langle x\\rangle \\langle (x-1)n\\rangle - \\langle x(x-1)n \\rangle}{\\langle x^2 \\rangle - \\langle x \\rangle^2}\\]"
+  },
+  {
+    "objectID": "posts/2024-02-01-MS_MLE.html#revisit-m",
+    "href": "posts/2024-02-01-MS_MLE.html#revisit-m",
+    "title": "MLE Charge Determination in ESI Mass Spectrometry",
+    "section": "Revisit \\(m\\)",
+    "text": "Revisit \\(m\\)\nPlugging in, we get \\[\\implies m = \\left(\\frac{\\langle x\\rangle \\langle (x-1)n\\rangle - \\langle x(x-1)n \\rangle}{\\langle x^2 \\rangle - \\langle x \\rangle^2} \\right) \\langle x\\rangle + \\langle n(x-1)\\rangle\\]"
+  },
+  {
+    "objectID": "posts/2024-02-01-MS_MLE.html#thoughts",
+    "href": "posts/2024-02-01-MS_MLE.html#thoughts",
+    "title": "MLE Charge Determination in ESI Mass Spectrometry",
+    "section": "Thoughts",
+    "text": "Thoughts\nTherefore, we have two separate equations that only depend on the values of \\(\\{x\\}\\) and \\(\\{n\\}\\) and we can estimate \\(m\\) and \\(z\\) from all the datapoints simultaneously. Note this is better (i.e., statistically speaking) than the typical approach of taking two neighboring peaks and doing: \\[ x_1=\\frac{m+1}{z+1} \\approx \\frac{m}{z+1} \\rightarrow \\frac{1}{x_1}= \\frac{z}{m} + \\frac{1}{m} = \\frac{1}{x_0} + \\frac{1}{m}\\] \\[\\implies m\\approx \\frac{x_0x_1}{x_0-x_1}\\]"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Single Molecule Biophysics",
@@ -207,6 +242,6 @@
     "href": "blog.html",
     "title": "Posts",
     "section": "",
-    "text": "Here are some interesting posts about molecules, math, programming, etc.\n\n\n\n\n\n\n\n\n\n\nRunning pretrained ML models on a Laptop\n\n\n\n\n\nThis notebook demonstrates how to use the Python libraries called transformers and diffusers by HuggingFace on a Macbook using the onboard GPU.\n\n\n\n\n\n\nDec 11, 2023\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\n\n\nMLE Polynomial Filtering\n\n\n\n\n\nFlexible polynomial-based filtering useing MLE is just easy to program Savitzky-Golay\n\n\n\n\n\n\nDec 1, 2023\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\n\n\nCalibrating an sCMOS camera\n\n\n\n\n\nA working, python-based calibration protocol for sCMOS cameras\n\n\n\n\n\n\nNov 24, 2023\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\n\n\nFast Median Filters\n\n\n\n\n\nA quick investigation of how to speed up median filtering of 2D images\n\n\n\n\n\n\nOct 29, 2023\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\n\n\nAutocorrelation Function Precision\n\n\n\n\n\nA Bayesian take on estimating ACFs\n\n\n\n\n\n\nJun 23, 2017\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\n\n\nDistributions of Transition State Energies\n\n\n\n\n\nFrauenfelder-inspired distributions\n\n\n\n\n\n\nJun 22, 2017\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\n\n\nEstimating Max-value Distributions\n\n\n\n\n\nA decent approximation for order statistics\n\n\n\n\n\n\nJun 21, 2017\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\nNo matching items"
+    "text": "Here are some interesting posts about molecules, math, programming, etc.\n\n\n\n\n\n\n\n\n\n\nMLE Charge Determination in ESI Mass Spectrometry\n\n\n\n\n\nCalculate mass and charge from an ESI-mass spectrum\n\n\n\n\n\n\nFeb 1, 2024\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\n\n\nRunning pretrained ML models on a Laptop\n\n\n\n\n\nThis notebook demonstrates how to use the Python libraries called transformers and diffusers by HuggingFace on a Macbook using the onboard GPU.\n\n\n\n\n\n\nDec 11, 2023\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\n\n\nMLE Polynomial Filtering\n\n\n\n\n\nFlexible polynomial-based filtering useing MLE is just easy to program Savitzky-Golay\n\n\n\n\n\n\nDec 1, 2023\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\n\n\nCalibrating an sCMOS camera\n\n\n\n\n\nA working, python-based calibration protocol for sCMOS cameras\n\n\n\n\n\n\nNov 24, 2023\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\n\n\nFast Median Filters\n\n\n\n\n\nA quick investigation of how to speed up median filtering of 2D images\n\n\n\n\n\n\nOct 29, 2023\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\n\n\nAutocorrelation Function Precision\n\n\n\n\n\nA Bayesian take on estimating ACFs\n\n\n\n\n\n\nJun 23, 2017\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\n\n\nDistributions of Transition State Energies\n\n\n\n\n\nFrauenfelder-inspired distributions\n\n\n\n\n\n\nJun 22, 2017\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\n\n\nEstimating Max-value Distributions\n\n\n\n\n\nA decent approximation for order statistics\n\n\n\n\n\n\nJun 21, 2017\n\n\nColin Kinz-Thompson\n\n\n\n\n\n\nNo matching items"
   }
 ]
