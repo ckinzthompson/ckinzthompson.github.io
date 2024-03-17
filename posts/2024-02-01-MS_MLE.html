@@ -254,6 +254,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
+<p><a href="https://colab.research.google.com/github/ckinzthompson/ckinzthompson.github.io/blob/main/additional/MS_MLE_colab.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a></p>
 <section id="background" class="level1">
 <h1>Background</h1>
 <p>Often in an ESI-mass spectrum, you can see many peaks corresponding to different charge-states of the same molecule (i.e., with the same mass). Unfortunately, we only know the <span class="math inline">\(m/z\)</span> value of these peaks, and do not know the charge corresponding to each peak. While neighboring peaks should have a <span class="math inline">\(\pm 1\)</span> relationship, we do not know if the first peak (i.e., highest <span class="math inline">\(m/z\)</span> we can see) is the <span class="math inline">\(z=+1\)</span> peak or some other charge. Charge determination must be performed in order to figure out the charge of each peak, and thus determine the mass of the molecule. Advanced deconvolution techinques exist for this purpose (including max-entropy based techniques), but here I’ll derive an accessible formula using maximum-likelihood estimation to calculate the charge and mass of the molecule simultaneously from several peak locations.</p>
