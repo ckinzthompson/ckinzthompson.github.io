@@ -220,6 +220,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">March 17, 2024</p>
+      </div>
+    </div>
       
     </div>
     
@@ -241,7 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul class="collapse">
   <li><a href="#estimate-m" id="toc-estimate-m" class="nav-link" data-scroll-target="#estimate-m">Estimate <span class="math inline">\(m\)</span></a></li>
   <li><a href="#estimate-z" id="toc-estimate-z" class="nav-link" data-scroll-target="#estimate-z">Estimate <span class="math inline">\(z\)</span></a></li>
-  <li><a href="#revisit-m" id="toc-revisit-m" class="nav-link" data-scroll-target="#revisit-m">Revisit <span class="math inline">\(m\)</span></a></li>
+  <li><a href="#decouple-the-results" id="toc-decouple-the-results" class="nav-link" data-scroll-target="#decouple-the-results">Decouple the results</a></li>
   <li><a href="#thoughts" id="toc-thoughts" class="nav-link" data-scroll-target="#thoughts">Thoughts</a></li>
   </ul></li>
   <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
@@ -254,7 +260,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<p><a href="https://colab.research.google.com/github/ckinzthompson/ckinzthompson.github.io/blob/main/additional/MS_MLE_colab.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a></p>
+<p><em>Editted 2024/03/17: to fix math</em></p>
+<p><em>Open in MS MLE tools in Colab:</em> <a href="https://colab.research.google.com/github/ckinzthompson/ckinzthompson.github.io/blob/main/additional/MS_MLE_colab.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a></p>
 <section id="background" class="level1">
 <h1>Background</h1>
 <p>Often in an ESI-mass spectrum, you can see many peaks corresponding to different charge-states of the same molecule (i.e., with the same mass). Unfortunately, we only know the <span class="math inline">\(m/z\)</span> value of these peaks, and do not know the charge corresponding to each peak. While neighboring peaks should have a <span class="math inline">\(\pm 1\)</span> relationship, we do not know if the first peak (i.e., highest <span class="math inline">\(m/z\)</span> we can see) is the <span class="math inline">\(z=+1\)</span> peak or some other charge. Charge determination must be performed in order to figure out the charge of each peak, and thus determine the mass of the molecule. Advanced deconvolution techinques exist for this purpose (including max-entropy based techniques), but here I’ll derive an accessible formula using maximum-likelihood estimation to calculate the charge and mass of the molecule simultaneously from several peak locations.</p>
@@ -263,7 +270,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>A list of peaks <span class="math inline">\(\{x_i\}\)</span>. This is just several <span class="math inline">\(m/z\)</span> values you have identified as belonging to the same series in a mass spectrum (i.e., via their common envelope).</li>
 <li>A reference index, <span class="math inline">\(0\)</span>. Pick one, it doesn’t matter which – it could be the largest, or the first.</li>
-<li>The mass of the reference molecule, <span class="math inline">\(m_0\)</span>. Drop the <span class="math inline">\(0\)</span> for ease of typing (<span class="math inline">\(m\)</span>).</li>
+<li>The mass of the neutral molecule, <span class="math inline">\(m\)</span>.</li>
 <li>The charge of the reference molecule, <span class="math inline">\(z_0\)</span>. Drop the <span class="math inline">\(0\)</span> for ease of typing (<span class="math inline">\(z\)</span>).</li>
 <li><span class="math inline">\(n_i\)</span> is the index relative to the reference peak (i.e., <span class="math inline">\(n_0=0\)</span>, <span class="math inline">\(n_1=1\)</span>, <span class="math inline">\(n_{-1}=-1, ...\)</span>).</li>
 <li><span class="math inline">\(\langle X \rangle \equiv \frac{1}{N} \sum_{i=1}^{N} X_i\)</span></li>
@@ -271,79 +278,86 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="assumptions" class="level2">
 <h2 class="anchored" data-anchor-id="assumptions">Assumptions</h2>
-<p>Peaks are located at: <span class="math display">\[x_i = \frac{m_0+n_i}{z_0+n_i}\]</span></p>
+<p>Peaks are located at: <span class="math display">\[x_i = \frac{m+(z_0+n_i)* M_{H}}{z_0+n_i},\]</span> where <span class="math inline">\(M_H = 1.00784\)</span> Da.</p>
 </section>
 </section>
 <section id="mle-equations" class="level1">
 <h1>MLE Equations</h1>
-<p>Rearrange to find the <span class="math display">\[x_i z + n_i (x_i - 1) = m.\]</span> Note that this implies we can transform the peaks into mass if we know the charge and index. If the we assume normal distributed errors, and a common, constant variance, we can write <span class="math display">\[\mathcal{L} = \prod_i \mathcal{N}(x_i z+n_i (x_i-1) \vert m, \sigma^2).\]</span></p>
-<p>We’ll use the maximum-likelihood approach to estimate <span class="math inline">\(m\)</span> and <span class="math inline">\(z\)</span>. But first, note that <span class="math display">\[ \ln \mathcal{L} \propto - \sum_i (x_i z+n_i (x_i-1)- m)^2\]</span></p>
+<p>Rearrange to find <span class="math display">\[m = z(x_i-M_H)+n_i(x_i-M_H) = zh_i + n_ih_i,\]</span> where <span class="math inline">\(h_i\equiv x_i-M_H\)</span>.</p>
+<p>Note that this implies we can transform the peaks into mass if we know the charge and index. If the we assume normal distributed errors, and a common, constant variance, we can write <span class="math display">\[\mathcal{L} = \prod_i \mathcal{N}(zh_i + n_ih_i \vert m, \sigma^2).\]</span></p>
+<p>We’ll use the maximum-likelihood approach to estimate <span class="math inline">\(m\)</span> and <span class="math inline">\(z\)</span>. But first, note that <span class="math display">\[ \ln \mathcal{L} \propto \sum_i (zh_i + n_ih_i- m)^2\]</span></p>
 <section id="estimate-m" class="level2">
 <h2 class="anchored" data-anchor-id="estimate-m">Estimate <span class="math inline">\(m\)</span></h2>
-<p><span class="math display">\[0=\frac{d \ln \mathcal{L}}{d m} \]</span> <span class="math display">\[0= \sum_i 2(x_i z+n_i(x_i-1)-m)(-1)\]</span> <span class="math display">\[= \sum_i (x_i z+n_i(x_i-1)-m)\]</span> <span class="math display">\[= \langle xz \rangle + \langle n(x-1)\rangle - m\]</span></p>
-<p>and finally <span class="math display">\[\implies m = z \langle x\rangle + \langle n(x-1)\rangle\]</span></p>
+<p>The MLE estimate is obtained by setting the derivative to zero <span class="math display">\[0=\frac{d \ln \mathcal{L}}{d m}.\]</span> We can solve for m to get <span class="math display">\[0 = \sum_i 2(zh_i-n_ih_i-m)(-1) = \sum_i (zh_i-n_ih_i-m) = z\langle h \rangle + \langle nh\rangle - m\]</span></p>
+<p><span class="math display">\[\implies m = z \langle h\rangle + \langle nh\rangle\]</span></p>
 </section>
 <section id="estimate-z" class="level2">
 <h2 class="anchored" data-anchor-id="estimate-z">Estimate <span class="math inline">\(z\)</span></h2>
-<p><span class="math display">\[0=\frac{d \ln \mathcal{L}}{d z} \]</span> <span class="math display">\[0= \sum_i 2(x_i z+n_i(x_i-1)-m)(x_i)\]</span> <span class="math display">\[= z \langle x^2\rangle +\langle  nx(x-1) \rangle -m\langle x\rangle\]</span> <span class="math display">\[= z \langle x^2\rangle +\langle  nx(x-1) \rangle -z\langle x\rangle^2 - langle x\rangle\langle n(x-1)\rangle\]</span> and finally <span class="math display">\[\implies z = \frac{\langle x\rangle \langle (x-1)n\rangle - \langle x(x-1)n \rangle}{\langle x^2 \rangle - \langle x \rangle^2}\]</span></p>
+<p>The MLE estimate is obtained by setting the derivate to zero <span class="math display">\[0=\frac{d \ln \mathcal{L}}{d z}.\]</span></p>
+<p>Solving, we obtain <span class="math display">\[0= \sum_i 2(zh_i + n_ih_i - m)h_i\]</span> <span class="math display">\[\implies z = \frac{m\langle h \rangle - \langle nh^2\rangle}{\langle h^2 \rangle } \]</span></p>
 </section>
-<section id="revisit-m" class="level2">
-<h2 class="anchored" data-anchor-id="revisit-m">Revisit <span class="math inline">\(m\)</span></h2>
-<p>Plugging in, we get <span class="math display">\[\implies m = \left(\frac{\langle x\rangle \langle (x-1)n\rangle - \langle x(x-1)n \rangle}{\langle x^2 \rangle - \langle x \rangle^2} \right) \langle x\rangle + \langle n(x-1)\rangle\]</span></p>
+<section id="decouple-the-results" class="level2">
+<h2 class="anchored" data-anchor-id="decouple-the-results">Decouple the results</h2>
+<p>The equations above for <span class="math inline">\(m\)</span> and <span class="math inline">\(z\)</span> are not independent. By plugging the equation for <span class="math inline">\(m\)</span> into the equation for <span class="math inline">\(z\)</span> we obtain</p>
+<p><span class="math display">\[ z = \frac{\langle h\rangle \langle nh \rangle - \langle nh^2 \rangle}{\langle h^2 \rangle - \langle h\rangle ^2}, \]</span></p>
+<p>which is just in terms of the statistics of the peaks and (relative) charge assignment indexing. The equation for <span class="math inline">\(m\)</span> is then obtained by plugging in to yield</p>
+<p><span class="math display">\[ m = \frac{\langle nh \rangle \langle h^2 \rangle - \langle nh^2 \rangle \langle h \rangle}{\langle h^2 \rangle - \langle h \rangle^2} \]</span></p>
 </section>
 <section id="thoughts" class="level2">
 <h2 class="anchored" data-anchor-id="thoughts">Thoughts</h2>
-<p>Therefore, we have two separate equations that only depend on the values of <span class="math inline">\(\{x\}\)</span> and <span class="math inline">\(\{n\}\)</span> and we can estimate <span class="math inline">\(m\)</span> and <span class="math inline">\(z\)</span> from all the datapoints simultaneously. Note this is better (i.e., statistically speaking) than the typical approach of taking two neighboring peaks and doing: <span class="math display">\[ x_1=\frac{m+1}{z+1} \approx \frac{m}{z+1} \rightarrow \frac{1}{x_1}= \frac{z}{m} + \frac{1}{m} = \frac{1}{x_0} + \frac{1}{m}\]</span> <span class="math display">\[\implies m\approx \frac{x_0x_1}{x_0-x_1}\]</span></p>
+<p>Therefore, we have two separate equations that only depend on the values of <span class="math inline">\(\{x\}\)</span> and <span class="math inline">\(\{n\}\)</span> and we can estimate <span class="math inline">\(m\)</span> and <span class="math inline">\(z\)</span> from all the datapoints simultaneously. Note this is better (i.e., statistically speaking) than the typical approach of taking two neighboring peaks and doing: <span class="math display">\[ x_1=\frac{m+1}{z+1} \approx \frac{m}{z+1} \rightarrow \frac{1}{x_1}= \frac{z}{m} + \frac{1}{m} = \frac{1}{x_0} + \frac{1}{m}\]</span> which leads to</p>
+<p><span class="math display">\[ m\approx \frac{x_0x_1}{x_0-x_1},\]</span> and <span class="math display">\[ z_0 \approx \frac{x_1}{x_0-x_1}.\]</span></p>
 </section>
 </section>
 <section id="example" class="level1">
 <h1>Example</h1>
 <p>Here’s some Python code showing how to do this calculation. Note: it assumes you didn’t skip any peaks (i.e., …+14,15,17,18…); better to use a smaller peak list with no skipped peaks.</p>
 <div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Myoglobin peaks from https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1853331/</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="fl">1305.0</span>,<span class="dv">1212</span>,<span class="dv">1131</span>,<span class="dv">1060</span>,<span class="dv">998</span>,<span class="dv">943</span>,<span class="dv">893</span>,<span class="dv">849</span>,<span class="dv">808</span>,<span class="dv">772</span>,<span class="dv">738</span>,<span class="dv">707</span>,<span class="dv">679</span>,<span class="dv">653</span>]</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array(x)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.sort(x)[::<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> np.arange(x.size)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>E_x <span class="op">=</span> np.mean(x)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>E_x2 <span class="op">=</span> np.mean(x<span class="op">**</span><span class="fl">2.</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>E_xm1_n <span class="op">=</span> np.mean((x<span class="op">-</span><span class="fl">1.</span>)<span class="op">*</span>n)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>E_x_xm1_n <span class="op">=</span> np.mean(x<span class="op">*</span>(x<span class="op">-</span><span class="fl">1.</span>)<span class="op">*</span>n)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> (E_x <span class="op">*</span> E_xm1_n <span class="op">-</span> E_x_xm1_n)<span class="op">/</span>(E_x2 <span class="op">-</span> E_x<span class="op">**</span><span class="fl">2.</span>)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> z<span class="op">*</span>E_x <span class="op">+</span> E_xm1_n</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">## Myoglobin peaks from Fig. 5: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1853331/</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="fl">1305.0</span>,<span class="dv">1212</span>,<span class="dv">1131</span>,<span class="dv">1060</span>,<span class="dv">998</span>,<span class="dv">943</span>,<span class="dv">893</span>,<span class="dv">849</span>,<span class="dv">808</span>,<span class="dv">772</span>,<span class="dv">738</span>,<span class="dv">707</span>,<span class="dv">679</span>,<span class="dv">653</span>]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array(x)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.sort(x)[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> np.arange(x.size)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>H <span class="op">=</span> <span class="fl">1.00784</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>hi <span class="op">=</span> x<span class="op">-</span>H</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>E_h <span class="op">=</span> np.mean(hi)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>E_h2 <span class="op">=</span> np.mean(hi<span class="op">*</span>hi)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>E_nh <span class="op">=</span> np.mean(n<span class="op">*</span>hi)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>E_nh2 <span class="op">=</span> np.mean(n<span class="op">*</span>hi<span class="op">*</span>hi)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> (E_h<span class="op">*</span>E_nh<span class="op">-</span>E_nh2)<span class="op">/</span>(E_h2<span class="op">-</span>E_h<span class="op">**</span><span class="fl">2.</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> z<span class="op">*</span>E_h<span class="op">+</span>E_nh</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Mass: </span><span class="sc">%.3f</span><span class="st">"</span><span class="op">%</span>(m))</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Charge_0:'</span>,z)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'----------------'</span>)</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Peak (m/z), z'</span>)</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(x.size):</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(x[i], <span class="bu">int</span>(z<span class="op">+</span>n[i]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Mass: </span><span class="sc">%.3f</span><span class="st">"</span><span class="op">%</span>(m))</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Charge_0:'</span>,z)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'----------------'</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'z, Peak (m/z)'</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(x.size):</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="bu">int</span>(z<span class="op">+</span>n[i]),x[i])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Mass: 16964.682
-Charge_0: 13.000357233961779
+<pre><code>Mass: 16951.387
+Charge_0: 13.00020082077729
 ----------------
-Peak (m/z), z
-1305.0 13
-1212.0 14
-1131.0 15
-1060.0 16
-998.0 17
-943.0 18
-893.0 19
-849.0 20
-808.0 21
-772.0 22
-738.0 23
-707.0 24
-679.0 25
-653.0 26</code></pre>
+z, Peak (m/z)
+13 1305.0
+14 1212.0
+15 1131.0
+16 1060.0
+17 998.0
+18 943.0
+19 893.0
+20 849.0
+21 808.0
+22 772.0
+23 738.0
+24 707.0
+25 679.0
+26 653.0</code></pre>
 </div>
 </div>
 
