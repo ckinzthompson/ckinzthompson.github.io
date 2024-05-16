@@ -169,7 +169,7 @@ McNair Scholar
 
 
 :::: {layout="[ 35, 65 ]"}
-![](./images/ppl/jordi_microscope.jpg)
+![](./images/ppl/blank1.jpg)
 
 ::: {center}
 Brigitte Valladares
