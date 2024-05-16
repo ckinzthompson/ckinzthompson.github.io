@@ -44,7 +44,7 @@ Research Associate
 ::: {center}
 Katherine Leon Hernandez
 
-SREB Doctoral Scholar, NIH MBRS Scholar, NSF LSAMP Scholar
+SREB Doctoral Scholar, NIH MBRS Scholar, NSF GS-LSAMP B2D Scholar
 
 [![](./images/envelope-regular.svg){width=0.25in}](mailto:kathy.leon@rutgers.edu)
 <!-- Start: Fall 2020  -->
@@ -143,7 +143,7 @@ Karl Gaiser
 ::: {center}
 Katrina Mejia
 
-GS-LSAMP Scholar
+NSF GS-LSAMP Scholar
 
 [![](./images/envelope-regular.svg){width=0.25in}](mailto:kmm722@scarletmail.rutgers.edu)
 <!-- Start: Spring 2024  -->
@@ -157,9 +157,28 @@ GS-LSAMP Scholar
 ::: {center}
 Jordania (Jordi) Urquizo
 
+McNair Scholar
+
 [![](./images/linkedin.svg){width=0.25in}](https://www.linkedin.com/in/jordania-urquizo/)
 [![](./images/envelope-regular.svg){width=0.25in}](mailto:jju20@scarletmail.rutgers.edu)
+
 <!-- Start: Spring 2024  -->
+<!-- End: Current -->
+:::
+::::
+
+
+:::: {layout="[ 35, 65 ]"}
+![](./images/ppl/jordi_microscope.jpg)
+
+::: {center}
+Brigitte Valladares
+
+NSF GS-LSAMP B2B Scholar
+
+[![](./images/envelope-regular.svg){width=0.25in}](mailto:Bsvalladares@students.pccc.edu)
+
+<!-- Start: Summer 2024  -->
 <!-- End: Current -->
 :::
 ::::

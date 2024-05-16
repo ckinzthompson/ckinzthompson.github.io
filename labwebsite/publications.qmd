@@ -6,6 +6,13 @@ toc: true
 
 # 2020 - Current
 
+* Ide, N.A., Gentry, R.C., Rudbach, M.A., Yoo, K., Velez, P.K., Comunale, V.M., Hartwick, E.W., Kinz-Thompson, C.D., Gonzalez Jr, R.L., Aitken, C.E., (2024) *A dynamic compositional equilibrium governs mRNA recognition by eIF3.* bioRxiv. DOI:10.1101/2024.04.25.581977
+\[[Preprint](https://www.biorxiv.org/content/10.1101/2024.04.25.581977v1)\]
+
+* Verma, A. R., Ray, K. K., Bodick, M., Kinz-Thompson, C. D. & Gonzalez, Jr., R. L. (2024) *Increasing the accuracy of single-molecule data analysis using tMAVEN*. Biophysical Journal, 123, 1-15. DOI:10.1101/2023.08.15.553409.
+\[[Link](https://www.sciencedirect.com/science/article/pii/S0006349524000389)\]
+\[[Preprint](https://www.biorxiv.org/content/10.1101/2023.08.15.553409v2)\]
+
 * Gentry, R.C., Ide, N.A., Comunale, V.M., Hartwick, E.W., Kinz-Thompson, C.D., Gonzalez Jr., R.L. (2023) *The mechanism of mRNA activation*. bioRxiv, DOI:10.1101/2023.11.15.567265.
 \[[Preprint](https://www.biorxiv.org/content/10.1101/2023.11.15.567265v1)\]
 
@@ -13,10 +20,7 @@ toc: true
 \[[Preprint](https://www.biorxiv.org/content/10.1101/2023.10.17.562748v1)\]
 \[[Zenodo Dataset](https://zenodo.org/records/10011336)\]
 
-* Verma, A. R., Ray, K. K., Bodick, M., Kinz-Thompson, C. D. & Gonzalez, Jr., R. L. (2023) *Increasing the accuracy of single-molecule data analysis using tMAVEN*. bioRxiv. DOI:10.1101/2023.08.15.553409.
-\[[Preprint](https://www.biorxiv.org/content/10.1101/2023.08.15.553409v1)\]
-
-* Ray, K.K., Kinz-Thompson, C.D., Fei, J., Wang, B., Lin, Q., Gonzalez, Jr., R.L. (2023) *Entropic control of the free energy landscape of an archetypal biomolecular machine*. Proceedings of the National Academy of Sciences 120, e2220591120. 
+* Ray, K.K., Kinz-Thompson, C.D., Fei, J., Wang, B., Lin, Q., Gonzalez, Jr., R.L. (2024) *Entropic control of the free energy landscape of an archetypal biomolecular machine*. Proceedings of the National Academy of Sciences 120, e2220591120. DOI:10.1073/pnas.2220591120.
 \[[Link](https://www.pnas.org/doi/10.1073/pnas.2220591120)\]
 \[[Preprint](https://www.biorxiv.org/content/10.1101/2022.10.03.510626v2)\]
 

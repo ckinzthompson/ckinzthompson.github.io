@@ -132,10 +132,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#harp" id="toc-harp" class="nav-link active" data-scroll-target="#harp">HARP</a></li>
+  <li><a href="#released" id="toc-released" class="nav-link active" data-scroll-target="#released">Released</a>
+  <ul class="collapse">
+  <li><a href="#harp" id="toc-harp" class="nav-link" data-scroll-target="#harp">HARP</a></li>
   <li><a href="#tmaven" id="toc-tmaven" class="nav-link" data-scroll-target="#tmaven">tMAVEN</a></li>
   <li><a href="#biasd" id="toc-biasd" class="nav-link" data-scroll-target="#biasd">BIASD</a></li>
-  <li><a href="#vbscope" id="toc-vbscope" class="nav-link" data-scroll-target="#vbscope">vbscope</a></li>
+  </ul></li>
+  <li><a href="#under-development" id="toc-under-development" class="nav-link" data-scroll-target="#under-development">Under Development</a>
+  <ul class="collapse">
+  <li><a href="#qcquant" id="toc-qcquant" class="nav-link" data-scroll-target="#qcquant">qcquant</a></li>
+  <li><a href="#removecysteines" id="toc-removecysteines" class="nav-link" data-scroll-target="#removecysteines">removecysteines</a></li>
+  <li><a href="#highfret" id="toc-highfret" class="nav-link" data-scroll-target="#highfret">highFRET</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -160,8 +168,10 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 <p>We’re committed to free and open source software. Primarily, we use Python/Arduino/C to develop solutions to our experimental and analysis problems. Interested in collaborating? Please, get in touch!</p>
-<section id="harp" class="level1">
-<h1>HARP</h1>
+<section id="released" class="level1">
+<h1>Released</h1>
+<section id="harp" class="level2">
+<h2 class="anchored" data-anchor-id="harp">HARP</h2>
 <div>
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
@@ -180,8 +190,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </div>
 </section>
-<section id="tmaven" class="level1">
-<h1>tMAVEN</h1>
+<section id="tmaven" class="level2">
+<h2 class="anchored" data-anchor-id="tmaven">tMAVEN</h2>
 <div>
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
@@ -200,8 +210,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </div>
 </section>
-<section id="biasd" class="level1">
-<h1>BIASD</h1>
+<section id="biasd" class="level2">
+<h2 class="anchored" data-anchor-id="biasd">BIASD</h2>
 <div>
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
@@ -220,25 +230,66 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </div>
 </section>
-<section id="vbscope" class="level1">
-<h1>vbscope</h1>
+</section>
+<section id="under-development" class="level1">
+<h1>Under Development</h1>
+<section id="qcquant" class="level2">
+<h2 class="anchored" data-anchor-id="qcquant">qcquant</h2>
 <div>
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img src="./images/michael-dziedzic-0XkLAIrknco-unsplash.jpg" class="img-fluid"></p>
+<p><img src="https://github.com/ckinzthompson/qcquant/raw/main/example_data/math_model.png" class="img-fluid"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 66.7%;justify-content: center;">
-<p>vbscope is archived software from the <a href="http://www.columbia.edu/cu/chemistry/groups/gonzalez/index.html">Gonzalez lab</a>. for analyzing single-molecule localization microscopy data.</p>
+<p><code>qcquant</code> is software for the quantitative analysis of chemotaxis plate assays using the growth-expansion model.</p>
 </div>
 </div>
 </div>
 <ul>
-<li>See the code on <a href="https://github.com/GonzalezBiophysicsLab/vbscope-paper">GitHub</a></li>
+<li>See the code on <a href="https://github.com/ckinzthompson/qcquant">GitHub</a></li>
+</ul>
+</div>
+</section>
+<section id="removecysteines" class="level2">
+<h2 class="anchored" data-anchor-id="removecysteines">removecysteines</h2>
+<div>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="https://raw.githubusercontent.com/ckinzthompson/removecysteines/main/docs/mRuby3_pca_esm2_t33_650M_UR50D.png" class="img-fluid"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 66.7%;justify-content: center;">
+<p><code>removecysteines</code> is software that uses a masked large language model (ESM2) to engineer out cysteine residues from protein sequences.</p>
+</div>
+</div>
+</div>
+<ul>
+<li>See the code on <a href="https://github.com/ckinzthompson/removecysteines">GitHub</a></li>
+<li>Run the code on Google Colab. <a href="https://colab.research.google.com/github/ckinzthompson/removecysteines/blob/main/remove_cysteines.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a></li>
+</ul>
+</div>
+</section>
+<section id="highfret" class="level2">
+<h2 class="anchored" data-anchor-id="highfret">highFRET</h2>
+<div>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="https://private-user-images.githubusercontent.com/17210418/330644902-25c02463-cfd7-4281-8973-8f6c2d007b08.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTU4Nzk5MzIsIm5iZiI6MTcxNTg3OTYzMiwicGF0aCI6Ii8xNzIxMDQxOC8zMzA2NDQ5MDItMjVjMDI0NjMtY2ZkNy00MjgxLTg5NzMtOGY2YzJkMDA3YjA4LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA1MTYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwNTE2VDE3MTM1MlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWYyNjYzNGZjZWM3MzcyYTkyZDAwMWU3YmI0NjRmMzExNjhkMmQ4OWMzZGIxZTYxNmE2Njg0ZDdjZDBmMTg2NzkmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.PQcUWwQYVyTjWvoSNAA2jJ39BiAZXSKWLKwD9F4GQR8" class="img-fluid"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 66.7%;justify-content: center;">
+<p><code>highfret</code> is software for analyzing single-molecule fluorescence microscopy data; specially for two-color smFRET experiments. It is currently under development.</p>
+</div>
+</div>
+</div>
+<ul>
+<li>See the code on <a href="https://github.com/ckinzthompson/highfret">GitHub</a></li>
 </ul>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

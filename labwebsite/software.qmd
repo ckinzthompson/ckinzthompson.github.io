@@ -5,9 +5,10 @@ toc: true
 
 We're committed to free and open source software. Primarily, we use Python/Arduino/C to develop solutions to our experimental and analysis problems. Interested in collaborating? Please, get in touch!
 
-# HARP
-:::: {}
+# Released
 
+## HARP
+:::: {}
 
 ::: {layout="[ 66,33 ]"}
 ![](./images/harp.png)
@@ -20,13 +21,11 @@ Hierarchical Atomic Resolution Perception (HARP) is software for assessing cryoE
 * Visit the [HARP website](https://bayes-shape-calc.github.io/HARP/)
 * See the code on [GitHub](https://github.com/bayes-shape-calc/HARP)
 
-
 ::::
 
 
 
-
-# tMAVEN
+## tMAVEN
 :::: {}
 ::: {layout="[ 50,50 ]"}
 ![](./images/tmaven_screenshot.png)
@@ -42,7 +41,7 @@ time-series Modeling, Analysis, and Visualization ENvironment (tMAVEN) is softwa
 
 
 
-# BIASD
+## BIASD
 
 :::: {}
 ::: {layout="[50,100]"}
@@ -57,20 +56,49 @@ Bayesian Inference for the Analysis of Sub-temporal-resolution Data (BIASD) is a
 
 ::::
 
+# Under Development
 
-# vbscope
+
+## qcquant
 :::: {}
 
-
 ::: {layout="[ 50,100 ]"}
-![](./images/michael-dziedzic-0XkLAIrknco-unsplash.jpg)
+![](https://github.com/ckinzthompson/qcquant/raw/main/example_data/math_model.png)
 
-vbscope is archived software from the [Gonzalez lab](http://www.columbia.edu/cu/chemistry/groups/gonzalez/index.html). for analyzing single-molecule localization microscopy data.
+`qcquant` is software for the quantitative analysis of chemotaxis plate assays using the growth-expansion model.
 
 :::
 
-* See the code on [GitHub](https://github.com/GonzalezBiophysicsLab/vbscope-paper)
-
+* See the code on [GitHub](https://github.com/ckinzthompson/qcquant)
 
 ::::
+
+## removecysteines
+:::: {}
+
+::: {layout="[ 50,100 ]"}
+![](https://raw.githubusercontent.com/ckinzthompson/removecysteines/main/docs/mRuby3_pca_esm2_t33_650M_UR50D.png)
+
+`removecysteines` is software that uses a masked large language model (ESM2) to engineer out cysteine residues from protein sequences.
+
+:::
+
+* See the code on [GitHub](https://github.com/ckinzthompson/removecysteines)
+* Run the code on Google Colab. <a href="https://colab.research.google.com/github/ckinzthompson/removecysteines/blob/main/remove_cysteines.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+::::
+
+## highFRET
+:::: {}
+
+::: {layout="[ 50,100 ]"}
+![](https://private-user-images.githubusercontent.com/17210418/330644902-25c02463-cfd7-4281-8973-8f6c2d007b08.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTU4Nzk5MzIsIm5iZiI6MTcxNTg3OTYzMiwicGF0aCI6Ii8xNzIxMDQxOC8zMzA2NDQ5MDItMjVjMDI0NjMtY2ZkNy00MjgxLTg5NzMtOGY2YzJkMDA3YjA4LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA1MTYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwNTE2VDE3MTM1MlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWYyNjYzNGZjZWM3MzcyYTkyZDAwMWU3YmI0NjRmMzExNjhkMmQ4OWMzZGIxZTYxNmE2Njg0ZDdjZDBmMTg2NzkmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.PQcUWwQYVyTjWvoSNAA2jJ39BiAZXSKWLKwD9F4GQR8)
+
+`highfret` is software for analyzing single-molecule fluorescence microscopy data; specially for two-color smFRET experiments. It is currently under development.
+
+:::
+
+* See the code on [GitHub](https://github.com/ckinzthompson/highfret)
+
+::::
+
 
