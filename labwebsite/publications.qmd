@@ -6,6 +6,9 @@ toc: true
 
 # 2020 - Current
 
+* Latorraca, N.R., Sabaat, S., Habrian, C.H., Bleier, J., Stanley, C., Kinz-Thompson, C.D., Marqusee, S., Isacoff, E.Y. (2025) *Domain Coupling in Activation of a Family C GPCR*. Nature Chemical Biology. DOI:10.1038/s41589-025-01895-3.
+\[[Link](https://www.nature.com/articles/s41589-025-01895-3)\]
+
 * Ide, N.A., Gentry, R.C., Rudbach, M.A., Yoo, K., Velez, P.K., Comunale, V.M., Hartwick, E.W., Kinz-Thompson, C.D., Gonzalez Jr, R.L., Aitken, C.E., (2024) *A dynamic compositional equilibrium governs mRNA recognition by eIF3.* bioRxiv. DOI:10.1101/2024.04.25.581977
 \[[Preprint](https://www.biorxiv.org/content/10.1101/2024.04.25.581977v1)\]
 

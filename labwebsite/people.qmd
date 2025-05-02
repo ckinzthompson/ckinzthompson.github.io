@@ -95,20 +95,6 @@ Christa Murphy
 
 
 :::: {layout="[ 35, 65 ]"}
-![](./images/ppl/zhutao_microscope.jpg)
-
-::: {center}
-Zhutao Sheng
-
-[![](./images/envelope-regular.svg){width=0.25in}](mailto:zhutao.sheng@rutgers.edu)
-<!-- Start: Fall 2022  -->
-<!-- End: Current -->
-:::
-::::
-
-
-
-:::: {layout="[ 35, 65 ]"}
 ![](./images/ppl/vaishnavi_microscope.jpg)
 
 ::: {center}
@@ -128,19 +114,6 @@ Vaishnavi Shesham
 ![](./images/ppl/blank1.jpg)
 
 ::: {center}
-Karl Gaiser
-
-[![](./images/envelope-regular.svg){width=0.25in}](mailto:kcg5@njit.edu)
-<!-- Start: Spring 2023  -->
-<!-- End: Current -->
-:::
-::::
-
-
-:::: {layout="[ 35, 65 ]"}
-![](./images/ppl/blank1.jpg)
-
-::: {center}
 Katrina Mejia
 
 NSF GS-LSAMP Scholar
@@ -151,50 +124,18 @@ NSF GS-LSAMP Scholar
 :::
 ::::
 
-:::: {layout="[ 35, 65 ]"}
-![](./images/ppl/jordi_microscope.jpg)
-
-::: {center}
-Jordania (Jordi) Urquizo
-
-McNair Scholar
-
-[![](./images/linkedin.svg){width=0.25in}](https://www.linkedin.com/in/jordania-urquizo/)
-[![](./images/envelope-regular.svg){width=0.25in}](mailto:jju20@scarletmail.rutgers.edu)
-
-<!-- Start: Spring 2024  -->
-<!-- End: Current -->
-:::
-::::
-
-
-:::: {layout="[ 35, 65 ]"}
-![](./images/ppl/blank1.jpg)
-
-::: {center}
-Brigitte Valladares
-
-NSF GS-LSAMP B2B Scholar
-
-[![](./images/envelope-regular.svg){width=0.25in}](mailto:Bsvalladares@students.pccc.edu)
-
-<!-- Start: Summer 2024  -->
-<!-- End: Current -->
-:::
-::::
-
-	
-
 
 ### Past Members
 
-
 ###### Graduate Students
-* Yuntao Qiu, Spring 2021 - Summer 2022, yq123@scarletmail.rutgers.edu
+* Zhutao Sheng, Fall 2022 - Fall 2024, zhutao.sheng@rutgers.edu
+* Yuntao Qiu, Spring 2021 - Summer 2022, yq123@scarletmail.rutgers.edu, [CUNY Graduate Center Biochemistry Program]
 
 ###### Undergraduate Students
+* Karl Gaiser, Spring 2023-Spring 2025, kcg5@njit.edu, [Tufts University Chemistry Department]
+* Jordania (Jordi) Urquizo, Spring 2024, jju20@scarletmail.rutgers.edu, McNair Scholar
+* Brigitte Valladares, Summer 2024, Bsvalladares@students.pccc.edu, NSF GS-LSAMP B2B Scholar
 * Kaiyang Zhu, Summer 2023, kaiyang.zhu@emory.edu
-
 * Wesley Chan, Spring 2022 - Summer 2022, wc518@scarletmail.rutgers.edu
 
 ###### High School Students
