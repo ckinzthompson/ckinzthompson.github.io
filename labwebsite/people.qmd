@@ -124,6 +124,48 @@ NSF GS-LSAMP Scholar
 :::
 ::::
 
+:::: {layout="[ 35, 65 ]"}
+![](./images/ppl/blank1.jpg)
+
+::: {center}
+Jessica Heaney
+
+<!-- Start: Summer 2025  -->
+<!-- End: Current -->
+:::
+::::
+
+:::: {layout="[ 35, 65 ]"}
+![](./images/ppl/blank1.jpg)
+
+::: {center}
+Olena Hryvnak
+
+<!-- Start: Summer 2025  -->
+<!-- End: Current -->
+:::
+::::
+
+:::: {layout="[ 35, 65 ]"}
+![](./images/ppl/blank1.jpg)
+
+::: {center}
+Jordania (Jordi) Urquizo
+
+McNair Scholar
+
+:::
+::::
+
+:::: {layout="[ 35, 65 ]"}
+![](./images/ppl/blank1.jpg)
+
+::: {center}
+Karl Gaiser
+
+:::
+::::
+
 
 ### Past Members
 
@@ -132,8 +174,8 @@ NSF GS-LSAMP Scholar
 * Yuntao Qiu, Spring 2021 - Summer 2022, yq123@scarletmail.rutgers.edu, [CUNY Graduate Center Biochemistry Program]
 
 ###### Undergraduate Students
-* Karl Gaiser, Spring 2023-Spring 2025, kcg5@njit.edu, [Tufts University Chemistry Department]
-* Jordania (Jordi) Urquizo, Spring 2024, jju20@scarletmail.rutgers.edu, McNair Scholar
+<!--* Karl Gaiser, Spring 2023-Summer 2025, kcg5@njit.edu, [Tufts University Chemistry Department] -->
+<!-- * Jordania (Jordi) Urquizo, Spring 2024 & Summer 2025, jju20@scarletmail.rutgers.edu, McNair Scholar -->
 * Brigitte Valladares, Summer 2024, Bsvalladares@students.pccc.edu, NSF GS-LSAMP B2B Scholar
 * Kaiyang Zhu, Summer 2023, kaiyang.zhu@emory.edu
 * Wesley Chan, Spring 2022 - Summer 2022, wc518@scarletmail.rutgers.edu
