@@ -5,6 +5,8 @@ toc: true
 
 Meet the Labbies and Crabbies
 
+![Summer 2025](./images/IMG_3240.jpg)
+
 
 ### Principal Investigator
 :::: {layout="[ 35, 65 ]"}
@@ -94,19 +96,6 @@ Christa Murphy
 ::::
 
 
-:::: {layout="[ 35, 65 ]"}
-![](./images/ppl/vaishnavi_microscope.jpg)
-
-::: {center}
-Vaishnavi Shesham
-
-[![](./images/envelope-regular.svg){width=0.25in}](mailto:vs803@scarletmail.rutgers.edu)
-<!-- Start: Fall 2022  -->
-<!-- End: Current -->
-:::
-::::
-
-
 
 ### Undergraduate Researchers
 
@@ -135,54 +124,25 @@ Jessica Heaney
 :::
 ::::
 
-:::: {layout="[ 35, 65 ]"}
-![](./images/ppl/blank1.jpg)
-
-::: {center}
-Olena Hryvnak
-
-<!-- Start: Summer 2025  -->
-<!-- End: Current -->
-:::
-::::
-
-:::: {layout="[ 35, 65 ]"}
-![](./images/ppl/blank1.jpg)
-
-::: {center}
-Jordania (Jordi) Urquizo
-
-McNair Scholar
-
-:::
-::::
-
-:::: {layout="[ 35, 65 ]"}
-![](./images/ppl/blank1.jpg)
-
-::: {center}
-Karl Gaiser
-
-:::
-::::
 
 
 ### Past Members
 
 ###### Graduate Students
+* Vaishnavi Shesham, Fall 2022 - Summer 2025,  vs803@scarletmail.rutgers.edu
 * Zhutao Sheng, Fall 2022 - Fall 2024, zhutao.sheng@rutgers.edu
 * Yuntao Qiu, Spring 2021 - Summer 2022, yq123@scarletmail.rutgers.edu, [CUNY Graduate Center Biochemistry Program]
 
 ###### Undergraduate Students
-<!--* Karl Gaiser, Spring 2023-Summer 2025, kcg5@njit.edu, [Tufts University Chemistry Department] -->
-<!-- * Jordania (Jordi) Urquizo, Spring 2024 & Summer 2025, jju20@scarletmail.rutgers.edu, McNair Scholar -->
+* Olena Hryvnak, Summe 2025, oh87@scarletmail.rutgers.edu, [Rutgers New Brunswick]
+* Karl Gaiser, Spring 2023-Summer 2025, kcg5@njit.edu, [Tufts University Chemistry Department]
+* Jordania (Jordi) Urquizo, Spring 2024 & Summer 2025, jju20@scarletmail.rutgers.edu, McNair Scholar
 * Brigitte Valladares, Summer 2024, Bsvalladares@students.pccc.edu, NSF GS-LSAMP B2B Scholar
 * Kaiyang Zhu, Summer 2023, kaiyang.zhu@emory.edu
 * Wesley Chan, Spring 2022 - Summer 2022, wc518@scarletmail.rutgers.edu
 
 ###### High School Students
 * Sasche Joseph, Summer 2022, ACS Project SEED Student
-
 
 
 ### Pets
