@@ -6,7 +6,7 @@ toc: true
 
 # 2020 - Current
 
-* Michael, N., Huang, B.Y., Ray, K., Kinz-Thompson, C.D., Gonzalez Jr., R.L. (2025). *A cascade of structural rearrangements positions peptide release factor 2 for polypeptide hydrolysis on the ribosome* Proc. Natl. Acad. Sci. USA. 122(46), e2509408122. DOI:10.1073/pnas.2509408122
+* Michael, N., Huang, B.Y., Ray, K., Kinz-Thompson, C.D., Gonzalez Jr., R.L. (2025). *A cascade of structural rearrangements positions peptide release factor 2 for polypeptide hydrolysis on the ribosome* Proceedings of the National Academy of Sciences. 122(46), e2509408122. DOI:10.1073/pnas.2509408122
 \[[Link](https://pnas.org/doi/10.1073/pnas.2509408122)]
 
 * Latorraca, N.R., Sabaat, S., Habrian, C.H., Bleier, J., Stanley, C., Kinz-Thompson, C.D., Marqusee S., Isacoff, E.Y (2025). *Domain coupling in activation of a family C GPCR.* Nature Chemical Biology. DOI:10.1038/s41589-025-01895-3.
