@@ -116,9 +116,9 @@ Jessica Heaney
 
 ::: {center}
 Jared De La Rosa 
-
+<!-- Job: SGS (Société Générale de Surveillance, SA) -->
 <!-- Start: Spring 2026  -->
-<!-- End: Current -->
+<!-- End: Summer 2026 -->
 :::
 ::::
 
