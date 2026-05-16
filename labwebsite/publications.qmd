@@ -9,6 +9,7 @@ toc: true
 * Dai, T., Qiu, Y., Leon Hernandez, K.M., Chan, W., Mejia, K., Nemeria, N., Kinz-Thompson, C.D. (2026) *Modular assembly of dynamic polymer networks from heteroaffinity cross-links to multivalent proteins.*  Angewandte Chemie International Edition, 00:e26058. Chosen as a "Very Important Paper" by the journal.
 \[[Link](https://onlinelibrary.wiley.com/doi/10.1002/ange.202526058)]
 \[[Preprint](https://chemrxiv.org/engage/chemrxiv/article-details/691c9fe3a10c9f5ca159003e)]
+\[[Outside Back Cover](https://onlinelibrary.wiley.com/doi/abs/10.1002/anie.2026-m0303081000)]
 
 
 * Kinz-Thompson, C.D., Lopez Redondo, M., Mulligan C., Sauer, D.B., Marden, J.J., Song, J. Tajkhorshid, E., Hunt, J.F., Stokes, D.L., Mindell, J.A., Wang, D.N, Gonzalez, Jr., R.L. (2026) *Elevator mechanism dynamics in a sodium-coupled dicarboxylate transporter*, Proceedings of the National academy of Sciences. 123(2), e2500723123. DOI: 10.1073/pnas.2500723123.
