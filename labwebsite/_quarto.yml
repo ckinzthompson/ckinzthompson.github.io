@@ -20,8 +20,8 @@ website:
       - text: Other
         menu:
           - software.qmd
-          - text: Posts
-            file: blog.qmd
+          # - text: Posts
+          #   file: blog.qmd
           - resources.qmd
       
       # - publications.qmd
