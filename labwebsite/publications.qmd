@@ -6,7 +6,7 @@ toc: true
 
 # 2020 - Current
 
-*Kinz-Thompson, C. D., Ray, K. K. (2026) *Biomolecular Resolution as a Quantification of Structural Information Content*. bioRxiv, DOI:10.1101/2023.10.17.562748.
+* Kinz-Thompson, C. D., Ray, K. K. (2026) *Biomolecular Resolution as a Quantification of Structural Information Content*. bioRxiv, DOI:10.1101/2023.10.17.562748.
 \[[Preprint v2](https://www.biorxiv.org/content/10.1101/2023.10.17.562748v2)\]
 \[[Preprint v1](https://www.biorxiv.org/content/10.1101/2023.10.17.562748v1)\]
 \[[Zenodo Dataset](https://zenodo.org/records/21536966)\]
