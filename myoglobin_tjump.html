@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Myoglobin relaxation experiment</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f0f5f7;color:#203746;font:16px/1.5 system-ui,sans-serif}main{max-width:1260px;margin:auto;padding:24px}h1{font-size:28px;margin:0 0 4px}h2{font-size:19px;margin:0 0 8px}p{margin:6px 0 14px}.muted{color:#526777}.views{display:grid;grid-template-columns:340px 1fr;gap:18px}.card{background:#fff;border-radius:16px;padding:18px}.plots{display:grid;gap:18px}.cuvette{width:100%;height:430px}.plot{width:100%;height:225px;display:block}.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:14px 0}button,select,input{font:inherit}button,select{padding:8px 13px;border:1px solid #bacbd4;border-radius:8px;background:white;color:#203746;cursor:pointer}button.primary,button[aria-pressed=true]{background:#203746;color:white}button:disabled{opacity:.45;cursor:default}input[type=range]{width:100%;accent-color:#3678b9}.legend{font-size:14px}.native{color:#148880}.denatured{color:#ba6128}#status{font-weight:600}#stats{font-variant-numeric:tabular-nums}details{margin:14px 0}summary{cursor:pointer;font-weight:600}#teacher{border:2px solid #a9c5d4}.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}label{display:block}label input{width:100%;padding:6px;border:1px solid #b5c5d0;border-radius:5px}#error{color:#a12929}#rateTable{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:right;padding:5px;border-bottom:1px solid #dce5e9}th:first-child,td:first-child{text-align:left}.sr{position:absolute;left:-10000px}@media(max-width:850px){.views{grid-template-columns:1fr}.cuvette{height:310px}}@media(max-width:480px){main{padding:12px}h1{font-size:23px}.card{padding:12px}.fields{grid-template-columns:1fr}.plot{height:235px}}
+#jump{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-variant-numeric:tabular-nums;white-space:pre;flex:0 1 46ch;width:46ch;max-width:100%;min-width:0}
+</style></head><body><main>
+<h1>Myoglobin temperature-jump experiment</h1><p class="muted">Change the solution temperature. Watch the protein population respond. Record CD at one fixed wavelength.</p>
+
+<div class="bar"><label for="jump">Jump / steady reference</label><select id="jump"></select><button id="play" class="primary">Start mixing</button><button id="record" class="primary" disabled>Record CD</button><label for="speed">Playback</label><select id="speed"><option value="1">1×</option><option value="5">5×</option><option value="15" selected>15×</option></select></div>
+<div class="views"><section class="card"><h2>Inside the quartz cuvette</h2><p class="muted">Native N ⇌ Denatured D</p><canvas id="cuvette" class="cuvette" role="img" aria-label="Cartoon proteins in a cuvette"></canvas><p class="legend"><span class="native">Native: compact, helix-rich</span><br><span class="denatured">Denatured: loose chain, less helicity</span></p><p class="legend" id="population"></p></section>
+<div class="plots"><section class="card"><h2>Solution temperature</h2><canvas id="temperature" class="plot" role="img" aria-label="Solution temperature versus time relative to recording start"></canvas><p id="timingInfo" class="legend muted"></p></section><section class="card"><h2 id="cdTitle">CD at 222 nm</h2><canvas id="cd" class="plot" role="img" aria-label="CD signal versus time relative to recording start"></canvas><p class="legend muted">Noisy dots are the CD signal at 222 nm. Data are added every 1 s. Shaded region is the mixing time. Only data after the start of the recording are exported.</p></section></div></div>
+<p id="status" aria-live="polite"></p><p id="stats"></p><p id="sampleInfo" class="legend muted"></p>
+<div class="bar"><button id="downloadAll" class="primary" disabled>Download all recorded data CSV</button></div>
+<p id="downloadStatus" class="legend" aria-live="polite"></p>
+<details><summary>What is being measured?</summary><p>At the selected wavelength near 220 nm, the native, helix-rich protein has a more negative CD signal. Unfolding makes the signal less negative; refolding reverses the direction. When the temperature is changed, the population begins to approach its new equilibrium.</p><p>For N ⇌ D, once the temperature has stabilized, k<sub>relax</sub> = k<sub>u</sub> + k<sub>f</sub> and CD(t) = A exp(−k<sub>relax</sub>t) + B. Time in the downloaded CSV begins when the recording phase begins. </p></details>
+</main><script id="configuration" type="application/json">{"title": "Myoglobin temperature-jump experiment", "initialTemperature_C": 60, "targets_C": [90, 74, 86, 78, 88, 80, 92, 82, 94, 84], "rampFraction": 0.5, "recordingDuration_s": 240, "sampleInterval_s": 1, "wavelength_nm": 222, "nativeEllipticity_deg_cm2_dmol": -4000000, "denaturedEllipticity_deg_cm2_dmol": -300000, "concentration_M": 5e-06, "pathlength_cm": 1, "noiseSD_mdeg": 6, "seed": 666, "stir_s": 10, "referenceDuration_s": 240, "finalTemperature_C": 100, "unfolding": {"deltaH_kcal_mol": 40.4, "deltaS_cal_mol_K": 47.8}, "folding": {"deltaH_kcal_mol": -56.2, "deltaS_cal_mol_K": -222.1}, "attemptFrequency_s": 1000000000000, "rateJitter_percent": 50, "instructor": false}</script><script>/* Reversible packing for casual source inspection, not encryption or secrecy. */
+(function(root){
+'use strict';
+const paths=[['unfolding','deltaH_kcal_mol'],['unfolding','deltaS_cal_mol_K'],['folding','deltaH_kcal_mol'],['folding','deltaS_cal_mol_K'],['attemptFrequency_s']];
+const hex=bytes=>Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');
+function bytes(s){if(typeof s!=='string'||!/^([0-9a-f]{2})+$/i.test(s))throw Error('Invalid packed configuration.');return Uint8Array.from(s.match(/../g),b=>parseInt(b,16));}
+function checksum(a){let n=2166136261;for(const b of a)n=Math.imul(n^b,16777619)>>>0;return n.toString(16).padStart(8,'0');}
+function transform(a,key){const out=new Uint8Array(a.length);let x=parseInt(key.slice(0,8),16)>>>0;x=x||0x9e3779b9;for(let i=0;i<a.length;i++){x^=x<<13;x^=x>>>17;x^=x<<5;x>>>=0;out[i]=a[i]^(x&255);}return out;}
+function decode(input){const c=structuredClone(input),p=c.activationModel;if(!p)return c;if(p.format!=='packed-v1'||typeof p.key!=='string'||!/^[0-9a-f]{16}$/i.test(p.key))throw Error('Unsupported packed configuration.');const a=transform(bytes(p.payload),p.key);if(a.length!==paths.length*8||checksum(a)!==p.check)throw Error('Packed configuration is damaged.');const view=new DataView(a.buffer);c.unfolding={};c.folding={};paths.forEach((path,i)=>{const parent=path.length===2?c[path[0]]:c;parent[path.at(-1)]=view.getFloat64(i*8,true);});delete c.activationModel;return c;}
+function encode(input){const c=decode(input),a=new Uint8Array(paths.length*8),view=new DataView(a.buffer);paths.forEach((path,i)=>{const v=path.reduce((o,k)=>o[k],c);if(!Number.isFinite(v))throw Error('Invalid activation parameter.');view.setFloat64(i*8,v,true);});const keyBytes=new Uint8Array(8);if(root.crypto&&root.crypto.getRandomValues)root.crypto.getRandomValues(keyBytes);else for(let i=0;i<8;i++)keyBytes[i]=Math.floor(Math.random()*256);const key=hex(keyBytes);delete c.unfolding;delete c.folding;delete c.attemptFrequency_s;c.activationModel={format:'packed-v1',key,payload:hex(transform(a,key)),check:checksum(a)};return c;}
+const api={encode,decode};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.ConfigCodec=api;
+})(typeof window!=='undefined'?window:globalThis);
+</script><script>/* Physical model, independent of animation and browser. Energy conventions match the handout. */
+(function(root){
+'use strict';
+const R=0.00198720425864083; // kcal mol^-1 K^-1
+function validate(c){
+ // Import earlier configurations while enforcing the current experiment timing.
+ if(c.finalTemperature_C===undefined)c.finalTemperature_C=94;
+ if(!Number.isFinite(c.finalTemperature_C)||c.finalTemperature_C<=-273.15)throw Error("Invalid final reference temperature.");
+ if(c.stir_s===undefined)c.stir_s=30;
+ c.referenceDuration_s=240;delete c.heatingStir_s;delete c.coolingStir_s;
+ const positive=['stir_s','attemptFrequency_s','recordingDuration_s','sampleInterval_s','concentration_M','pathlength_cm'];
+ for(const key of positive)if(!Number.isFinite(c[key])||c[key]<=0)throw Error(key+' must be positive.');
+ if(c.sampleInterval_s!==1||c.recordingDuration_s!==240)throw Error('This lab uses 240 seconds and 1-second sampling.');
+ if(!Array.isArray(c.targets_C)||!c.targets_C.length||!c.targets_C.every(t=>Number.isFinite(t)&&t>-273.15))throw Error('Provide a nonempty list of valid target temperatures.');
+ if(!Number.isFinite(c.initialTemperature_C)||c.initialTemperature_C<=-273.15)throw Error('Invalid initial temperature.');
+ if(!Number.isFinite(c.rampFraction)||c.rampFraction<=0||c.rampFraction>1)throw Error('rampFraction must be greater than zero and at most one.');
+ if(c.rateJitter_percent===undefined)c.rateJitter_percent=20;
+ if(!Number.isFinite(c.rateJitter_percent)||c.rateJitter_percent<0||c.rateJitter_percent>=100)throw Error('Rate jitter must be between 0 and less than 100 percent.');
+ if(!Number.isFinite(c.noiseSD_mdeg)||c.noiseSD_mdeg<0)throw Error('Noise must be nonnegative.');
+ for(const dir of ['unfolding','folding'])for(const key of ['deltaH_kcal_mol','deltaS_cal_mol_K'])if(!Number.isFinite(c[dir][key]))throw Error('Invalid activation parameter.');
+ for(const key of ['nativeEllipticity_deg_cm2_dmol','denaturedEllipticity_deg_cm2_dmol','wavelength_nm','seed'])if(!Number.isFinite(c[key]))throw Error('Invalid '+key);
+ if(c.nativeEllipticity_deg_cm2_dmol===c.denaturedEllipticity_deg_cm2_dmol)throw Error('Native and denatured CD must differ.');
+ // Reject unsupported numeric ranges before building a trace; do not silently cap rates.
+ for(const t of [c.initialTemperature_C,...c.targets_C,c.finalTemperature_C]){
+  const v=rates(c,t); if(!Number.isFinite(v.ku+v.kf)||v.ku+v.kf<=0||!Number.isFinite(v.tau))throw Error('Activation parameters produce rates outside the supported numerical range.');
+ }
+ return c;
+}
+function rates(c,temp,factors={ku:1,kf:1}){
+ const T=temp+273.15;
+ const logRate=d=>Math.log(c.attemptFrequency_s)+d.deltaS_cal_mol_K/(R*1000)-d.deltaH_kcal_mol/(R*T);
+ const lu=logRate(c.unfolding),lf=logRate(c.folding);
+ // Perturb each directional rate independently BEFORE calculating their sum or ratio.
+ const kuThermo=Math.exp(lu),kfThermo=Math.exp(lf);
+ const ku=kuThermo*factors.ku,kf=kfThermo*factors.kf;
+ const d=lu-lf+Math.log(factors.ku)-Math.log(factors.kf);const fN=d>0?Math.exp(-d)/(1+Math.exp(-d)):1/(1+Math.exp(d));
+ return {ku,kf,fN,tau:1/(ku+kf),logK:d,Keq:Math.exp(d),KeqThermo:Math.exp(lu-lf)};
+}
+function advance(f,c,temp,dt,factors){const r=rates(c,temp,factors);return r.fN+(f-r.fN)*Math.exp(-(r.ku+r.kf)*dt);}
+function theta(c,f){return c.denaturedEllipticity_deg_cm2_dmol+(c.nativeEllipticity_deg_cm2_dmol-c.denaturedEllipticity_deg_cm2_dmol)*f;}
+function rng(seed){let s=seed>>>0;return()=>{s=(s+0x6D2B79F5)>>>0;let t=Math.imul(s^(s>>>15),1|s);t^=t+Math.imul(t^(t>>>7),61|t);return ((t^(t>>>14))>>>0)/4294967296;};}
+function rateFactors(c,index){const random=rng(c.seed+18967+index*7919);const j=(c.rateJitter_percent??20)/100;return {ku:1-j+2*j*random(),kf:1-j+2*j*random()};}
+function gaussian(random){return Math.sqrt(-2*Math.log(Math.max(random(),1e-12)))*Math.cos(2*Math.PI*random());}
+function solutionTemperature(run,t){return run.startC+(run.targetC-run.startC)*Math.max(0,Math.min(1,t/run.ramp));}
+function simulate(c){
+ validate(c);let f=rates(c,c.initialTemperature_C).fN;const runs=[];const step=0.05;
+ const specs=[{targetC:c.initialTemperature_C,reference:true,label:`Low steady (${c.initialTemperature_C} C)`},
+ ...c.targets_C.map((targetC,j)=>({targetC,reference:false,label:`Jump ${j+1}: ${j?c.targets_C[j-1]:c.initialTemperature_C} -> ${targetC} C`})),
+ {targetC:c.finalTemperature_C,reference:true,label:`High steady (${c.finalTemperature_C} C)`}];
+ specs.forEach((spec,index)=>{
+  const {targetC,reference,label}=spec;
+  const startC=reference?targetC:(index===1?c.initialTemperature_C:c.targets_C[index-2]);
+  const factors=rateFactors(c,index);
+  if(reference)f=rates(c,targetC,factors).fN;
+  const duration=240;
+  const run={index,label,reference,duration,factors,startC,targetC,stir:c.stir_s,ramp:c.stir_s*c.rampFraction,end:c.stir_s+duration,initial:f,trace:[],observations:[],samples:[]};
+  const steps=Math.ceil(run.end/step);
+  for(let j=0;j<=steps;j++){
+   const t=Math.min(j*step,run.end),dt=j?t-run.trace[j-1].t:0;
+   if(j>0)f=advance(f,c,solutionTemperature(run,t-dt/2),dt,factors);
+   run.trace.push({t,temp:solutionTemperature(run,t),f,theta:theta(c,f)});
+  }
+  // One noisy observation per second over the ENTIRE display: baseline, mixing,
+  // and acquisition. Exported samples reference the identical displayed dots.
+  const random=rng(c.seed+index*1009);
+  function observe(t,recorded){
+   const v=at(run,t),cd=theta(c,v.f)*10*c.concentration_M*c.pathlength_cm+c.noiseSD_mdeg*gaussian(random);
+   const obs={t,jump:label,time_s:recorded?Math.round(t-run.stir):t-run.stir,cd_mdeg:cd};
+   run.observations.push(obs);if(recorded)run.samples.push(obs);
+  }
+  for(let t=-15;t<run.stir;t++)observe(t,false);
+  for(let second=0;second<duration;second++)observe(run.stir+second,true);
+
+  run.final=f;runs.push(run);
+ });return runs;
+}
+function at(run,t){if(t<=0)return {t,temp:run.startC,f:run.initial,theta:run.trace[0].theta};const pos=Math.min(t/0.05,run.trace.length-1),i=Math.floor(pos),a=run.trace[i],b=run.trace[Math.min(i+1,run.trace.length-1)],w=b.t===a.t?0:(Math.min(t,run.end)-a.t)/(b.t-a.t);return {t,temp:a.temp+(b.temp-a.temp)*w,f:a.f+(b.f-a.f)*w,theta:a.theta+(b.theta-a.theta)*w};}
+function csv(runs,counts=runs.map(r=>r.samples.length)){
+ const quote=s=>'"'+String(s).replace(/"/g,'""')+'"';
+ const header=['time_s',...runs.map(r=>quote(r.label+' CD (mdeg)'))].join(',');
+ const length=Math.max(0,...counts);
+ const rows=Array.from({length},(_,t)=>[t,...runs.map((r,i)=>t<counts[i]?r.samples[t].cd_mdeg.toPrecision(12):'')].join(','));
+ return header+'\n'+rows.join('\n')+(rows.length?'\n':'');
+}
+function axisRanges(c){
+ return {temperature:[60,100],cd:[-250,0],temperatureTicks:[60,65,70,75,80,85,90,95,100],cdTicks:[-250,-200,-150,-100,-50,0]};
+}
+
+const api={R,validate,rates,advance,theta,rng,rateFactors,gaussian,solutionTemperature,simulate,at,csv,axisRanges};
+if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.RelaxationModel=api;
+})(typeof window!=='undefined'?window:globalThis);
+</script><script>'use strict';
+const M=window.RelaxationModel;
+let config=window.ConfigCodec.decode(JSON.parse(document.getElementById('configuration').textContent)),runs,index=0,time=-15,playing=false,lastFrame=0,lastPhase='',molecules=[];
+let reached=[],acquired=[],recordingStarted=[],axes,needsRender=true;
+const $=id=>document.getElementById(id);
+function download(name,text,type='text/csv'){const url=URL.createObjectURL(new Blob([text],{type}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);}
+function initialise(){
+ runs=M.simulate(config);axes=M.axisRanges(config);index=0;time=-15;playing=false;reached=runs.map(()=>-15);acquired=runs.map(()=>0);recordingStarted=runs.map(()=>false);
+ $('jump').replaceChildren();runs.forEach((r,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${r.label} — not run`; $('jump').append(o);});
+ if($('jitterInfo'))$('jitterInfo').textContent=`Rates include independent ±${config.rateJitter_percent}% multipliers, fixed within each experiment. The truth-table export includes nominal rates and applied factors.`;
+ if($('timingInfo'))$('timingInfo').textContent=`Mixing for ${config.stir_s} s during a ${(config.stir_s*config.rampFraction).toFixed(2)} s long temperature jump. Followed by ${config.recordingDuration_s} s recording.`;
+ $('cdTitle').textContent=`CD at ${config.wavelength_nm} nm`;
+ $('sampleInfo').textContent=`Protein concentration: ${config.concentration_M.toExponential(4)} M · Pathlength: ${config.pathlength_cm} cm · Molar ellipticity is per mole of protein, not per residue.`;
+ $('downloadStatus').textContent='';lastPhase='';makeMolecules();updateUI();
+}
+function makeMolecules(){
+ const r=runs[index],random=M.rng(config.seed+30000+index);const n=80;
+ let state=Uint8Array.from({length:n},()=>random()<r.initial?1:0);molecules=[state];
+ for(let t=.25;t<=r.end+.001;t+=.25){
+  const v=M.rates(config,M.solutionTemperature(r,t-.125),r.factors);const change=-Math.expm1(-(v.ku+v.kf)*.25);
+  state=Uint8Array.from(state,f=>f?(random()>=(1-v.fN)*change?1:0):(random()<v.fN*change?1:0));molecules.push(state);
+ }
+}
+function collect(){const r=runs[index];reached[index]=Math.max(reached[index],time);acquired[index]=recordingStarted[index]?r.samples.filter(s=>s.t<=reached[index]+1e-8).length:0;}
+function phase(){const r=runs[index];if(time<0)return r.reference?'Steady reference — ready to mix':'Initial equilibrium — ready for the temperature jump';if(time<r.ramp)return r.reference?'Mixing at the steady reference temperature':'Mixing — the solution temperature is ramping';if(time<r.stir)return 'Mixing — the solution is at the target temperature';if(!recordingStarted[index])return 'Mixing complete — click Record CD (time zero)';if(time<r.end)return 'Recording CD — solution temperature is constant';return 'Acquisition complete';}
+function updateUI(){
+ const r=runs[index],v=M.at(r,time),stop=recordingStarted[index]?r.end:r.stir;
+ const ph=(!playing&&time>-15&&time<stop?"Paused — ":"")+phase();needsRender=true;
+ if(ph!==lastPhase){$('status').textContent=ph;lastPhase=ph;}
+ $('stats').textContent=`${r.label} · Recording time: ${(time-r.stir).toFixed(1)} s · Solution: ${v.temp.toFixed(1)} °C · Recorded: ${acquired[index]} / ${r.duration} points · Completed: ${runs.filter((r,i)=>acquired[i]===r.duration).length} / ${runs.length} runs`;
+ const waiting=reached[index]>=r.stir&&!recordingStarted[index];
+ const playLabel=playing?'Pause':reached[index]>=r.end?'Complete':time===-15?'Start mixing':'Resume';
+ if($('play').textContent!==playLabel)$('play').textContent=playLabel;
+ $('play').disabled=!playing&&(reached[index]>=r.end||waiting);
+ $('record').disabled=!waiting;
+ $('downloadAll').disabled=!acquired.some(Boolean);
+ runs.forEach((r,i)=>{
+  const status=acquired[i]===r.duration?'complete':acquired[i]?`${String(acquired[i]).padStart(3,' ')}/${r.duration} points`:reached[i]>-15?'in progress':'not run';
+  const label=`${r.label} — ${status}`,option=$('jump').children[i];
+  if(option.textContent!==label)option.textContent=label;
+ });
+}
+// Hidden fast-forward: Shift+X, outside editable fields.
+window.addEventListener('keydown',event=>{
+ if(!event.shiftKey||event.key.toLowerCase()!=='x'||event.repeat)return;
+ if(event.target&&['INPUT','TEXTAREA','SELECT'].includes(event.target.tagName))return;
+ event.preventDefault();
+ const speed=$('speed');
+ let fast=Array.from(speed.options).find(option=>option.value==='100');
+ if(fast){speed.value='15';fast.remove();}
+ else{fast=document.createElement('option');fast.value='100';fast.textContent='100×';speed.append(fast);speed.value='100';}
+});
+$('jump').addEventListener('change',()=>{index=Number($('jump').value);time=reached[index];playing=false;lastPhase='';makeMolecules();updateUI();});
+$('play').addEventListener('click',()=>{if($('play').disabled)return;if(!playing&&time<reached[index])time=reached[index];playing=!playing;lastFrame=0;updateUI();});
+$('record').addEventListener('click',()=>{if(reached[index]<runs[index].stir||recordingStarted[index])return;time=runs[index].stir;recordingStarted[index]=true;playing=true;collect();updateUI();});
+$('downloadAll').addEventListener('click',()=>{download('myoglobin_recorded_runs.csv',M.csv(runs,acquired));$('downloadStatus').textContent=`Downloaded one shared time axis and ${runs.length} CD columns: ${acquired.reduce((a,b)=>a+b,0)} acquired measurements across ${acquired.filter(Boolean).length} runs. Unrecorded cells are blank.`;});
+function canvas(id){const c=$(id),box=c.getBoundingClientRect(),dpr=window.devicePixelRatio||1,w=box.width,h=box.height;if(c.width!==Math.round(w*dpr)||c.height!==Math.round(h*dpr)){c.width=Math.round(w*dpr);c.height=Math.round(h*dpr);}const g=c.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,w,h);return {g,w,h};}
+function text(g,s,x,y,color='#526777',size=12,align='left'){g.fillStyle=color;g.font=`${size}px system-ui`;g.textAlign=align;g.fillText(s,x,y);}
+function cuvette(){
+ const {g,w,h}=canvas('cuvette'),left=w*.14,right=w*.86,top=12,bottom=h-48;
+ g.fillStyle='#e1f1f4';g.fillRect(left,top,right-left,bottom-top);g.strokeStyle='#86b6c3';g.lineWidth=3;g.strokeRect(left,top,right-left,bottom-top);
+ g.fillStyle='rgba(49,119,188,.12)';g.fillRect(0,h*.48,w,15);g.strokeStyle='#3678b9';g.lineWidth=2;g.beginPath();g.moveTo(0,h*.48+7);g.lineTo(w,h*.48+7);g.stroke();
+ const states=molecules[Math.max(0,Math.min(molecules.length-1,Math.floor(Math.max(time,0)/.25)))];let count=0;
+ states.forEach((f,i)=>{count+=f;const x=left+(i%8+.5)*(right-left)/8,y=top+(Math.floor(i/8)+.5)*(bottom-top)/10;g.strokeStyle=f?'#148880':'#d47c40';g.lineWidth=2;g.beginPath();
+  for(let q=0;q<=24;q++){const a=q*Math.PI*2/24;const dx=f?7*Math.cos(a)+2*Math.cos(3*a):(q/24-.5)*22;const dy=f?6*Math.sin(2*a):5*Math.sin(a*2+i)+2*Math.cos(a*3);const xx=x+dx+Math.sin(time*.2+i)*1.5,yy=y+dy+Math.cos(time*.18+i)*1.5;if(q)g.lineTo(xx,yy);else g.moveTo(xx,yy);}g.stroke();
+ });
+ text(g,`${config.wavelength_nm} nm probe → CD detector`,w/2,h-18,'#3678b9',13,'center');$('population').textContent=`Cartoon sample: ${count} / 80 native. Individual molecules exchange between states.`;
+}
+function plot(id,isTemperature){
+ const {g,w,h}=canvas(id),r=runs[index],left=isTemperature?50:64,top=25,bottom=h-50,right=w-14;
+ const x=t=>left+(t+15)/(r.end+15)*(right-left);
+ const [lo,hi]=isTemperature?axes.temperature:axes.cd;
+ const y=v=>bottom-(v-lo)/(hi-lo)*(bottom-top);
+ g.fillStyle='#fff0dc';g.fillRect(x(0),top,x(r.stir)-x(0),bottom-top);
+ const yTicks=isTemperature?axes.temperatureTicks:axes.cdTicks;
+ for(const v of yTicks){const yy=y(v);g.strokeStyle='#dce6eb';g.lineWidth=1;g.beginPath();g.moveTo(left,yy);g.lineTo(right,yy);g.stroke();text(g,String(v),left-8,yy+4,'#526777',12,'right');}
+
+ for(let recordingTime=-30;recordingTime<=r.duration;recordingTime+=30){
+  const xx=x(recordingTime+r.stir);if(xx<left||xx>right)continue;
+  text(g,String(recordingTime),xx,bottom+20,'#526777',12,recordingTime===r.duration?'right':'center');
+ }
+
+ text(g,isTemperature?'Temperature (°C)':'CD (mdeg)',left,14);text(g,'Time relative to recording start (s)',(left+right)/2,h-6,'#526777',12,'center');
+ g.strokeStyle='#3678b9';g.beginPath();g.moveTo(x(r.stir),top);g.lineTo(x(r.stir),bottom);g.stroke();text(g,w<450?'record':'recording starts',Math.min(x(r.stir)+4,right-90),top+13,'#3678b9',11);
+ g.save();g.beginPath();g.rect(left,top,right-left,bottom-top);g.clip();
+ if(isTemperature){
+  g.lineWidth=2.5;g.strokeStyle='#d47c40';g.beginPath();
+  g.moveTo(x(-15),y(M.at(r,-15).temp));for(let t=-14.5;t<=time;t+=.5)g.lineTo(x(t),y(M.at(r,t).temp));g.lineTo(x(time),y(M.at(r,time).temp));g.stroke();
+ }else{
+  g.fillStyle='#203746';r.observations.filter(s=>s.t<=time).forEach(s=>{g.beginPath();g.arc(x(s.t),y(s.cd_mdeg),1.1,0,Math.PI*2);g.fill();});
+ }
+ g.strokeStyle='#20374688';g.lineWidth=1;g.beginPath();g.moveTo(x(time),top);g.lineTo(x(time),bottom);g.stroke();g.restore();
+}
+const fields={hu:['unfolding','deltaH_kcal_mol'],su:['unfolding','deltaS_cal_mol_K'],hf:['folding','deltaH_kcal_mol'],sf:['folding','deltaS_cal_mol_K'],attempt:['attemptFrequency_s'],noise:['noiseSD_mdeg'],nativeTheta:['nativeEllipticity_deg_cm2_dmol'],denatTheta:['denaturedEllipticity_deg_cm2_dmol'],concentration:['concentration_M'],path:['pathlength_cm'],seed:['seed'],initialTemp:['initialTemperature_C'],finalTemp:['finalTemperature_C'],mixTime:['stir_s'],rampFraction:['rampFraction'],rateJitter:['rateJitter_percent']};
+function populateTeacher(){Object.entries(fields).forEach(([id,path])=>{$(id).value=path.reduce((v,k)=>v[k],config);});truthTable();}
+function candidate(){const c=structuredClone(config);for(const [id,path] of Object.entries(fields)){if(!$(id).value.trim())throw Error('Every configuration field needs a value.');const parent=path.slice(0,-1).reduce((v,k)=>v[k],c);parent[path.at(-1)]=Number($(id).value);}return M.validate(c);}
+function truthRows(){return runs.map(r=>{const T=r.targetC,v=M.rates(config,T,r.factors),base=M.rates(config,T);return {experiment:r.label,temperature_C:T,nominal_ku_s_1:base.ku,nominal_kf_s_1:base.kf,ku_factor:r.factors.ku,kf_factor:r.factors.kf,ku_s_1:v.ku,kf_s_1:v.kf,krelax_s_1:v.ku+v.kf,tau_s:v.tau,fN_eq:v.fN,nominal_Keq:base.Keq,Keq_factor:r.factors.ku/r.factors.kf,Keq:v.Keq,deltaG_unfolding_kcal_mol:-M.R*(T+273.15)*v.logK};});}
+function truthTable(){if(!$('rateTable'))return;const rows=truthRows();$('rateTable').innerHTML='<table><thead><tr><th>T (°C)</th><th>ku (s⁻¹)</th><th>kf (s⁻¹)</th><th>τ (s)</th><th>Native eq.</th></tr></thead><tbody>'+rows.map(v=>`<tr><td>${v.temperature_C}</td><td>${v.ku_s_1.toExponential(3)}</td><td>${v.kf_s_1.toExponential(3)}</td><td>${v.tau_s.toPrecision(4)}</td><td>${(100*v.fN_eq).toFixed(2)}%</td></tr>`).join('')+'</tbody></table>';}
+function apply(){try{config=candidate();initialise();truthTable();$('error').textContent='';return true;}catch(e){$('error').textContent=e.message;return false;}}
+window.addEventListener('resize',()=>{needsRender=true;});
+initialise();
+if($('teacher')&&config.instructor){
+ $('teacher').hidden=false;populateTeacher();$('apply').addEventListener('click',apply);
+ $('configDownload').addEventListener('click',()=>{if(apply())download('myoglobin-config.json',JSON.stringify({...config,instructor:false},null,2),'application/json');});
+ $('configLoad').addEventListener('change',async()=>{try{const file=$('configLoad').files[0];if(!file)return;const c=M.validate(window.ConfigCodec.decode(JSON.parse(await file.text())));config={...c,instructor:true};initialise();populateTeacher();$('error').textContent='';}catch(e){$('error').textContent=e.message;}});
+ $('student').addEventListener('click',()=>{if(!apply())return;const root=document.documentElement.cloneNode(true);root.querySelector('#teacher').remove();root.querySelector('#configuration').textContent=JSON.stringify({...config,instructor:false}).replace(/</g,'\\u003c');download('myoglobin-student.html','<!doctype html>\n'+root.outerHTML,'text/html');});
+ $('truth').addEventListener('click',()=>{if(!apply())return;const rows=truthRows(),keys=Object.keys(rows[0]);download('myoglobin-instructor-truth.csv',keys.join(',')+'\n'+rows.map(r=>keys.map(k=>typeof r[k]==='string'?'"'+r[k].replace(/"/g,'""')+'"':r[k]).join(',')).join('\n')+'\n');});
+}else if($('teacher'))$('teacher').remove();
+function frame(ms){const dt=lastFrame?Math.min((ms-lastFrame)/1000,.25):0;lastFrame=ms;
+ if(playing){const stop=recordingStarted[index]?runs[index].end:runs[index].stir;time=Math.min(stop,time+dt*Number($('speed').value));collect();if(time>=stop)playing=false;updateUI();}
+ if(playing||needsRender){cuvette();plot('temperature',true);plot('cd',false);needsRender=false;}requestAnimationFrame(frame);
+}requestAnimationFrame(frame);
+</script></body></html>
