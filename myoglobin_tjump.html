@@ -13,7 +13,7 @@
 <div class="bar"><button id="downloadAll" class="primary" disabled>Download all recorded data CSV</button></div>
 <p id="downloadStatus" class="legend" aria-live="polite"></p>
 <details><summary>What is being measured?</summary><p>At the selected wavelength near 220 nm, the native, helix-rich protein has a more negative CD signal. Unfolding makes the signal less negative; refolding reverses the direction. When the temperature is changed, the population begins to approach its new equilibrium.</p><p>For N ⇌ D, once the temperature has stabilized, k<sub>relax</sub> = k<sub>u</sub> + k<sub>f</sub> and CD(t) = A exp(−k<sub>relax</sub>t) + B. Time in the downloaded CSV begins when the recording phase begins. </p></details>
-</main><script id="configuration" type="application/json">{"title": "Myoglobin temperature-jump experiment", "initialTemperature_C": 60, "targets_C": [90, 74, 86, 78, 88, 80, 92, 82, 94, 84], "rampFraction": 0.5, "recordingDuration_s": 240, "sampleInterval_s": 1, "wavelength_nm": 222, "nativeEllipticity_deg_cm2_dmol": -4000000, "denaturedEllipticity_deg_cm2_dmol": -300000, "concentration_M": 5e-06, "pathlength_cm": 1, "noiseSD_mdeg": 6, "seed": 666, "stir_s": 10, "referenceDuration_s": 240, "finalTemperature_C": 100, "unfolding": {"deltaH_kcal_mol": 40.4, "deltaS_cal_mol_K": 47.8}, "folding": {"deltaH_kcal_mol": -56.2, "deltaS_cal_mol_K": -222.1}, "attemptFrequency_s": 1000000000000, "rateJitter_percent": 50, "instructor": false}</script><script>/* Reversible packing for casual source inspection, not encryption or secrecy. */
+</main><script id="configuration" type="application/json">{"title": "Myoglobin temperature-jump experiment", "initialTemperature_C": 60, "targets_C": [90, 74, 86, 78, 88, 80, 92, 82, 94, 84], "rampFraction": 0.5, "recordingDuration_s": 240, "sampleInterval_s": 1, "wavelength_nm": 222, "nativeEllipticity_deg_cm2_dmol": -4000000, "denaturedEllipticity_deg_cm2_dmol": -300000, "concentration_M": 5e-06, "pathlength_cm": 1, "noiseSD_mdeg": 4, "seed": 666, "stir_s": 10, "referenceDuration_s": 240, "finalTemperature_C": 100, "unfolding": {"deltaH_kcal_mol": 40.4, "deltaS_cal_mol_K": 47.8}, "folding": {"deltaH_kcal_mol": -56.2, "deltaS_cal_mol_K": -222.1}, "attemptFrequency_s": 1000000000000, "rateJitter_percent": 50, "instructor": false}</script><script>/* Reversible packing for casual source inspection, not encryption or secrecy. */
 (function(root){
 'use strict';
 const paths=[['unfolding','deltaH_kcal_mol'],['unfolding','deltaS_cal_mol_K'],['folding','deltaH_kcal_mol'],['folding','deltaS_cal_mol_K'],['attemptFrequency_s']];
@@ -119,6 +119,7 @@ if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.Rela
 </script><script>'use strict';
 const M=window.RelaxationModel;
 let config=window.ConfigCodec.decode(JSON.parse(document.getElementById('configuration').textContent)),runs,index=0,time=-15,playing=false,lastFrame=0,lastPhase='',molecules=[];
+config.seed = crypto.getRandomValues(new Uint32Array(1))[0];
 let reached=[],acquired=[],recordingStarted=[],axes,needsRender=true;
 const $=id=>document.getElementById(id);
 function download(name,text,type='text/csv'){const url=URL.createObjectURL(new Blob([text],{type}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);}
